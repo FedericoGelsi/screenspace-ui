@@ -9,6 +9,9 @@ import {
 } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 
+import I18n from '../app/assets/strings/I18n';
+import TEXT_KEY from '../app/assets/strings/TextKey';
+
 const BackIcon = (props) => (
   <Icon
     {...props}
@@ -91,7 +94,7 @@ export const TopNavigationScreenSpace = () => {
     >
       <TopNavigation
         alignment='center'
-        title='ScreenSpace'
+        title={I18n.t(TEXT_KEY.appName)}
         accessoryLeft={renderBackAction}
         accessoryRight={renderRightActions}
       />

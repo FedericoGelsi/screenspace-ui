@@ -22,7 +22,10 @@ import {
 } from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
-import {TopNavigationScreenSpace} from './components/TopNavigation';
+import {TopNavigationScreenSpace} from '../components/TopNavigation';
+
+import I18n from './assets/strings/I18n';
+import TEXT_KEY from './assets/strings/TextKey';
 
 /**
  * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
@@ -37,7 +40,7 @@ export default () => (
       <TopNavigationScreenSpace />
       <Layout style={styles.container}>
         <Text style={styles.text} category="h1">
-          Welcome to UI Kitten 😻
+          {I18n.t(TEXT_KEY.welcome)} 😻
         </Text>
         <Text style={styles.text} category="s1">
           Start with editing App.js to configure your App
