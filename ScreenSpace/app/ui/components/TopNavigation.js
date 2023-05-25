@@ -9,41 +9,41 @@ import {
 } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 
-import I18n from '../app/assets/strings/I18n';
-import TEXT_KEY from '../app/assets/strings/TextKey';
+import I18n from '../../assets/strings/I18n';
+import TEXT_KEY from '../../assets/strings/TextKey';
 
 const BackIcon = (props) => (
   <Icon
     {...props}
-    name='arrow-back'
+    name="arrow-back"
   />
 );
 
 const EditIcon = (props) => (
   <Icon
     {...props}
-    name='edit'
+    name="edit"
   />
 );
 
 const MenuIcon = (props) => (
   <Icon
     {...props}
-    name='more-vertical'
+    name="more-vertical"
   />
 );
 
 const InfoIcon = (props) => (
   <Icon
     {...props}
-    name='info'
+    name="info"
   />
 );
 
 const LogoutIcon = (props) => (
   <Icon
     {...props}
-    name='log-out'
+    name="log-out"
   />
 );
 
@@ -73,11 +73,11 @@ export const TopNavigationScreenSpace = () => {
       >
         <MenuItem
           accessoryLeft={InfoIcon}
-          title='About'
+          title="About"
         />
         <MenuItem
           accessoryLeft={LogoutIcon}
-          title='Logout'
+          title="Logout"
         />
       </OverflowMenu>
     </>
@@ -90,10 +90,10 @@ export const TopNavigationScreenSpace = () => {
   return (
     <Layout
       style={styles.container}
-      level='1'
+      level="1"
     >
       <TopNavigation
-        alignment='center'
+        alignment="center"
         title={I18n.t(TEXT_KEY.appName)}
         accessoryLeft={renderBackAction}
         accessoryRight={renderRightActions}
