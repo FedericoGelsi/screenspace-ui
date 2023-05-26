@@ -5,6 +5,7 @@ import { StyleSheet, View, SafeAreaView} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import { CinemaFormDetails } from './CinemaFormDetails';
 import { CinemaFormAddress } from './CinemaFormAddress';
+import CinemaFormSummary from './CinemaFormSummary';
 
 const PAGES = ['Page 1', 'Page 2', 'Page 3'];
 
@@ -67,7 +68,7 @@ export const CinemaForm = ({navigation}) => {
         <Layout style={styles.formContainer}>
             {currentPage === 0 && <CinemaFormDetails/>}
             {currentPage === 1 && <CinemaFormAddress/>}
-            {currentPage === 2 && <CinemaFormDetails/>}
+            {currentPage === 2 && <CinemaFormSummary/>}
         </Layout>
         <Layout style={[{justifyContent: currentPage === 0 ? 'center' : 'space-around'}, styles.actionLayout]}>
           {currentPage !== 0 && (
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     height: 440,
-    width: 330,
+    width: 340,
     alignSelf: 'center',
     backgroundColor: '#FFFFFF',
     flexDirection: 'column',
