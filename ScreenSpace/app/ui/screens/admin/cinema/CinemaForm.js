@@ -1,9 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Layout, TopNavigation, TopNavigationAction, Icon, Button, Divider } from '@ui-kitten/components';
+import { Layout, TopNavigation, TopNavigationAction, Icon, Button, Text } from '@ui-kitten/components';
 import * as React from 'react';
-import { StyleSheet, View, Text, SafeAreaView} from 'react-native';
+import { StyleSheet, View, SafeAreaView} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import { CinemaFormDetails } from './CinemaFormDetails';
+import { CinemaFormAddress } from './CinemaFormAddress';
 
 const PAGES = ['Page 1', 'Page 2', 'Page 3'];
 
@@ -64,7 +65,9 @@ export const CinemaForm = ({navigation}) => {
           />
         </View>
         <Layout style={styles.formContainer}>
-            <CinemaFormDetails/>
+            {currentPage === 0 && <CinemaFormDetails/>}
+            {currentPage === 1 && <CinemaFormAddress/>}
+            {currentPage === 2 && <CinemaFormDetails/>}
         </Layout>
         <Layout style={[{justifyContent: currentPage === 0 ? 'center' : 'space-around'}, styles.actionLayout]}>
           {currentPage !== 0 && (
@@ -77,7 +80,7 @@ export const CinemaForm = ({navigation}) => {
               Next
             </Button>
           ) : (
-            <Button status='success' style={currentPage === 0 ? styles.oneButton : styles.buttonStyle}>
+            <Button status="success" style={currentPage === 0 ? styles.oneButton : styles.buttonStyle}>
               Finish
             </Button>
           )}
@@ -85,7 +88,7 @@ export const CinemaForm = ({navigation}) => {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
