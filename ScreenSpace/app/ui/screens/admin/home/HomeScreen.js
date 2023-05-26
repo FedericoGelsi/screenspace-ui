@@ -8,7 +8,7 @@ const BackIcon = (props) => (
   <Icon {...props} name="arrow-back" />
 );
 
-const data = new Array(0).fill({
+const data = new Array(9).fill({
     title: 'Item',
   });
 
@@ -16,6 +16,10 @@ export const HomeScreenAdmin = ({ navigation }) => {
 
   const navigateBack = () => {
     navigation.goBack();
+  };
+
+  const navigateNewCinema = () => {
+    navigation.push('NewCinema');
   };
 
   const BackAction = () => (
@@ -50,7 +54,7 @@ export const HomeScreenAdmin = ({ navigation }) => {
         <Button style={styles.buttonStyle}>
             Shows
         </Button>
-        <Button style={styles.buttonStyle}>
+        <Button style={styles.buttonStyle} onPress={navigateNewCinema}>
             New Cinema
         </Button>
       </Layout>
@@ -91,5 +95,5 @@ const styles = StyleSheet.create({
     buttonStyle: {
         borderRadius: 1000,
         width: 140,
-    }
+    },
   });
