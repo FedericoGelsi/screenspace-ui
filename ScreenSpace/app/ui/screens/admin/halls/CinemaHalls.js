@@ -98,7 +98,7 @@ export const CinemaHalls = ({ navigation }) => {
         <Card disabled={true}>
         <Layout style={styles.radioContainer}>
             <Text category="s1" style={{ marginRight: 8 }}>
-                Status
+                Hall Name
             </Text>
             <Input
                 placeholder='Hall name'
