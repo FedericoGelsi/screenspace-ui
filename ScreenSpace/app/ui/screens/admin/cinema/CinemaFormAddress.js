@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Text} from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
-import { ProvincePicker } from './ProvincePicker';
+import { ProvincePicker } from '../../../components/ProvincePicker';
 
 export const CinemaFormAddress = () => {
 

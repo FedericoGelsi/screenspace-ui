@@ -2,25 +2,11 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Divider, List, ListItem, Text, Icon, Layout } from '@ui-kitten/components';
 
-const CinemaFormSummary = () => {
-    const cinema = 'Hoyts Alto Palermo';
-    const street = 'Beruti 3399';
-    const city = 'CABA';
-    const province = 'Buenos Aires';
-    const country = 'Argentina';
-
-    const data = [
-        { title: 'Cinema', description: cinema },
-        { title: 'Street', description: street },
-        { title: 'City', description: city },
-        { title: 'Province', description: province },
-        { title: 'Country', description: country },
-    ];
-
+const CinemaFormSummary = ({header}) => {
     return (
         <>
             <Text category="h6" style={styles.title}>
-                Summary
+                {header}
             </Text>
 
             <Layout style={styles.layout}>

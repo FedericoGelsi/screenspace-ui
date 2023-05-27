@@ -22,6 +22,10 @@ export const HomeScreenAdmin = ({ navigation }) => {
     navigation.push('NewCinema');
   };
 
+  const navigateCinemaDetails = () => {
+    navigation.push('CinemaDetails');
+  };
+
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack}/>
   );
@@ -45,7 +49,7 @@ export const HomeScreenAdmin = ({ navigation }) => {
         <List
             contentContainerStyle={styles.contentContainer}
             data={data}
-            renderItem={CinemaCard}
+            renderItem={() => <CinemaCard navigateAction={navigateCinemaDetails}/>}
         />
       </Layout>
       )}

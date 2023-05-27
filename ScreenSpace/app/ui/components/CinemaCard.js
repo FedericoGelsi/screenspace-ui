@@ -1,29 +1,25 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Card, Text, Icon } from '@ui-kitten/components';
-
-const DetailsIcon = (props) => (
-    <Icon {...props} style={[props.style, styles.icon]} name='arrow-ios-forward-outline'/>
-  );
+import { Card, Text, Icon } from '@ui-kitten/components';
 
 const Header = (props) => (
     <View {...props} style={[props.style, styles.headerContainer]}>
         <Text category='h6'>
             Hoyts Abasto
         </Text>
-        <Button
-            style={styles.button}
-            appearance='ghost'
-            size='tiny'
-            accessoryLeft={DetailsIcon}
+        <Icon
+            style={{ width: 32, height: 32, borderColor: 'blue' }}
+            fill='#1677FF'
+            name='arrow-ios-forward-outline'
         />
     </View>
 );
 
-export const CinemaCard = () => (
+export const CinemaCard = ({navigateAction}) => (
     <Card
         style={styles.card}
         header={Header}
+        onPress={() => navigateAction()}
     >
         <Text>
         Av. Corrientes 3247, C1193AAE CABA
@@ -43,12 +39,5 @@ const styles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-    icon: {
-        width: 32,
-        height: 32,
-    },
-    button: {
-        margin: -10,
     },
 });

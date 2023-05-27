@@ -1,11 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Layout, TopNavigation, TopNavigationAction, Icon, Button, Text } from '@ui-kitten/components';
+import { Layout, TopNavigation, TopNavigationAction, Icon, Button, Text, Modal, Card } from '@ui-kitten/components';
 import * as React from 'react';
 import { StyleSheet, View, SafeAreaView} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import { CinemaFormDetails } from './CinemaFormDetails';
 import { CinemaFormAddress } from './CinemaFormAddress';
 import CinemaFormSummary from './CinemaFormSummary';
+import { navigate } from '@react-navigation/routers/lib/typescript/src/CommonActions';
 
 const PAGES = ['Page 1', 'Page 2', 'Page 3'];
 
@@ -39,6 +40,7 @@ const BackIcon = (props) => (
 
 export const CinemaForm = ({navigation}) => {
   const [currentPage, setCurrentPage] = React.useState(0);
+  const [visible, setVisible] = React.useState(false);
 
   const onStepPress = (position) => {
     setCurrentPage(position);
@@ -46,6 +48,10 @@ export const CinemaForm = ({navigation}) => {
 
   const navigateBack = () => {
     navigation.goBack();
+  };
+
+  const navigateHome = () => {
+    navigation.navigate("Home");
   };
 
   const BackAction = () => (
@@ -68,7 +74,7 @@ export const CinemaForm = ({navigation}) => {
         <Layout style={styles.formContainer}>
             {currentPage === 0 && <CinemaFormDetails/>}
             {currentPage === 1 && <CinemaFormAddress/>}
-            {currentPage === 2 && <CinemaFormSummary/>}
+            {currentPage === 2 && <CinemaFormSummary header={'Summary'}/>}
         </Layout>
         <Layout style={[{justifyContent: currentPage === 0 ? 'center' : 'space-around'}, styles.actionLayout]}>
           {currentPage !== 0 && (
@@ -81,12 +87,29 @@ export const CinemaForm = ({navigation}) => {
               Next
             </Button>
           ) : (
-            <Button status="success" style={currentPage === 0 ? styles.oneButton : styles.buttonStyle}>
+            <Button status="success" style={currentPage === 0 ? styles.oneButton : styles.buttonStyle} onPress={() => setVisible(true)}>
               Finish
             </Button>
           )}
         </Layout>
       </View>
+      <Modal
+        visible={visible}
+        backdropStyle={styles.backdrop}
+        onBackdropPress={() => setVisible(false)}
+      >
+        <Card disabled={true} style={{width: '80%', alignSelf: 'center'}}>
+          <Text style={{marginBottom: 10, textAlign: 'center'}}>
+            Your cinema was created successfully
+          </Text>
+          <Button status="success" onPress={() => {
+            setVisible(false);
+            navigateHome();
+            }}>
+            Home
+          </Button>
+        </Card>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -141,5 +164,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 });
