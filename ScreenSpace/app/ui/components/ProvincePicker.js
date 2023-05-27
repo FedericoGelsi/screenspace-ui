@@ -3,35 +3,37 @@ import { StyleSheet } from 'react-native';
 import { IndexPath, Layout, Select, SelectItem, Text } from '@ui-kitten/components';
 
 const provinces = [
-    'Buenos Aires',
-    'Catamarca',
-    'Chaco',
-    'Chubut',
-    'Córdoba',
-    'Corrientes',
-    'Entre Ríos',
-    'Formosa',
-    'Jujuy',
-    'La Pampa',
-    'La Rioja',
-    'Mendoza',
-    'Misiones',
-    'Neuquén',
-    'Río Negro',
-    'Salta',
-    'San Juan',
-    'San Luis',
-    'Santa Cruz',
-    'Santa Fe',
-    'Santiago del Estero',
-    'Tierra del Fuego',
-    'Tucumán',
-  ];
+  { "id": 1, "name": "Buenos Aires" },
+  { "id": 2, "name": "CABA" },
+  { "id": 3, "name": "Catamarca" },
+  { "id": 4, "name": "Chaco" },
+  { "id": 5, "name": "Chubut" },
+  { "id": 6, "name": "Córdoba" },
+  { "id": 7, "name": "Corrientes" },
+  { "id": 8, "name": "Entre Ríos" },
+  { "id": 9, "name": "Formosa" },
+  { "id": 10, "name": "Jujuy" },
+  { "id": 11, "name": "La Pampa" },
+  { "id": 12, "name": "La Rioja" },
+  { "id": 13, "name": "Mendoza" },
+  { "id": 14, "name": "Misiones" },
+  { "id": 15, "name": "Neuquén" },
+  { "id": 16, "name": "Río Negro" },
+  { "id": 17, "name": "Salta" },
+  { "id": 18, "name": "San Juan" },
+  { "id": 19, "name": "San Luis" },
+  { "id": 20, "name": "Santa Cruz" },
+  { "id": 21, "name": "Santa Fe" },
+  { "id": 22, "name": "Santiago del Estero" },
+  { "id": 23, "name": "Tierra del Fuego" },
+  { "id": 24, "name": "Tucumán" }
+];
+
 
 export const ProvincePicker = () => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
-  const displayValue = provinces[selectedIndex.row];
+  const displayValue = provinces[selectedIndex.row].name;
 
   return (
     <Layout
@@ -49,7 +51,7 @@ export const ProvincePicker = () => {
             onSelect={(index) => setSelectedIndex(index)}
       >
         {provinces.map((province) => (
-            <SelectItem title={province} />
+            <SelectItem key={province.id} title={province.name} />
         ))}
       </Select>
     </Layout>
