@@ -65,8 +65,8 @@ export const CinemaHalls = ({ navigation }) => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 , backgroundColor: '#FFFFFF'}}>
-      <TopNavigation title="ScreenSpace" alignment="center" accessoryLeft={BackAction}/>
+    <SafeAreaView style={{backgroundColor: '#FFFFFF', height: '100%'}}>
+      <TopNavigation title="ScreenSpace" alignment="center" accessoryLeft={BackAction} style={{height: '8%'}}/>
       <Divider/>
       {data.length === 0 ? (
         <Layout style={styles.noDataContainer}>
@@ -74,7 +74,7 @@ export const CinemaHalls = ({ navigation }) => {
             <NoData message="You do not have halls yet"/>
         </Layout>
       ) : (
-      <Layout style={styles.cinemaContainer}>
+      <Layout style={styles.hallContainer}>
         <HallHeader handleModal={handleModal}/>
         <List
             contentContainerStyle={styles.contentContainer}
@@ -142,36 +142,34 @@ export const CinemaHalls = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    cinemaContainer: {
-      height: 522,
+    hallContainer: {
+      height: '82%',
       backgroundColor: '#FFFFFF',
       flexDirection: 'column',
       justifyContent: 'space-between',
     },
     noDataContainer: {
+      height: '82%',
       display: 'flex',
-      height: 522,
       backgroundColor: '#FFFFFF',
     },
     contentContainer: {
       backgroundColor: '#FFFFFF',
       accentBackgroundColor: '#FFFFFF',
-      paddingHorizontal: 30,
-      marginTop: -10,
+      width: '100%',
+      paddingHorizontal: 20,
     },
     actionLayout: {
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-around',
         alignItems: 'center',
-        marginTop: 15,
+        alignSelf: 'center',
+        height: '10%',
     },
     oneButton: {
         borderRadius: 1000,
         width: 300,
-    },
-    buttonStyle: {
-        borderRadius: 1000,
     },
     headerContainer: {
         flexDirection: 'row',

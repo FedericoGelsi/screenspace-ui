@@ -3,7 +3,7 @@ import { Input, Text} from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 import { ProvincePicker } from '../../../components/ProvincePicker';
 
-export const CinemaFormAddress = () => {
+export const CinemaFormAddress = ({editProps}) => {
 
     return (
         <>
@@ -13,25 +13,29 @@ export const CinemaFormAddress = () => {
             <Input
                 label="Street Address"
                 placeholder="Street Address"
+                value={editProps?.address}
                 size="large"
                 style={styles.formCtrl}
             />
             <Input
                 label="Postal Code"
                 placeholder="Postal Code"
+                value={editProps?.postalCode}
                 size="large"
                 style={styles.formCtrl}
             />
             <Input
                 label="City"
                 placeholder="City"
+                value={editProps?.city}
                 size="large"
                 style={styles.formCtrl}
             />
-            <ProvincePicker/>
+            <ProvincePicker actualProvince={editProps?.province}/>
             <Input
                 label="Country"
                 placeholder="Country"
+                value={editProps?.country}
                 size="large"
                 style={styles.formCtrl}
             />
@@ -40,15 +44,10 @@ export const CinemaFormAddress = () => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-    },
     formCtrl: {
         marginBottom: 15,
     },
     title: {
-        marginTop: 0,
         marginBottom: 10,
     },
 });

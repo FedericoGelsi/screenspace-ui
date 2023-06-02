@@ -1,6 +1,6 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet} from 'react-native';
-import { Divider, Icon, List, Layout, Text, TopNavigation, TopNavigationAction, Button } from '@ui-kitten/components';
+import { SafeAreaView, StyleSheet, View} from 'react-native';
+import { Divider, Icon, List, Text, TopNavigation, TopNavigationAction, Button } from '@ui-kitten/components';
 import { CinemaCard } from '../../../components/CinemaCard';
 import { NoData } from '../../../components/NoData';
 
@@ -8,7 +8,7 @@ const BackIcon = (props) => (
   <Icon {...props} name="arrow-back" />
 );
 
-const data = new Array(9).fill({
+const data = new Array(10).fill({
     title: 'Item',
   });
 
@@ -31,70 +31,77 @@ export const HomeScreenAdmin = ({ navigation }) => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 , backgroundColor: '#FFFFFF'}}>
-      <TopNavigation title="ScreenSpace" alignment="center" accessoryLeft={BackAction}/>
+    <SafeAreaView style={{backgroundColor: '#FFFFFF', height: '100%'}}>
+      <TopNavigation title="ScreenSpace" alignment="center" accessoryLeft={BackAction} style={{height: '8%'}}/>
       <Divider/>
-      {data.length === 0 ? (
-        <Layout style={styles.noDataContainer}>
-          <Text category="h6" style={styles.title}>
-            Your Cinemas
-          </Text>
-          <NoData message='You do not have any cinema yet. Start by creating a new one!'/>
-        </Layout>
-      ) : (
-      <Layout style={styles.cinemaContainer}>
-        <Text category="h6" style={styles.title}>
-            Your Cinemas
-        </Text>
-        <List
-            contentContainerStyle={styles.contentContainer}
-            data={data}
-            renderItem={() => <CinemaCard navigateAction={navigateCinemaDetails}/>}
-        />
-      </Layout>
-      )}
-      <Divider/>
-      <Layout style={styles.actionLayout}>
-        <Button style={styles.buttonStyle}>
-            Shows
-        </Button>
-        <Button style={styles.buttonStyle} onPress={navigateNewCinema}>
-            New Cinema
-        </Button>
-      </Layout>
+      <View style={styles.screenContainer}>
+        {data.length === 0 ? (
+          <View style={styles.noDataContainer}>
+            <Text category="h6" style={styles.title}>
+              Your Cinemas
+            </Text>
+            <NoData message='You do not have any cinema yet. Start by creating a new one!'/>
+          </View>
+        ) : (
+          <View style={styles.cinemaContainer}>
+            <Text category="h6" style={styles.title}>
+                Your Cinemas
+            </Text>
+            <List
+                contentContainerStyle={styles.contentContainer}
+                data={data}
+                renderItem={() => <CinemaCard navigateAction={navigateCinemaDetails}/>}
+            />
+          </View>
+        )}
+        <Divider/>
+        <View style={styles.actionLayout}>
+          <Button style={styles.buttonStyle}>
+              Shows
+          </Button>
+          <Button style={styles.buttonStyle} onPress={navigateNewCinema}>
+              New Cinema
+          </Button>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
     cinemaContainer: {
-      height: 522,
+      height: '88%',
       backgroundColor: '#FFFFFF',
       flexDirection: 'column',
       justifyContent: 'space-between',
     },
     noDataContainer: {
       display: 'flex',
-      height: 522,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
       backgroundColor: '#FFFFFF',
+      flexGrow: 1,
     },
     contentContainer: {
       backgroundColor: '#FFFFFF',
       accentBackgroundColor: '#FFFFFF',
       paddingHorizontal: 30,
-      marginTop: -10,
+    },
+    screenContainer: {
+      height: '92%',
     },
     title: {
-        marginTop: 25,
-        marginBottom: 10,
+        marginTop: 20,
+        textAlignVertical: 'center',
         textAlign: 'center',
     },
     actionLayout: {
+        height: '12%',
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-around',
         alignItems: 'center',
-        marginTop: 15,
     },
     buttonStyle: {
         borderRadius: 1000,

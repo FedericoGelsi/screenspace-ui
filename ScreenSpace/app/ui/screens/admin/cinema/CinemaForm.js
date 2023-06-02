@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Layout, TopNavigation, TopNavigationAction, Icon, Button, Text, Modal, Card } from '@ui-kitten/components';
+import { Layout, TopNavigation, TopNavigationAction, Icon, Button, Text, Modal, Card, Divider } from '@ui-kitten/components';
 import * as React from 'react';
 import { StyleSheet, View, SafeAreaView} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
@@ -38,7 +38,7 @@ const BackIcon = (props) => (
   <Icon {...props} name="arrow-back" />
 );
 
-export const CinemaForm = ({navigation}) => {
+export const CinemaForm = ({navigation, route}) => {
   const [currentPage, setCurrentPage] = React.useState(0);
   const [visible, setVisible] = React.useState(false);
 
@@ -59,8 +59,8 @@ export const CinemaForm = ({navigation}) => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-      <TopNavigation title="ScreenSpace" alignment="center" accessoryLeft={BackAction} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF', height: '100%' }}>
+      <TopNavigation title="ScreenSpace" alignment="center" accessoryLeft={BackAction} style={{height: '8%' }}/>
       <View style={styles.container}>
         <View style={styles.stepIndicator}>
           <StepIndicator
@@ -71,27 +71,29 @@ export const CinemaForm = ({navigation}) => {
             labels={['Cinema details', 'Address', 'Summary']}
           />
         </View>
-        <Layout style={styles.formContainer}>
-            {currentPage === 0 && <CinemaFormDetails/>}
-            {currentPage === 1 && <CinemaFormAddress/>}
-            {currentPage === 2 && <CinemaFormSummary header={'Summary'}/>}
-        </Layout>
-        <Layout style={[{justifyContent: currentPage === 0 ? 'center' : 'space-around'}, styles.actionLayout]}>
-          {currentPage !== 0 && (
-          <Button style={styles.buttonStyle} onPress={() => setCurrentPage(currentPage - 1)}>
-              Previous
-          </Button>
-          )}
-          {currentPage !== PAGES.length - 1 ? (
-            <Button style={currentPage === 0 ? styles.oneButton : styles.buttonStyle} onPress={() => setCurrentPage(currentPage + 1)}>
-              Next
+        <View style={styles.contentContainer}>
+          <View style={styles.formContainer}>
+              {currentPage === 0 && <CinemaFormDetails editProps={route?.params}/>}
+              {currentPage === 1 && <CinemaFormAddress editProps={route?.params}/>}
+              {currentPage === 2 && <CinemaFormSummary header={'Summary'} info={route?.params}/>}
+          </View>
+          <View style={[{justifyContent: currentPage === 0 ? 'center' : 'space-around'}, styles.actionLayout]}>
+            {currentPage !== 0 && (
+            <Button style={styles.buttonStyle} onPress={() => setCurrentPage(currentPage - 1)}>
+                Previous
             </Button>
-          ) : (
-            <Button status="success" style={currentPage === 0 ? styles.oneButton : styles.buttonStyle} onPress={() => setVisible(true)}>
-              Finish
-            </Button>
-          )}
-        </Layout>
+            )}
+            {currentPage !== PAGES.length - 1 ? (
+              <Button style={currentPage === 0 ? styles.oneButton : styles.buttonStyle} onPress={() => setCurrentPage(currentPage + 1)}>
+                Next
+              </Button>
+            ) : (
+              <Button status="success" style={currentPage === 0 ? styles.oneButton : styles.buttonStyle} onPress={() => setVisible(true)}>
+                Finish
+              </Button>
+            )}
+          </View>
+        </View>
       </View>
       <Modal
         visible={visible}
@@ -117,10 +119,15 @@ export const CinemaForm = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: '92%',
     backgroundColor: '#ffffff',
   },
+  contentContainer: {
+    height: '90%',
+  },
   stepIndicator: {
-    marginVertical: 20,
+    top: '2%',
+    height: '10%',
   },
   stepLabel: {
     fontSize: 12,
@@ -139,20 +146,20 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection:'row',
     alignItems: 'center',
-    marginTop: 15,
-    width: 350,
+    height: '14%',
+    width: '90%',
   },
   buttonStyle: {
     borderRadius: 1000,
     width: 140,
   },
   formContainer: {
-    height: 440,
-    width: 340,
+    height: '86%',
+    width: '85%',
     alignSelf: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#ffffff',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   oneButton: {

@@ -30,9 +30,11 @@ const provinces = [
 ];
 
 
-export const ProvincePicker = () => {
-
-  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
+export const ProvincePicker = ({actualProvince}) => {
+  console.log(actualProvince)
+  let selectedProvince = provinces.find((item) => item.name === actualProvince);
+  console.log(selectedProvince);
+  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(selectedProvince == null ? 0 : selectedProvince?.id - 1));
   const displayValue = provinces[selectedIndex.row].name;
 
   return (

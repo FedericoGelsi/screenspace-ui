@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 50,
-        marginTop: 80,
+        padding: 50,
+        flexGrow: 1,
     },
     icon: {
         width: 80,

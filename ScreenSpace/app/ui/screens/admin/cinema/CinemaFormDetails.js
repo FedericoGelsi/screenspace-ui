@@ -2,11 +2,11 @@ import React from 'react';
 import { Input, Text, Radio, RadioGroup } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 
-export const CinemaFormDetails = () => {
+export const CinemaFormDetails = ({editProps}) => {
 
     const [priceValue, setPriceValue] = React.useState('');
 
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [selectedIndex, setSelectedIndex] = React.useState(editProps?.status === "Active" ? 0 : 1);
 
     return (
         <>
@@ -16,12 +16,14 @@ export const CinemaFormDetails = () => {
             <Input
                 label="Cinema name"
                 placeholder="Cinema name"
+                value={editProps?.cinemaName}
                 size="large"
                 style={styles.formCtrl}
             />
             <Input
                 label="Company Name"
                 placeholder="Company Name"
+                value={editProps?.companyName}
                 size="large"
                 style={styles.formCtrl}
             />
@@ -30,6 +32,7 @@ export const CinemaFormDetails = () => {
                 placeholder="Insert price ($)"
                 keyboardType='numeric'
                 size="large"
+                value={editProps?.pricePerShow}
                 style={styles.formCtrl}
                 onChangeText={(text) => setPriceValue(text)}
             />
@@ -69,7 +72,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
     },
     title: {
-        marginTop: -40,
         marginBottom: 10,
     },
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Divider, List, ListItem, Text, Icon, Layout } from '@ui-kitten/components';
 
-const CinemaFormSummary = ({header}) => {
+const CinemaFormSummary = ({header, info}) => {
     return (
         <>
             <Text category="h6" style={styles.title}>
@@ -21,7 +21,7 @@ const CinemaFormSummary = ({header}) => {
                             Cinema
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            Hoyts Alto Palermo
+                            {info?.cinemaName}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -35,7 +35,7 @@ const CinemaFormSummary = ({header}) => {
                             Street
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            Beruti 3399, C1425
+                            {info?.address} {info?.postalCode}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -49,7 +49,7 @@ const CinemaFormSummary = ({header}) => {
                             City
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            CABA
+                            {info?.city}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -63,7 +63,7 @@ const CinemaFormSummary = ({header}) => {
                             Province
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            Buenos Aires
+                            {info?.province}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -77,7 +77,7 @@ const CinemaFormSummary = ({header}) => {
                             Country
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            Argentina
+                            {info?.country}
                         </Text>
                     </Layout>
                     <Divider />
@@ -93,7 +93,7 @@ const CinemaFormSummary = ({header}) => {
                             Price per seat
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            $20
+                            ${info?.pricePerShow}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -107,7 +107,7 @@ const CinemaFormSummary = ({header}) => {
                             Cinema Status
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            Temporary Unavailable
+                            {info?.status}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -121,7 +121,7 @@ const CinemaFormSummary = ({header}) => {
                             Company
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            Hoyts
+                            {info?.companyName}
                         </Text>
                     </Layout>
                     <Divider />
@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     title: {
-        marginTop: -10,
         marginBottom: 10,
     },
 

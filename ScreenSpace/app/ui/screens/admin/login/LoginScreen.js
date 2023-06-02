@@ -14,7 +14,7 @@ export const LoginScreen = ({ navigation }) => {
     <TopNavigationScreenSpace />
       <Divider/>
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Button onPress={navigateDetails}>Login</Button>
+        <Button onPress={navigateDetails}>Click to Login</Button>
       </Layout>
     </SafeAreaView>
   );

@@ -1,7 +1,8 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet} from 'react-native';
-import { Divider, Icon, List, Layout, TopNavigation, TopNavigationAction, Button } from '@ui-kitten/components';
+import { SafeAreaView, StyleSheet, View} from 'react-native';
+import { Divider, Icon, TopNavigation, TopNavigationAction, Button } from '@ui-kitten/components';
 import CinemaFormSummary from './CinemaFormSummary';
+import { editValues } from '../../../mock/mockValues';
 
 const BackIcon = (props) => (
   <Icon {...props} name="arrow-back" />
@@ -17,53 +18,52 @@ export const CinemaDetails = ({ navigation }) => {
     navigation.push('CinemaHalls');
   };
 
+  const navigateEditCinema = () => {
+    navigation.push('NewCinema', editValues);
+  };
+
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack}/>
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 , backgroundColor: '#FFFFFF'}}>
-      <TopNavigation title="ScreenSpace" alignment="center" accessoryLeft={BackAction}/>
+    <SafeAreaView style={{backgroundColor: '#FFFFFF', height: '100%'}}>
+      <TopNavigation title="ScreenSpace" alignment="center" accessoryLeft={BackAction} style={{height: '8%'}}/>
       <Divider/>
-      <Layout style={styles.cinemaContainer}>
-        <CinemaFormSummary header={'Cinema Details'}/>
-      </Layout>
+      <View style={styles.cinemaContainer}>
+        <CinemaFormSummary header={'Cinema Details'} info={editValues}/>
+      </View>
       <Divider/>
-      <Layout style={styles.actionLayout}>
-        <Button style={styles.buttonStyle}>
+      <View style={styles.actionLayout}>
+        <Button style={styles.buttonStyle} onPress={navigateEditCinema}>
             Edit Cinema
         </Button>
         <Button style={styles.buttonStyle} onPress={navigateHalls}>
             Halls
         </Button>
-      </Layout>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
     cinemaContainer: {
-        paddingTop: 30,
-        height: 522,
-        width: 340,
+        top: '2%',
+        height: '82%',
+        width: '85%',
         alignSelf: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#ffffff',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
-    title: {
-        marginTop: 25,
-        marginBottom: 10,
-        textAlign: 'center',
-    },
     actionLayout: {
+        height: '10%',
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-around',
         alignItems: 'center',
-        marginTop: 15,
-    },
+  },
     buttonStyle: {
         borderRadius: 1000,
         width: 140,

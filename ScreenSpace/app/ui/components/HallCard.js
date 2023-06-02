@@ -8,7 +8,7 @@ export const HallCard = ({navigateAction}) => (
         onPress={() => navigateAction()}
     >
         <View style={styles.headerContainer}>
-            <Text category='h6'>
+            <Text category='h6' style={{width: '50%'}}>
                 Main Hall
             </Text>
             <View style={styles.actionLayout}>
