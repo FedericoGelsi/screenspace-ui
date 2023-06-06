@@ -23,6 +23,8 @@ import {
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {TopNavigationScreenSpace} from './ui/components/TopNavigation';
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
 
 import I18n from './assets/strings/I18n';
 import TEXT_KEY from './assets/strings/TextKey';
@@ -53,7 +55,9 @@ export default () => (
           LIKE
         </Button>
       </Layout> */}
-      <AppNavigator/>
+      <Provider store={store}>
+        <AppNavigator/>
+      </Provider>
     </ApplicationProvider>
   </>
 );

@@ -9,7 +9,7 @@ const BackIcon = (props) => (
   <Icon {...props} name="arrow-back" />
 );
 
-const data = new Array(9).fill({
+const data = new Array(2).fill({
     title: 'Item',
   });
 
@@ -155,7 +155,6 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
       backgroundColor: '#FFFFFF',
-      accentBackgroundColor: '#FFFFFF',
       width: '100%',
       paddingHorizontal: 20,
     },

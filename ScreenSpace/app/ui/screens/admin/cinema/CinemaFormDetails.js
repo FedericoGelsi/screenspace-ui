@@ -1,12 +1,13 @@
-import React from 'react';
-import { Input, Text, Radio, RadioGroup } from '@ui-kitten/components';
+import React, { useState } from 'react';
+import { Input, Text, Toggle } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { completeForm } from '../../../../redux/slices/formSlice';
 
-export const CinemaFormDetails = ({editProps}) => {
+export const CinemaFormDetails = () => {
 
-    const [priceValue, setPriceValue] = React.useState('');
-
-    const [selectedIndex, setSelectedIndex] = React.useState(editProps?.status === "Active" ? 0 : 1);
+    const formValues = useSelector((state) => state.form);
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -16,41 +17,38 @@ export const CinemaFormDetails = ({editProps}) => {
             <Input
                 label="Cinema name"
                 placeholder="Cinema name"
-                value={editProps?.cinemaName}
+                value={formValues?.cinemaName}
                 size="large"
                 style={styles.formCtrl}
+                onChangeText={(text) => dispatch(completeForm({key: "cinemaName", value: text}))}
             />
             <Input
                 label="Company Name"
                 placeholder="Company Name"
-                value={editProps?.companyName}
+                value={formValues?.companyName}
                 size="large"
                 style={styles.formCtrl}
+                onChangeText={(text) => dispatch(completeForm({key: "companyName", value: text}))}
             />
             <Input
                 label="Price per show"
                 placeholder="Insert price ($)"
                 keyboardType='numeric'
                 size="large"
-                value={editProps?.pricePerShow}
+                value={formValues?.pricePerShow}
                 style={styles.formCtrl}
-                onChangeText={(text) => setPriceValue(text)}
+                onChangeText={(text) => dispatch(completeForm({key: "pricePerShow", value: text}))}
             />
             <Text category='label' appearance='hint' style={styles.text}>
                 Status
             </Text>
-            <RadioGroup
-                selectedIndex={selectedIndex}
-                onChange={index => setSelectedIndex(index)}
-                style={styles.radioContainer}
-            >
-                <Radio>
-                    Active
-                </Radio>
-                <Radio>
-                    Temporary Unavailable
-                </Radio>
-            </RadioGroup>
+            <Toggle
+                style={styles.toggleContainer}
+                checked={formValues?.active === true ? false : true}
+                onChange={() => dispatch(completeForm({key: "active", value: !formValues.active}))}
+                >
+                Temporary Unavailable
+            </Toggle>
         </>
     );
 };
@@ -63,7 +61,8 @@ const styles = StyleSheet.create({
     formCtrl: {
         marginBottom: 30,
     },
-    radioContainer: {
+    toggleContainer: {
+        marginTop: 10,
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignSelf: 'flex-start',

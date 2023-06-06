@@ -3,12 +3,16 @@ import { SafeAreaView, StyleSheet, View} from 'react-native';
 import { Divider, Icon, TopNavigation, TopNavigationAction, Button } from '@ui-kitten/components';
 import CinemaFormSummary from './CinemaFormSummary';
 import { editValues } from '../../../mock/mockValues';
+import { useDispatch } from 'react-redux';
+import { loadForm } from '../../../../redux/slices/formSlice';
 
 const BackIcon = (props) => (
   <Icon {...props} name="arrow-back" />
 );
 
 export const CinemaDetails = ({ navigation }) => {
+
+  const dispatch = useDispatch();
 
   const navigateBack = () => {
     navigation.goBack();
@@ -19,7 +23,8 @@ export const CinemaDetails = ({ navigation }) => {
   };
 
   const navigateEditCinema = () => {
-    navigation.push('NewCinema', editValues);
+    navigation.push('NewCinema');
+    dispatch(loadForm(editValues));
   };
 
   const BackAction = () => (

@@ -15,6 +15,7 @@
     "@react-native-picker/picker": "^2.4.10",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
+    "@reduxjs/toolkit": "^1.9.5",
     "@ui-kitten/components": "5.3.1",
     "@ui-kitten/eva-icons": "5.3.1",
     "@ui-kitten/metro-config": "5.3.1",
@@ -32,7 +33,8 @@
     "react-native-screens": "^3.20.0",
     "react-native-step-indicator": "^1.0.3",
     "react-native-svg": "^12.1.1",
-    "react-native-swiper": "^1.6.0"
+    "react-native-swiper": "^1.6.0",
+    "react-redux": "^8.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

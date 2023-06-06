@@ -1,9 +1,13 @@
 import React from 'react';
-import { Input, Text} from '@ui-kitten/components';
+import { Input, Text } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 import { ProvincePicker } from '../../../components/ProvincePicker';
+import { useSelector, useDispatch } from 'react-redux';
+import { completeForm } from '../../../../redux/slices/formSlice';
 
-export const CinemaFormAddress = ({editProps}) => {
+export const CinemaFormAddress = () => {
+    const formValues = useSelector((state) => state.form);
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -13,31 +17,35 @@ export const CinemaFormAddress = ({editProps}) => {
             <Input
                 label="Street Address"
                 placeholder="Street Address"
-                value={editProps?.address}
+                value={formValues?.address}
                 size="large"
                 style={styles.formCtrl}
+                onChangeText={(text) => dispatch(completeForm({key: "address", value: text}))}
             />
             <Input
                 label="Postal Code"
                 placeholder="Postal Code"
-                value={editProps?.postalCode}
+                value={formValues?.postalCode}
                 size="large"
                 style={styles.formCtrl}
+                onChangeText={(text) => dispatch(completeForm({key: "postalCode", value: text}))}
             />
             <Input
                 label="City"
                 placeholder="City"
-                value={editProps?.city}
+                value={formValues?.city}
                 size="large"
                 style={styles.formCtrl}
+                onChangeText={(text) => dispatch(completeForm({key: "city", value: text}))}
             />
-            <ProvincePicker actualProvince={editProps?.province}/>
+            <ProvincePicker actualProvince={formValues?.province}/>
             <Input
                 label="Country"
                 placeholder="Country"
-                value={editProps?.country}
+                value={formValues?.country}
                 size="large"
                 style={styles.formCtrl}
+                onChangeText={(text) => dispatch(completeForm({key: "country", value: text}))}
             />
         </>
     );

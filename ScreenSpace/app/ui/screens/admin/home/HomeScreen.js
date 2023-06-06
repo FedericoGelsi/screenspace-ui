@@ -8,7 +8,7 @@ const BackIcon = (props) => (
   <Icon {...props} name="arrow-back" />
 );
 
-const data = new Array(10).fill({
+const data = new Array(2).fill({
     title: 'Item',
   });
 

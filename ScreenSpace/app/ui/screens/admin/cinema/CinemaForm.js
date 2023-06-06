@@ -1,12 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Layout, TopNavigation, TopNavigationAction, Icon, Button, Text, Modal, Card, Divider } from '@ui-kitten/components';
+import { TopNavigation, TopNavigationAction, Icon, Button, Text, Modal, Card } from '@ui-kitten/components';
 import * as React from 'react';
 import { StyleSheet, View, SafeAreaView} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import { CinemaFormDetails } from './CinemaFormDetails';
 import { CinemaFormAddress } from './CinemaFormAddress';
 import CinemaFormSummary from './CinemaFormSummary';
-import { navigate } from '@react-navigation/routers/lib/typescript/src/CommonActions';
+import { useDispatch } from 'react-redux';
+import { reset } from '../../../../redux/slices/formSlice';
 
 const PAGES = ['Page 1', 'Page 2', 'Page 3'];
 
@@ -39,6 +40,8 @@ const BackIcon = (props) => (
 );
 
 export const CinemaForm = ({navigation, route}) => {
+  const dispatch = useDispatch();
+
   const [currentPage, setCurrentPage] = React.useState(0);
   const [visible, setVisible] = React.useState(false);
 
@@ -48,6 +51,7 @@ export const CinemaForm = ({navigation, route}) => {
 
   const navigateBack = () => {
     navigation.goBack();
+    dispatch(reset())
   };
 
   const navigateHome = () => {
@@ -73,9 +77,9 @@ export const CinemaForm = ({navigation, route}) => {
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.formContainer}>
-              {currentPage === 0 && <CinemaFormDetails editProps={route?.params}/>}
-              {currentPage === 1 && <CinemaFormAddress editProps={route?.params}/>}
-              {currentPage === 2 && <CinemaFormSummary header={'Summary'} info={route?.params}/>}
+              {currentPage === 0 && <CinemaFormDetails/>}
+              {currentPage === 1 && <CinemaFormAddress/>}
+              {currentPage === 2 && <CinemaFormSummary header={'Summary'}/>}
           </View>
           <View style={[{justifyContent: currentPage === 0 ? 'center' : 'space-around'}, styles.actionLayout]}>
             {currentPage !== 0 && (
@@ -88,7 +92,10 @@ export const CinemaForm = ({navigation, route}) => {
                 Next
               </Button>
             ) : (
-              <Button status="success" style={currentPage === 0 ? styles.oneButton : styles.buttonStyle} onPress={() => setVisible(true)}>
+              <Button status="success" style={currentPage === 0 ? styles.oneButton : styles.buttonStyle} onPress={() => {
+                dispatch(reset());
+                setVisible(true);
+                }}>
                 Finish
               </Button>
             )}

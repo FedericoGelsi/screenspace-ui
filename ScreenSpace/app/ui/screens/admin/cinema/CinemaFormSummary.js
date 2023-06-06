@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Divider, List, ListItem, Text, Icon, Layout } from '@ui-kitten/components';
+import { Divider, Text, Icon, Layout } from '@ui-kitten/components';
+import { useSelector } from 'react-redux';
 
 const CinemaFormSummary = ({header, info}) => {
+    const formValues = useSelector((state) => state.form);
+
     return (
         <>
             <Text category="h6" style={styles.title}>
@@ -21,7 +24,7 @@ const CinemaFormSummary = ({header, info}) => {
                             Cinema
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            {info?.cinemaName}
+                            {formValues?.cinemaName || info?.cinemaName}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -35,7 +38,7 @@ const CinemaFormSummary = ({header, info}) => {
                             Street
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            {info?.address} {info?.postalCode}
+                            {formValues?.address || info?.address} {formValues?.postalCode || info?.postalCode}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -49,7 +52,7 @@ const CinemaFormSummary = ({header, info}) => {
                             City
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            {info?.city}
+                            {formValues?.city || info?.city}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -63,7 +66,7 @@ const CinemaFormSummary = ({header, info}) => {
                             Province
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            {info?.province}
+                            {formValues?.province || info?.province}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -77,7 +80,7 @@ const CinemaFormSummary = ({header, info}) => {
                             Country
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            {info?.country}
+                            {formValues?.country || info?.country}
                         </Text>
                     </Layout>
                     <Divider />
@@ -93,7 +96,7 @@ const CinemaFormSummary = ({header, info}) => {
                             Price per seat
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            ${info?.pricePerShow}
+                            ${formValues?.pricePerShow || info?.pricePerShow}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -107,7 +110,7 @@ const CinemaFormSummary = ({header, info}) => {
                             Cinema Status
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            {info?.status}
+                            {(formValues?.active === true || info?.active === true) ? 'Active' : 'Temporary Unavailable'}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -121,7 +124,7 @@ const CinemaFormSummary = ({header, info}) => {
                             Company
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            {info?.companyName}
+                            {formValues?.companyName || info?.companyName}
                         </Text>
                     </Layout>
                     <Divider />

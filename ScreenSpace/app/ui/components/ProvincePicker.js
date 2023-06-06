@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { IndexPath, Layout, Select, SelectItem, Text } from '@ui-kitten/components';
+import { useDispatch } from 'react-redux';
+import { completeForm } from '../../redux/slices/formSlice';
 
 const provinces = [
   { "id": 1, "name": "Buenos Aires" },
@@ -31,9 +33,8 @@ const provinces = [
 
 
 export const ProvincePicker = ({actualProvince}) => {
-  console.log(actualProvince)
+  const dispatch = useDispatch();
   let selectedProvince = provinces.find((item) => item.name === actualProvince);
-  console.log(selectedProvince);
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(selectedProvince == null ? 0 : selectedProvince?.id - 1));
   const displayValue = provinces[selectedIndex.row].name;
 
@@ -50,7 +51,10 @@ export const ProvincePicker = ({actualProvince}) => {
             placeholder='Select a Province'
             value={displayValue}
             selectedIndex={selectedIndex}
-            onSelect={(index) => setSelectedIndex(index)}
+            onSelect={(index) => {
+              setSelectedIndex(index);
+              dispatch(completeForm({key: "province", value: provinces[index - 1].name}))
+            }}
       >
         {provinces.map((province) => (
             <SelectItem key={province.id} title={province.name} />
