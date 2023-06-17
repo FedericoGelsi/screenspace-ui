@@ -22,10 +22,10 @@ import {
 } from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
-import {TopNavigationScreenSpace} from '../components/TopNavigation';
-
-import I18n from './assets/strings/I18n';
-import TEXT_KEY from './assets/strings/TextKey';
+import {TopNavigationScreenSpace} from './ui/components/TopNavigation';
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
+import { AppNavigator } from './navigation/Navigation';
 
 /**
  * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
@@ -37,7 +37,7 @@ export default () => (
   <>
     <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider {...eva} theme={eva.light}>
-      <TopNavigationScreenSpace />
+      {/* <TopNavigationScreenSpace />
       <Layout style={styles.container}>
         <Text style={styles.text} category="h1">
           {I18n.t(TEXT_KEY.welcome)} 😻
@@ -51,7 +51,10 @@ export default () => (
         <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
           LIKE
         </Button>
-      </Layout>
+      </Layout> */}
+      <Provider store={store}>
+        <AppNavigator/>
+      </Provider>
     </ApplicationProvider>
   </>
 );
