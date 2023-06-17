@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 import { IndexPath, Layout, Select, SelectItem, Text } from '@ui-kitten/components';
 import { useDispatch } from 'react-redux';
 import { completeForm } from '../../redux/slices/formSlice';
+import I18n from '../../assets/strings/I18n';
+import TEXT_KEY from '../../assets/strings/TextKey';
 
 const provinces = [
   { "id": 1, "name": "Buenos Aires" },
@@ -44,7 +46,7 @@ export const ProvincePicker = ({actualProvince}) => {
       level='1'
     >
         <Text category='label' appearance='hint' style={styles.text}>
-            Province
+          {I18n.t(TEXT_KEY.cinemaForm.address.inputProvince)}
         </Text>
         <Select
             style={styles.select}

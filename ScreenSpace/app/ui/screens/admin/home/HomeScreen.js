@@ -3,6 +3,8 @@ import { SafeAreaView, StyleSheet, View} from 'react-native';
 import { Divider, Icon, List, Text, TopNavigation, TopNavigationAction, Button } from '@ui-kitten/components';
 import { CinemaCard } from '../../../components/CinemaCard';
 import { NoData } from '../../../components/NoData';
+import I18n from '../../../../assets/strings/I18n';
+import TEXT_KEY from '../../../../assets/strings/TextKey';
 
 const BackIcon = (props) => (
   <Icon {...props} name="arrow-back" />
@@ -38,14 +40,14 @@ export const HomeScreenAdmin = ({ navigation }) => {
         {data.length === 0 ? (
           <View style={styles.noDataContainer}>
             <Text category="h6" style={styles.title}>
-              Your Cinemas
+              {I18n.t(TEXT_KEY.cinemaHome.title)}
             </Text>
             <NoData message='You do not have any cinema yet. Start by creating a new one!'/>
           </View>
         ) : (
           <View style={styles.cinemaContainer}>
             <Text category="h6" style={styles.title}>
-                Your Cinemas
+              {I18n.t(TEXT_KEY.cinemaHome.title)}
             </Text>
             <List
                 contentContainerStyle={styles.contentContainer}
@@ -57,10 +59,10 @@ export const HomeScreenAdmin = ({ navigation }) => {
         <Divider/>
         <View style={styles.actionLayout}>
           <Button style={styles.buttonStyle}>
-              Shows
+            {I18n.t(TEXT_KEY.cinemaHome.showsButtonText)}
           </Button>
           <Button style={styles.buttonStyle} onPress={navigateNewCinema}>
-              New Cinema
+            {I18n.t(TEXT_KEY.cinemaHome.newCinemaButtonText)}
           </Button>
         </View>
       </View>

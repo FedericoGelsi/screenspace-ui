@@ -25,9 +25,6 @@ import * as eva from '@eva-design/eva';
 import {TopNavigationScreenSpace} from './ui/components/TopNavigation';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
-
-import I18n from './assets/strings/I18n';
-import TEXT_KEY from './assets/strings/TextKey';
 import { AppNavigator } from './navigation/Navigation';
 
 /**

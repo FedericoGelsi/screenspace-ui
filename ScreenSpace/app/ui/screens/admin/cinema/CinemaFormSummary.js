@@ -2,6 +2,8 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Divider, Text, Icon, Layout } from '@ui-kitten/components';
 import { useSelector } from 'react-redux';
+import I18n from '../../../../assets/strings/I18n';
+import TEXT_KEY from '../../../../assets/strings/TextKey';
 
 const CinemaFormSummary = ({header, info}) => {
     const formValues = useSelector((state) => state.form);
@@ -21,7 +23,7 @@ const CinemaFormSummary = ({header, info}) => {
                             name='film-outline'
                         />
                         <Text category="s1" style={{ marginHorizontal: 8 }}>
-                            Cinema
+                            {I18n.t(TEXT_KEY.cinemaSummary.cinemaText)}
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
                             {formValues?.cinemaName || info?.cinemaName}
@@ -35,7 +37,7 @@ const CinemaFormSummary = ({header, info}) => {
                             name='map-outline'
                         />
                         <Text category="s1" style={{ marginHorizontal: 8 }}>
-                            Street
+                            {I18n.t(TEXT_KEY.cinemaSummary.streetText)}
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
                             {formValues?.address || info?.address} {formValues?.postalCode || info?.postalCode}
@@ -49,7 +51,7 @@ const CinemaFormSummary = ({header, info}) => {
                             name='navigation-2-outline'
                         />
                         <Text category="s1" style={{ marginHorizontal: 8 }}>
-                            City
+                            {I18n.t(TEXT_KEY.cinemaSummary.cityText)}
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
                             {formValues?.city || info?.city}
@@ -63,7 +65,7 @@ const CinemaFormSummary = ({header, info}) => {
                             name='navigation-2-outline'
                         />
                         <Text category="s1" style={{ marginHorizontal: 8 }}>
-                            Province
+                            {I18n.t(TEXT_KEY.cinemaSummary.provinceText)}
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
                             {formValues?.province || info?.province}
@@ -77,7 +79,7 @@ const CinemaFormSummary = ({header, info}) => {
                             name='navigation-2-outline'
                         />
                         <Text category="s1" style={{ marginHorizontal: 8 }}>
-                            Country
+                            {I18n.t(TEXT_KEY.cinemaSummary.countryText)}
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
                             {formValues?.country || info?.country}
@@ -93,7 +95,7 @@ const CinemaFormSummary = ({header, info}) => {
                             name='pricetags-outline'
                         />
                         <Text category="s1" style={{ marginHorizontal: 8 }}>
-                            Price per seat
+                            {I18n.t(TEXT_KEY.cinemaSummary.priceText)}
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
                             ${formValues?.pricePerShow || info?.pricePerShow}
@@ -107,10 +109,10 @@ const CinemaFormSummary = ({header, info}) => {
                             name='film-outline'
                         />
                         <Text category="s1" style={{ marginHorizontal: 8 }}>
-                            Cinema Status
+                            {I18n.t(TEXT_KEY.cinemaSummary.cinemaStatusText)}
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
-                            {(formValues?.active === true || info?.active === true) ? 'Active' : 'Temporary Unavailable'}
+                            {(formValues?.active === true || info?.active === true) ? I18n.t(TEXT_KEY.cinemaSummary.cinemaStatusActive) : I18n.t(TEXT_KEY.cinemaSummary.cinemaStatusInactive)}
                         </Text>
                     </Layout>
                     <Divider style={styles.divider} />
@@ -121,7 +123,7 @@ const CinemaFormSummary = ({header, info}) => {
                             name='alert-circle-outline'
                         />
                         <Text category="s1" style={{ marginHorizontal: 8 }}>
-                            Company
+                            {I18n.t(TEXT_KEY.cinemaSummary.companyText)}
                         </Text>
                         <Text category="s1" style={{ flexGrow: 1, textAlign: 'right' }}>
                             {formValues?.companyName || info?.companyName}

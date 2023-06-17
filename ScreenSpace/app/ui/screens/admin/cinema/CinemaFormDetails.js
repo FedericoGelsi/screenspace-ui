@@ -3,6 +3,8 @@ import { Input, Text, Toggle } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { completeForm } from '../../../../redux/slices/formSlice';
+import I18n from '../../../../assets/strings/I18n';
+import TEXT_KEY from '../../../../assets/strings/TextKey';
 
 export const CinemaFormDetails = () => {
 
@@ -12,27 +14,27 @@ export const CinemaFormDetails = () => {
     return (
         <>
             <Text category="h6" style={styles.title}>
-                Cinema details
+                {I18n.t(TEXT_KEY.cinemaForm.details.title)}
             </Text>
             <Input
-                label="Cinema name"
-                placeholder="Cinema name"
+                label={I18n.t(TEXT_KEY.cinemaForm.details.inputName)}
+                placeholder={I18n.t(TEXT_KEY.cinemaForm.details.inputName)}
                 value={formValues?.cinemaName}
                 size="large"
                 style={styles.formCtrl}
                 onChangeText={(text) => dispatch(completeForm({key: "cinemaName", value: text}))}
             />
             <Input
-                label="Company Name"
-                placeholder="Company Name"
+                label={I18n.t(TEXT_KEY.cinemaForm.details.inputCompany)}
+                placeholder={I18n.t(TEXT_KEY.cinemaForm.details.inputCompany)}
                 value={formValues?.companyName}
                 size="large"
                 style={styles.formCtrl}
                 onChangeText={(text) => dispatch(completeForm({key: "companyName", value: text}))}
             />
             <Input
-                label="Price per show"
-                placeholder="Insert price ($)"
+                label={I18n.t(TEXT_KEY.cinemaForm.details.inputPrice)}
+                placeholder={I18n.t(TEXT_KEY.cinemaForm.details.inputPricePlaceholder)}
                 keyboardType='numeric'
                 size="large"
                 value={formValues?.pricePerShow}
@@ -40,14 +42,14 @@ export const CinemaFormDetails = () => {
                 onChangeText={(text) => dispatch(completeForm({key: "pricePerShow", value: text}))}
             />
             <Text category='label' appearance='hint' style={styles.text}>
-                Status
+                {I18n.t(TEXT_KEY.cinemaForm.details.inputStatus)}
             </Text>
             <Toggle
                 style={styles.toggleContainer}
                 checked={formValues?.active === true ? false : true}
                 onChange={() => dispatch(completeForm({key: "active", value: !formValues.active}))}
                 >
-                Temporary Unavailable
+                {I18n.t(TEXT_KEY.cinemaForm.details.inputStatusPlaceholder)}
             </Toggle>
         </>
     );

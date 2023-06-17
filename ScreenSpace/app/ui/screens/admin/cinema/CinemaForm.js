@@ -8,6 +8,8 @@ import { CinemaFormAddress } from './CinemaFormAddress';
 import CinemaFormSummary from './CinemaFormSummary';
 import { useDispatch } from 'react-redux';
 import { reset } from '../../../../redux/slices/formSlice';
+import I18n from '../../../../assets/strings/I18n';
+import TEXT_KEY from '../../../../assets/strings/TextKey';
 
 const PAGES = ['Page 1', 'Page 2', 'Page 3'];
 
@@ -58,6 +60,12 @@ export const CinemaForm = ({navigation, route}) => {
     navigation.navigate("Home");
   };
 
+  const stepLabels = [
+    { label: I18n.t(TEXT_KEY.cinemaForm.stepIndicator.firstStep) },
+    { label: I18n.t(TEXT_KEY.cinemaForm.stepIndicator.secondStep) },
+    { label: I18n.t(TEXT_KEY.cinemaForm.stepIndicator.thirdStep) },
+  ];
+   
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack}/>
   );
@@ -72,31 +80,31 @@ export const CinemaForm = ({navigation, route}) => {
             customStyles={thirdIndicatorStyles}
             currentPosition={currentPage}
             onPress={onStepPress}
-            labels={['Cinema details', 'Address', 'Summary']}
+            labels={stepLabels.map((step) => step.label)}
           />
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.formContainer}>
               {currentPage === 0 && <CinemaFormDetails/>}
               {currentPage === 1 && <CinemaFormAddress/>}
-              {currentPage === 2 && <CinemaFormSummary header={'Summary'}/>}
+              {currentPage === 2 && <CinemaFormSummary header={I18n.t(TEXT_KEY.cinemaSummary.formTitle)}/>}
           </View>
           <View style={[{justifyContent: currentPage === 0 ? 'center' : 'space-around'}, styles.actionLayout]}>
             {currentPage !== 0 && (
             <Button style={styles.buttonStyle} onPress={() => setCurrentPage(currentPage - 1)}>
-                Previous
+                {I18n.t(TEXT_KEY.cinemaForm.buttonPreviousText)}
             </Button>
             )}
             {currentPage !== PAGES.length - 1 ? (
               <Button style={currentPage === 0 ? styles.oneButton : styles.buttonStyle} onPress={() => setCurrentPage(currentPage + 1)}>
-                Next
+                {I18n.t(TEXT_KEY.cinemaForm.buttonNextText)}
               </Button>
             ) : (
               <Button status="success" style={currentPage === 0 ? styles.oneButton : styles.buttonStyle} onPress={() => {
                 dispatch(reset());
                 setVisible(true);
                 }}>
-                Finish
+                {I18n.t(TEXT_KEY.cinemaForm.buttonFinishText)}
               </Button>
             )}
           </View>
