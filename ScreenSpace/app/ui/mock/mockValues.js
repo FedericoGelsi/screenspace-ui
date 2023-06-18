@@ -9,3 +9,10 @@ export const editValues = {
     province: 'Jujuy',
     country: 'Argentina',
 };
+
+export const editHallValues = {
+    hallName: "Main Hall",
+    numberOfLines: 8,
+    numberOfSeats: 8,
+    active: 1,
+};

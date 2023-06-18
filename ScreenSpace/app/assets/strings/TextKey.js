@@ -8,11 +8,14 @@ export default {
     title: 'cinemaHome.title',
     showsButtonText: 'cinemaHome.showsButtonText',
     newCinemaButtonText: 'cinemaHome.newCinemaButtonText',
+    noDataText: 'cinemaHome.noDataText',
   },
   cinemaForm: {
     buttonNextText: 'cinemaForm.buttonNextText',
     buttonPreviousText: 'cinemaForm.buttonPreviousText',
     buttonFinishText: 'cinemaForm.buttonFinishText',
+    successModalMessage: 'cinemaForm.successModalMessage',
+    successModalButtonMessage: 'cinemaForm.successModalButtonMessage',
     details: {
       title: 'cinemaForm.details.title',
       inputName: 'cinemaForm.details.inputName',
@@ -49,5 +52,31 @@ export default {
     companyText: 'cinemaSummary.companyText',
     cinemaStatusActive: 'cinemaSummary.cinemaStatusActive',
     cinemaStatusInactive: 'cinemaSummary.cinemaStatusInactive',
+  },
+  cinemaDetails: {
+    title: 'cinemaDetails.title',
+    editButtonText: 'cinemaDetails.editButtonText',
+    hallsButtonText: 'cinemaDetails.hallsButtonText',
+  },
+  cinemaHalls: {
+    noDataText: 'cinemaHalls.noDataText',
+    finishButtonText: 'cinemaHalls.finishButtonText',
+    form: {
+      name: 'cinemaHalls.form.name',
+      numberOfLinesText: 'cinemaHalls.form.numberOfLinesText',
+      numberOfSeatsText: 'cinemaHalls.form.numberOfSeatsText',
+      status: 'cinemaHalls.form.status',
+      activeText: 'cinemaHalls.form.activeText',
+      inactiveText: 'cinemaHalls.form.inactiveText',
+      saveButtonText: 'cinemaHalls.form.saveButtonText',
+    }
+  },
+  hallCard: {
+    removeButtonText: 'hallCard.removeButtonText',
+    editButtonText: 'hallCard.editButtonText',
+  },
+  hallHeader: {
+    headerTitle: 'hallHeader.headerTitle',
+    addButtonText: 'hallHeader.addButtonText',
   },
 };

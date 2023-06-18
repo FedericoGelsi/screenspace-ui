@@ -8,11 +8,14 @@ export default {
     title: 'Tus Cines',
     showsButtonText: 'Shows',
     newCinemaButtonText: 'Nuevo Cine',
+    noDataText: 'No posee ningún cine en este momento. Empieza por crear uno nuevo!',
   },
   cinemaForm: {
     buttonNextText: 'Siguiente',
     buttonPreviousText: 'Anterior',
     buttonFinishText: 'Terminar',
+    successModalMessage: 'Tu cine se creó correctamente',
+    successModalButtonMessage: 'Inicio',
     details: {
       title: 'Detalle del Cine',
       inputName: 'Nombre del Cine',
@@ -49,5 +52,31 @@ export default {
     companyText: 'Compañía',
     cinemaStatusActive: 'Activo',
     cinemaStatusInactive: 'Temporalmente Inactivo',
+  },
+  cinemaDetails: {
+    title: 'Información del Cine',
+    editButtonText: 'Editar Cine',
+    hallsButtonText: 'Salas',
+  },
+  cinemaHalls: {
+    noDataText: 'No tiene salas actualmente',
+    finishButtonText: 'Terminar',
+    form: {
+      name: 'Nombre Sala',
+      numberOfLinesText: 'Numero de filas',
+      numberOfSeatsText: 'Numero de asientos por fila',
+      status: 'Estado',
+      activeText: 'Activo',
+      inactiveText: 'Inactivo',
+      saveButtonText: 'Guardar Cambios',
+    }
+  },
+  hallCard: {
+    removeButtonText: 'Eliminar',
+    editButtonText: 'Editar',
+  },
+  hallHeader: {
+    headerTitle: 'Salas',
+    addButtonText: 'Añadir Sala',
   },
 };
