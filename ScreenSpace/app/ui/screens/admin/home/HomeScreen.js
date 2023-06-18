@@ -13,12 +13,20 @@ import {NoData} from '../../../components/NoData';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {BackIcon} from '../../../kittenIcons/kittenIcons';
+import {useDispatch} from 'react-redux';
+import {getOwnerCinemas} from '../../../../redux/slices/ownerCinemasSlice';
 
 const data = new Array(2).fill({
   title: 'Item',
 });
 
 export const HomeScreenAdmin = ({navigation}) => {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getOwnerCinemas(1));
+  }, [dispatch]);
+
   const navigateBack = () => {
     navigation.goBack();
   };
