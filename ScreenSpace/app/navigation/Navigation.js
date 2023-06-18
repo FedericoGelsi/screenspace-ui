@@ -6,6 +6,7 @@ import { HomeScreenAdmin } from '../ui/screens/admin/home/HomeScreen';
 import { CinemaForm } from '../ui/screens/admin/cinema/CinemaForm';
 import { CinemaDetails } from '../ui/screens/admin/cinema/CinemaDetails';
 import { CinemaHalls } from '../ui/screens/admin/halls/CinemaHalls';
+import CinemaShowsHome from '../ui/screens/admin/shows/CinemaShowHome';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -16,6 +17,7 @@ const HomeNavigator = () => (
     <Screen name='NewCinema' component={CinemaForm}/>
     <Screen name='CinemaDetails' component={CinemaDetails}/>
     <Screen name='CinemaHalls' component={CinemaHalls}/>
+    <Screen name='CinemaShows' component={CinemaShowsHome}/>
   </Navigator>
 );
 

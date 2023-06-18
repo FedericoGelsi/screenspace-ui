@@ -50,4 +50,10 @@ export default {
     cinemaStatusActive: 'cinemaSummary.cinemaStatusActive',
     cinemaStatusInactive: 'cinemaSummary.cinemaStatusInactive',
   },
+  cinemaShows:{
+    sectionName: 'cinemaShows.sectionName',
+    noDataMessage: 'cinemaShows.noDataMessage',
+    newShowButton: 'cinemaShows.newShowButton',
+    deleteShowWarningMessage: 'cinemaShows.deleteShowWarningMessage'
+  }
 };

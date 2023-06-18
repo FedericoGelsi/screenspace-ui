@@ -50,4 +50,10 @@ export default {
     cinemaStatusActive: 'Activo',
     cinemaStatusInactive: 'Temporalmente Inactivo',
   },
+  cinemaShows:{
+    sectionName: 'Funciones',
+    noDataMessage: 'Todavía no tienes ninguna función.\nComienza creando una nueva!',
+    newShowButton: 'Crear nueva función',
+    deleteShowWarningMessage: 'Está seguro de eliminar este item?\nEsta acción no se puede revertir'
+  }
 };

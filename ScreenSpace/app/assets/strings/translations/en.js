@@ -50,4 +50,10 @@ export default {
     cinemaStatusActive: 'Active',
     cinemaStatusInactive: 'Temporary Unavailable',
   },
+  cinemaShows:{
+    sectionName: 'Shows',
+    noDataMessage: 'You do not have any shows yet\nStart by creating a new one!',
+    newShowButton: 'Create new show',
+    deleteShowWarningMessage: 'Are you sure you want to delete this item?\nYou cannot revert this action'
+  }
 };
