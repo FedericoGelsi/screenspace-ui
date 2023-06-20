@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {
   Divider,
@@ -13,19 +13,24 @@ import {NoData} from '../../../components/NoData';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {BackIcon} from '../../../kittenIcons/kittenIcons';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {getOwnerCinemas} from '../../../../redux/slices/ownerCinemasSlice';
 
-const data = new Array(2).fill({
+const data = new Array(1).fill({
   title: 'Item',
 });
 
-export const HomeScreenAdmin = ({navigation}) => {
+export const HomeScreenAdmin = ({navigation, route}) => {
+  let refresh = route?.params ? route.params : false
   const dispatch = useDispatch();
+  const {cinemas, error, isLoading} = useSelector(state => state.ownerCinemas);
 
   React.useEffect(() => {
     dispatch(getOwnerCinemas(1));
-  }, [dispatch]);
+    if (refresh)
+      dispatch(getOwnerCinemas(1));
+      refresh = false
+  }, [dispatch, refresh]);
 
   const navigateBack = () => {
     navigation.goBack();
@@ -35,13 +40,19 @@ export const HomeScreenAdmin = ({navigation}) => {
     navigation.push('NewCinema');
   };
 
-  const navigateCinemaDetails = () => {
-    navigation.push('CinemaDetails');
+  const navigateCinemaDetails = (cinemaIndex) => {
+    navigation.push('CinemaDetails', {cinemaDetails: cinemas[cinemaIndex]});
   };
 
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
+
+  if (isLoading) {
+    return (
+      <Text>Cargando...</Text>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
@@ -67,9 +78,9 @@ export const HomeScreenAdmin = ({navigation}) => {
             </Text>
             <List
               contentContainerStyle={styles.contentContainer}
-              data={data}
-              renderItem={() => (
-                <CinemaCard navigateAction={navigateCinemaDetails} />
+              data={cinemas}
+              renderItem={(item) => (
+                <CinemaCard navigateAction={navigateCinemaDetails} item={item}/>
               )}
             />
           </View>

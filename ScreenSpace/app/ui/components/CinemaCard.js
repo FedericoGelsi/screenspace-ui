@@ -5,7 +5,7 @@ import { Card, Text, Icon } from '@ui-kitten/components';
 const Header = (props) => (
     <View {...props} style={[props.style, styles.headerContainer]}>
         <Text category='h6'>
-            Hoyts Abasto
+            {props.name}
         </Text>
         <Icon
             style={{ width: 32, height: 32, borderColor: 'blue' }}
@@ -15,14 +15,16 @@ const Header = (props) => (
     </View>
 );
 
-export const CinemaCard = ({navigateAction}) => (
+export const CinemaCard = ({navigateAction, item}) => (
     <Card
         style={styles.card}
-        header={Header}
-        onPress={() => navigateAction()}
+        header={(headerProps) => (
+            <Header {...headerProps} name={item.item.name} />
+        )}
+        onPress={() => navigateAction(item.index)}
     >
         <Text>
-        Av. Corrientes 3247, C1193AAE CABA
+        {item.item.calle + " " + item.item.numero + " "}
         </Text>
     </Card>
 );

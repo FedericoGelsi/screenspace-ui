@@ -24,7 +24,7 @@ const ownerCinemasSlice = createSlice({
       .addCase(getOwnerCinemas.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.cinemas = action.payload.items;
+        state.cinemas = action.payload;
         console.log(action);
       })
       .addCase(getOwnerCinemas.rejected, (state, action) => {

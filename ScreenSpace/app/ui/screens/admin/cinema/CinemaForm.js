@@ -20,6 +20,7 @@ import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {SuccessModal} from '../../../components/SuccessModal';
 import {CustomStepIndicator} from '../../../components/CustomStepIndicator';
 import {BackIcon} from '../../../kittenIcons/kittenIcons';
+import { createCinema } from '../../../../redux/slices/formSlice';
 
 export const CinemaForm = ({navigation}) => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ export const CinemaForm = ({navigation}) => {
   };
 
   const navigateHome = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Home', {refresh: true});
     dispatch(reset());
   };
 
@@ -105,6 +106,7 @@ export const CinemaForm = ({navigation}) => {
                 }
                 onPress={() => {
                   setVisible(true);
+                  dispatch(createCinema(1))
                 }}>
                 {I18n.t(TEXT_KEY.cinemaForm.buttonFinishText)}
               </Button>

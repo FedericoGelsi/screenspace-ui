@@ -10,14 +10,15 @@ import {
 import CinemaFormSummary from './CinemaFormSummary';
 import {editValues} from '../../../mock/mockValues';
 import {useDispatch} from 'react-redux';
-import {loadForm} from '../../../../redux/slices/formSlice';
+import {loadForm, loadFormBack} from '../../../../redux/slices/formSlice';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 
 const BackIcon = props => <Icon {...props} name="arrow-back" />;
 
-export const CinemaDetails = ({navigation}) => {
+export const CinemaDetails = ({navigation, route}) => {
   const dispatch = useDispatch();
+  const { cinemaDetails } = route.params;
 
   const navigateBack = () => {
     navigation.goBack();
@@ -29,7 +30,7 @@ export const CinemaDetails = ({navigation}) => {
 
   const navigateEditCinema = () => {
     navigation.push('NewCinema');
-    dispatch(loadForm(editValues));
+    dispatch(loadFormBack(cinemaDetails));
   };
 
   const BackAction = () => (
@@ -48,7 +49,7 @@ export const CinemaDetails = ({navigation}) => {
       <View style={styles.cinemaContainer}>
         <CinemaFormSummary
           header={I18n.t(TEXT_KEY.cinemaDetails.title)}
-          info={editValues}
+          info={cinemaDetails}
         />
       </View>
       <Divider />
