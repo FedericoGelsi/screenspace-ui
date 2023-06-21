@@ -38,7 +38,6 @@ const CinemaShowHome = ({cinema = cinemas[0], navigation}) => {
       headerSubtitle={cinema.name}
       navigation={navigation}>
       <Layout style={{flex: 1, paddingHorizontal: 16}}>
-        {console.log(data)}
         <DateFilter date={date} setDate={setDate} />
         {data.length === 0 ? (
           <NoData message={I18n.t(TEXT_KEY.cinemaShows.noDataMessage)} />
