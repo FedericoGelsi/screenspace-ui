@@ -55,5 +55,42 @@ export default {
     noDataMessage: 'You do not have any shows yet\nStart by creating a new one!',
     newShowButton: 'Create new show',
     deleteShowWarningMessage: 'Are you sure you want to delete this item?\nYou cannot revert this action'
+  },
+  newCinemaShow:{
+    sectionName: 'New Show',
+    nextStepButtonLabel: 'Next Step',
+    previousStepButtonLabel: 'Previous Step',
+    submitButtonLabel: 'Create show',
+    steps: {
+      firstStep: {
+        label: 'Cinema',
+        title: 'Pick your Cinema',
+        subtitle: 'sadsadasd',
+        searchBar: {
+          placeholder: 'Look for you cinema'
+        }
+      },
+      secondStep: {
+        label: 'Hall',
+        title: 'Pick your hall',
+        subtitle: '',
+        searchBar: {
+          placeholder: 'Look for you hall'
+        }
+      },
+      thirdStep: {
+        label: 'Movie',
+        title: 'Pick the movie',
+        subtitle: '',
+        searchBar: {
+          placeholder: 'Look for the movie'
+        }
+      },
+      fourthStep: {
+        label: 'Date',
+        title: 'Pick the date',
+        subtitle: '',
+      }
+    },
   }
 };

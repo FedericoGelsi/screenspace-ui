@@ -55,5 +55,33 @@ export default {
     noDataMessage: 'Todavía no tienes ninguna función.\nComienza creando una nueva!',
     newShowButton: 'Crear nueva función',
     deleteShowWarningMessage: 'Está seguro de eliminar este item?\nEsta acción no se puede revertir'
+  },
+  newCinemaShow:{
+    sectionName: 'Nueva Función',
+    nextStepButtonLabel: 'Siguiente paso',
+    previousStepButtonLabel: 'Paso anterior',
+    submitButtonLabel: 'Crear función',
+    steps: {
+      firstStep: {
+        label: 'Cine',
+        title: 'Elige tu cine',
+        subtitle: '',
+      },
+      secondStep: {
+        label: 'Sala',
+        title: 'Elige tu sala',
+        subtitle: '',
+      },
+      thirdStep: {
+        label: 'Película',
+        title: 'Elige la película',
+        subtitle: '',
+      },
+      fourthStep: {
+        label: 'Fecha',
+        title: 'Elige la fecha',
+        subtitle: 'Elige la fecha y hora de la función',
+      }
+    },
   }
 };

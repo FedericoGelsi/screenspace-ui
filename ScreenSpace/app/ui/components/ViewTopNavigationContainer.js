@@ -1,7 +1,6 @@
 import {
   Divider,
   Icon,
-  Layout,
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components';

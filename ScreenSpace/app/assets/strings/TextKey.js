@@ -55,5 +55,42 @@ export default {
     noDataMessage: 'cinemaShows.noDataMessage',
     newShowButton: 'cinemaShows.newShowButton',
     deleteShowWarningMessage: 'cinemaShows.deleteShowWarningMessage'
+  },
+  newCinemaShow:{
+    sectionName: 'newCinemaShow.sectionName',
+    nextStepButtonLabel: 'newCinemaShow.nextStepButtonLabel',
+    previousStepButtonLabel: 'newCinemaShow.previousStepButtonLabel',
+    submitButtonLabel: 'newCinemaShow.submitButtonLabel',
+    steps: {
+      firstStep: {
+        label: 'newCinemaShow.steps.firstStep.label',
+        title: 'newCinemaShow.steps.firstStep.title',
+        subtitle: 'newCinemaShow.steps.firstStep.subtitle',
+        searchBar: {
+          placeholder: 'newCinemaShow.steps.firstStep.searchBar.placeholder'
+        }
+      },
+      secondStep: {
+        label: 'newCinemaShow.steps.secondStep.label',
+        title: 'newCinemaShow.steps.secondStep.title',
+        subtitle: 'newCinemaShow.steps.secondStep.subtitle',
+        searchBar: {
+          placeholder: 'newCinemaShow.steps.secondStep.searchBar.placeholder'
+        }
+      },
+      thirdStep: {
+        label: 'newCinemaShow.steps.thirdStep.label',
+        title: 'newCinemaShow.steps.thirdStep.title',
+        subtitle: 'newCinemaShow.steps.thirdStep.subtitle',
+        searchBar: {
+          placeholder: 'newCinemaShow.steps.thirdStep.searchBar.placeholder'
+        }
+      },
+      fourthStep: {
+        label: 'newCinemaShow.steps.fourthStep.label',
+        title: 'newCinemaShow.steps.fourthStep.title',
+        subtitle: 'newCinemaShow.steps.fourthStep.subtitle',
+      },
+    },
   }
 };

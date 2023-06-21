@@ -1,28 +1,26 @@
 import React from 'react';
 import ViewTopNavigationContainer from '../../../components/ViewTopNavigationContainer';
-import ShowCard from '../../../components/ShowCard';
-import {Button, Icon, List} from '@ui-kitten/components';
+import ShowCard from '../../../components/admin/shows/ShowCard';
+import {List} from '@ui-kitten/components';
 
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {NoData} from '../../../components/NoData';
-
-const CreateNewShowButton = () => {
-  return (
-    <Button style={{margin: 16}} status="success" accessoryLeft={<Icon name="plus" />}>
-      {I18n.t(TEXT_KEY.cinemaShows.newShowButton)}
-    </Button>
-  );
-};
+import { CreateNewShowButton } from '../../../components/admin/shows/CreateNewShowButton';
 
 const CinemaShowHome = ({cinemaName = 'Hoyts Abasto', navigation}) => {
-  const data = new Array(2).fill({
-    hall: 'Item',
-    movieName: 'SomeMovieName',
+  const data = new Array(20).fill({
+    id: Math.random().toString(16).slice(2),
+    hall: 'Main Hall - 22:00',
+    movieName: 'Star Wars: Episode IX'
   });
 
+  const navigateNewShow = () => {
+    navigation.push('NewShow');
+  };
+
   const renderItem = ({item, index}) => (
-    <ShowCard hall={item.hall} movieName={item.movieName} />
+    <ShowCard show={item}/>
   );
   return (
     <ViewTopNavigationContainer
@@ -37,7 +35,7 @@ const CinemaShowHome = ({cinemaName = 'Hoyts Abasto', navigation}) => {
           data={data}
           renderItem={renderItem}></List>
       )}
-      <CreateNewShowButton />
+      <CreateNewShowButton onPress={navigateNewShow} />
     </ViewTopNavigationContainer>
   );
 };
