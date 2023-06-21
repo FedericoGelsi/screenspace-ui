@@ -10,6 +10,8 @@ const NewShowStep0 = () => {
   const formValues = useSelector(state => state.newShowForm);
   const dispatch = useDispatch();
 
+  const [items, setItems] = useState(getCinemas());
+
   const MenuOptions = ({items, renderItem}) => {
     const useMenuState = (initialState = 1) => {
       const [selectedIndex, setSelectedIndex] = useState(initialState);
@@ -24,8 +26,6 @@ const NewShowStep0 = () => {
       </Menu>
     );
   };
-
-  const [items, setItems] = useState(getCinemas());
 
   const searchCinema = value => getCinemaByName(value);
 
