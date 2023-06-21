@@ -3,14 +3,14 @@ import {Icon, Layout, Menu, MenuItem, Text} from '@ui-kitten/components';
 import I18n from '../../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../../assets/strings/TextKey';
 import SearchBar from '../../../SearchBar';
-import {getCinemaByName, getCinemas} from '../../../../../api/cinemaController';
+import {getCinemaByName, getHalls} from '../../../../../api/cinemaController';
 import {useSelector, useDispatch} from 'react-redux';
 
-const NewShowStep0 = () => {
+const PickHallStep = () => {
   const formValues = useSelector(state => state.newShowForm);
   const dispatch = useDispatch();
 
-  const [items, setItems] = useState(getCinemas());
+  const [items, setItems] = useState(getHalls());
 
   const MenuOptions = ({items, renderItem}) => {
     const useMenuState = (initialState = 1) => {
@@ -70,4 +70,4 @@ const NewShowStep0 = () => {
   );
 };
 
-export default NewShowStep0;
+export default PickHallStep

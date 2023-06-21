@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text } from '@ui-kitten/components';
 
-const NewShowStep1 = () => {
+const PickMovieStep = () => {
   return (
-    <Text>NewShowStep1</Text>
+    <Text>NewShowStep2</Text>
   )
 }
 
-export default NewShowStep1
+export default PickMovieStep

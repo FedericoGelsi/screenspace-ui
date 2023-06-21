@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text } from '@ui-kitten/components';
 
-const NewShowStep3 = () => {
+const PickDateTimeStep = () => {
   return (
     <Text>NewShowStep3</Text>
   )
 }
 
-export default NewShowStep3
+export default PickDateTimeStep
