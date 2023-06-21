@@ -26,7 +26,7 @@ const CinemaFormSummary = ({header, info}) => {
               {I18n.t(TEXT_KEY.cinemaSummary.cinemaText)}
             </Text>
             <Text category="s1" style={{flexGrow: 1, textAlign: 'right'}}>
-              {formValues?.cinemaName || info?.name}
+              {formValues?.cinemaName || info?.cinemaName}
             </Text>
           </Layout>
           <Divider style={styles.divider} />
@@ -40,8 +40,8 @@ const CinemaFormSummary = ({header, info}) => {
               {I18n.t(TEXT_KEY.cinemaSummary.streetText)}
             </Text>
             <Text category="s1" style={{flexGrow: 1, textAlign: 'right'}}>
-              {formValues?.address || info?.calle}{' '}
-              {formValues?.postalCode || info?.numero}
+              {formValues?.address || info?.address}{' '}
+              {formValues?.postalCode || info?.postalCode}
             </Text>
           </Layout>
           <Divider style={styles.divider} />
@@ -55,7 +55,7 @@ const CinemaFormSummary = ({header, info}) => {
               {I18n.t(TEXT_KEY.cinemaSummary.cityText)}
             </Text>
             <Text category="s1" style={{flexGrow: 1, textAlign: 'right'}}>
-              {formValues?.city || info?.localidad}
+              {formValues?.city || info?.city}
             </Text>
           </Layout>
           <Divider style={styles.divider} />
@@ -69,7 +69,7 @@ const CinemaFormSummary = ({header, info}) => {
               {I18n.t(TEXT_KEY.cinemaSummary.provinceText)}
             </Text>
             <Text category="s1" style={{flexGrow: 1, textAlign: 'right'}}>
-              {formValues?.province || info?.provincia}
+              {formValues?.province || info?.province}
             </Text>
           </Layout>
           <Divider style={styles.divider} />
@@ -83,7 +83,7 @@ const CinemaFormSummary = ({header, info}) => {
               {I18n.t(TEXT_KEY.cinemaSummary.countryText)}
             </Text>
             <Text category="s1" style={{flexGrow: 1, textAlign: 'right'}}>
-              {formValues?.country || info?.pais}
+              {formValues?.country || info?.country}
             </Text>
           </Layout>
           <Divider />
@@ -99,7 +99,7 @@ const CinemaFormSummary = ({header, info}) => {
               {I18n.t(TEXT_KEY.cinemaSummary.priceText)}
             </Text>
             <Text category="s1" style={{flexGrow: 1, textAlign: 'right'}}>
-              ${formValues?.pricePerShow || info?.seatCosts}
+              ${formValues?.pricePerShow || info?.pricePerShow}
             </Text>
           </Layout>
           <Divider style={styles.divider} />
@@ -113,7 +113,7 @@ const CinemaFormSummary = ({header, info}) => {
               {I18n.t(TEXT_KEY.cinemaSummary.cinemaStatusText)}
             </Text>
             <Text category="s1" style={{flexGrow: 1, textAlign: 'right'}}>
-              {formValues?.active === true || info?.available === true
+              {formValues?.active === true || info?.active === true
                 ? I18n.t(TEXT_KEY.cinemaSummary.cinemaStatusActive)
                 : I18n.t(TEXT_KEY.cinemaSummary.cinemaStatusInactive)}
             </Text>
@@ -129,7 +129,7 @@ const CinemaFormSummary = ({header, info}) => {
               {I18n.t(TEXT_KEY.cinemaSummary.companyText)}
             </Text>
             <Text category="s1" style={{flexGrow: 1, textAlign: 'right'}}>
-              {formValues?.companyName || info?.company}
+              {formValues?.companyName || info?.companyName}
             </Text>
           </Layout>
           <Divider />

@@ -8,11 +8,11 @@ import {
   Button,
 } from '@ui-kitten/components';
 import CinemaFormSummary from './CinemaFormSummary';
-import {editValues} from '../../../mock/mockValues';
 import {useDispatch} from 'react-redux';
 import {loadForm, loadFormBack} from '../../../../redux/slices/formSlice';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
+import { loadHalls } from '../../../../redux/slices/hallSlice';
 
 const BackIcon = props => <Icon {...props} name="arrow-back" />;
 
@@ -25,11 +25,11 @@ export const CinemaDetails = ({navigation, route}) => {
   };
 
   const navigateHalls = () => {
-    navigation.push('CinemaHalls');
+    navigation.push('CinemaHalls', {cinemaId: cinemaDetails.id});
   };
 
   const navigateEditCinema = () => {
-    navigation.push('NewCinema');
+    navigation.push('NewCinema', {edit: true, cinemaId: cinemaDetails.id});
     dispatch(loadFormBack(cinemaDetails));
   };
 

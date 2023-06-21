@@ -19,12 +19,12 @@ export const CinemaCard = ({navigateAction, item}) => (
     <Card
         style={styles.card}
         header={(headerProps) => (
-            <Header {...headerProps} name={item.item.name} />
+            <Header {...headerProps} name={item.item.cinemaName} />
         )}
         onPress={() => navigateAction(item.index)}
     >
         <Text>
-        {item.item.calle + " " + item.item.numero + " "}
+        {item.item.address + " " + item.item.postalCode}
         </Text>
     </Card>
 );

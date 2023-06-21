@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getCinemas, newCinema } from '../../networking/api/endpoints/cinemasWS';
+import { editCinemaAPI, getCinemas, newCinemaAPI } from '../../networking/api/endpoints/cinemasWS';
 
 const initialState = {
     cinemaName: null,
     companyName: null,
     pricePerShow: null,
-    active: null,
+    active: false,
     address: null,
     postalCode: null,
     city: null,
@@ -15,10 +15,19 @@ const initialState = {
 };
 
 export const createCinema = createAsyncThunk(
-  'owner/cinema',
+  'owner/createCinema',
   async (ownerId, thunkAPI) => {
     const state = thunkAPI.getState();
-    const result = await newCinema(ownerId, state.form);
+    const result = await newCinemaAPI(ownerId, state.form);
+    return result;
+  }
+);
+
+export const editCinema = createAsyncThunk(
+  'owner/editCinema',
+  async (cinemaId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const result = await editCinemaAPI(cinemaId, state.form);
     return result;
   }
 );
@@ -35,15 +44,15 @@ export const formSlice = createSlice({
       return action.payload;
     },
     loadFormBack: (state, action) => {
-      state.cinemaName = action.payload.name;
-      state.companyName = action.payload.company;
-      state.pricePerShow = action.payload.seatCosts.toString();
-      state.active = action.payload.available;
-      state.address = action.payload.calle + " " + action.payload.numero;
-      state.postalCode = "No definido";
-      state.city = action.payload.localidad;
-      state.province = action.payload.provincia;
-      state.country = action.payload.pais;
+      state.cinemaName = action.payload.cinemaName;
+      state.companyName = action.payload.companyName;
+      state.pricePerShow = action.payload.pricePerShow.toString();
+      state.active = action.payload.active;
+      state.address = action.payload.address;
+      state.postalCode = action.payload.postalCode;
+      state.city = action.payload.city;
+      state.province = action.payload.province;
+      state.country = action.payload.country;
     }
   },
   extraReducers: (builder) => {
@@ -51,13 +60,20 @@ export const formSlice = createSlice({
       state.error = null;
     })
       .addCase(createCinema.fulfilled, (state, action) => {
-        state.restaurants = action.payload;
         state.error = false;
-        console.log(action.type);
       })
       .addCase(createCinema.rejected, (state, action) => {
         state.error = true
-        console.log(action);
+      })
+      .addCase(editCinema.pending, (state, action) => {
+        state.error = null;
+      })
+      .addCase(editCinema.rejected, (state, action) => {
+        state.error = true
+      })
+      .addCase(editCinema.fulfilled, (state, action) => {
+        state.restaurants = action.payload;
+        state.error = false;
       })
     }
 });

@@ -22,26 +22,35 @@ import {
   completeHall,
   reset,
   isComplete,
-  loadHall,
+  createHall,
+  loadHallFromBack,
+  editHall,
+  loadHalls
 } from '../../../../redux/slices/hallSlice';
-import {editHallValues} from '../../../mock/mockValues';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {BackIcon} from '../../../kittenIcons/kittenIcons';
 import {Stepper} from '../../../components/Stepper';
 
-export const CinemaHalls = ({navigation}) => {
+export const CinemaHalls = ({navigation, route}) => {
+  const {halls} = useSelector(state => state.hall)
   const hallValues = useSelector(state => state.hall);
   const dispatch = useDispatch();
   const hallComplete = useSelector(isComplete);
 
   const [addHallVisible, setAddHallVisible] = React.useState(false);
   const [isHallComplete, setIsHallComplete] = React.useState(true);
-  const [data, setData] = React.useState(new Array(3).fill({title: 'Item'}));
+  const [data, setData] = React.useState(halls);
+  const [edit, setEdit] = React.useState(false);
+
 
   React.useEffect(() => {
     setIsHallComplete(hallComplete);
   }, [hallValues]);
+
+  React.useEffect(() => {
+    setData(halls);
+  }, [halls]);
 
   const navigateBack = () => {
     navigation.goBack();
@@ -49,12 +58,23 @@ export const CinemaHalls = ({navigation}) => {
 
   const handleModal = status => {
     setAddHallVisible(status);
-    dispatch(reset());
   };
 
-  const handleEdit = () => {
+  const handleSubmit = () => {
+    if (edit){
+      dispatch(editHall(route.params.cinemaId));
+      setEdit(false)
+      dispatch(reset())
+    } else {
+      dispatch(createHall(route.params.cinemaId));
+    }
+  }
+
+  const handleEdit = (hallIndex) => {
     setAddHallVisible(true);
-    dispatch(loadHall(editHallValues));
+    setEdit(true)
+    dispatch(completeHall({key:'hallId', value: halls[hallIndex].id}))
+    dispatch(loadHallFromBack(halls[hallIndex]));
   };
 
   const handleRemove = () => {
@@ -86,8 +106,8 @@ export const CinemaHalls = ({navigation}) => {
           <List
             contentContainerStyle={styles.contentContainer}
             data={data}
-            renderItem={() => (
-              <HallCard editHandler={handleEdit} removeHandler={handleRemove} />
+            renderItem={(item) => (
+              <HallCard editHandler={handleEdit} removeHandler={handleRemove} item={item}/>
             )}
           />
         </Layout>
@@ -104,7 +124,12 @@ export const CinemaHalls = ({navigation}) => {
       <Modal
         visible={addHallVisible}
         backdropStyle={styles.backdrop}
-        onBackdropPress={() => handleModal(false)}
+        onBackdropPress={() => {
+          handleModal(false);
+          dispatch(reset());
+          if (edit)
+            setEdit(false)
+        }}
         style={styles.modal}>
         <Card disabled={true}>
           <Layout style={styles.radioContainer}>
@@ -152,6 +177,7 @@ export const CinemaHalls = ({navigation}) => {
             status="success"
             onPress={() => {
               handleModal(false);
+              handleSubmit();
             }}>
             {I18n.t(TEXT_KEY.cinemaHalls.form.saveButtonText)}
           </Button>

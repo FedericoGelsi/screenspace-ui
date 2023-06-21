@@ -4,11 +4,11 @@ import {Card, Text, Button} from '@ui-kitten/components';
 import I18n from '../../assets/strings/I18n';
 import TEXT_KEY from '../../assets/strings/TextKey';
 
-export const HallCard = ({editHandler, removeHandler}) => (
+export const HallCard = ({editHandler, removeHandler, item}) => (
   <Card style={styles.card}>
     <View style={styles.headerContainer}>
       <Text category="h6" style={{width: '50%'}}>
-        Main Hall
+        {item.item.name}
       </Text>
       <View style={styles.actionLayout}>
         <Button
@@ -21,7 +21,7 @@ export const HallCard = ({editHandler, removeHandler}) => (
         <Button
           size="tiny"
           style={styles.buttonStyle}
-          onPress={() => editHandler()}>
+          onPress={() => editHandler(item.index)}>
           {I18n.t(TEXT_KEY.hallCard.editButtonText)}
         </Button>
       </View>

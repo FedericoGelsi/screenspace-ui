@@ -14,6 +14,7 @@ import {
   reset,
   isDetailsComplete,
   isAddressComplete,
+  editCinema,
 } from '../../../../redux/slices/formSlice';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
@@ -22,7 +23,8 @@ import {CustomStepIndicator} from '../../../components/CustomStepIndicator';
 import {BackIcon} from '../../../kittenIcons/kittenIcons';
 import { createCinema } from '../../../../redux/slices/formSlice';
 
-export const CinemaForm = ({navigation}) => {
+export const CinemaForm = ({navigation, route}) => {
+  let edit = route?.params?.edit ? route.params.edit : false
   const dispatch = useDispatch();
   const formValues = useSelector(state => state.form);
   const detailsComplete = useSelector(isDetailsComplete);
@@ -45,6 +47,13 @@ export const CinemaForm = ({navigation}) => {
   const navigateHome = () => {
     navigation.navigate('Home', {refresh: true});
     dispatch(reset());
+  };
+
+  const submitHandler = () => {
+    if (edit)
+      dispatch(editCinema(route.params.cinemaId))
+    else
+      dispatch(createCinema(1))
   };
 
   const BackAction = () => (
@@ -106,7 +115,7 @@ export const CinemaForm = ({navigation}) => {
                 }
                 onPress={() => {
                   setVisible(true);
-                  dispatch(createCinema(1))
+                  submitHandler();
                 }}>
                 {I18n.t(TEXT_KEY.cinemaForm.buttonFinishText)}
               </Button>

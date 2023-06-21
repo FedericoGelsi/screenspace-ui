@@ -15,6 +15,7 @@ import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {BackIcon} from '../../../kittenIcons/kittenIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {getOwnerCinemas} from '../../../../redux/slices/ownerCinemasSlice';
+import { loadHalls } from '../../../../redux/slices/hallSlice';
 
 const data = new Array(1).fill({
   title: 'Item',
@@ -41,6 +42,7 @@ export const HomeScreenAdmin = ({navigation, route}) => {
   };
 
   const navigateCinemaDetails = (cinemaIndex) => {
+    dispatch(loadHalls(cinemas[cinemaIndex].halls));
     navigation.push('CinemaDetails', {cinemaDetails: cinemas[cinemaIndex]});
   };
 
