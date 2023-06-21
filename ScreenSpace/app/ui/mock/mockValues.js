@@ -29,8 +29,8 @@ export const cinemas = [
       {
         id: 0,
         name: 'Main Hall',
-        width: 0,
-        height: 0,
+        width: 20,
+        height: 10,
         available: true,
         cinemaShows: [
           {
@@ -73,8 +73,8 @@ export const cinemas = [
       {
         id: 1,
         name: 'Hall 1',
-        width: 0,
-        height: 0,
+        width: 12,
+        height: 8,
         available: true,
         cinemaShows: [
           {
@@ -284,5 +284,63 @@ export const cinemas = [
         ],
       },
     ],
+  },
+];
+
+export const movies = [
+  {
+    id: 0,
+    title: 'Everything Everywhere All at Once',
+    duration: 135,
+    imageUrl: 'coverurl',
+    genres: [],
+    synopsis: 'Movie synopsis',
+    rating: 4,
+    isShowing: true,
+    releaseDate: '2022-06-21T02:05:59.422Z',
+  },
+  {
+    id: 1,
+    title: 'Star Wars: Episode IX',
+    duration: 135,
+    imageUrl: 'coverurl',
+    genres: [],
+    synopsis: 'Movie synopsis',
+    rating: 4,
+    isShowing: true,
+    releaseDate: '2022-06-21T02:05:59.422Z',
+  },
+  {
+    id: 2,
+    title: 'Puss in Boots 2',
+    duration: 135,
+    imageUrl: 'coverurl',
+    genres: [],
+    synopsis: 'Movie synopsis',
+    rating: 4,
+    isShowing: true,
+    releaseDate: '2022-06-21T02:05:59.422Z',
+  },
+  {
+    id: 3,
+    title: 'Shrek 2',
+    duration: 125,
+    imageUrl: 'coverurl',
+    genres: [],
+    synopsis: 'Movie synopsis',
+    rating: 4,
+    isShowing: false,
+    releaseDate: '2022-06-21T02:05:59.422Z',
+  },
+  {
+    id: 4,
+    title: 'Fast X',
+    duration: 135,
+    imageUrl: 'coverurl',
+    genres: [],
+    synopsis: 'Movie synopsis',
+    rating: 4,
+    isShowing: true,
+    releaseDate: '2022-06-21T02:05:59.422Z',
   },
 ];

@@ -22,7 +22,7 @@ const PickHallStep = () => {
 
     return (
       <Menu style={{marginVertical: 16, maxHeight: '70%'}} {...menuState}>
-        {items.map(item => renderItem(item))}
+        {items.map((item, index) => renderItem(item, index))}
       </Menu>
     );
   };
@@ -33,20 +33,21 @@ const PickHallStep = () => {
     setItems(searchHall(value));
   };
 
-  const PinIcon = <Icon name="pin" />;
+  const HallIcon = <Icon name="grid-outline" />;
 
-  const renderItem = item => (
+  const renderItem = (item, index) => (
     <MenuItem
+      key={index}
       title={`${item.name}\n${
-        item.available ? getMaxCapacity(item) : 'Temporarly unavailable'
+        item.available ? getMaxCapacity(item) : I18n.t(TEXT_KEY.newCinemaShow.steps.secondStep.isAvailableLabel)
       }`}
       disabled={!item.available}
-      accessoryLeft={PinIcon}
+      accessoryLeft={HallIcon}
     />
   );
 
   const getMaxCapacity = item => {
-    return `${I18n.t(TEXT_KEY.newCinemaShow.steps.secondStep.maxCapacityLabel)}: ${item.width*item.height}}`;
+    return `${I18n.t(TEXT_KEY.newCinemaShow.steps.secondStep.maxCapacityLabel)}: ${item.width*item.height}`;
   };
 
   return (

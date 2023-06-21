@@ -22,7 +22,7 @@ const PickCinemaStep = () => {
 
     return (
       <Menu style={{marginVertical: 16, maxHeight: '70%'}} {...menuState}>
-        {items.map(item => renderItem(item))}
+        {items.map((item,index) => renderItem(item, index))}
       </Menu>
     );
   };
@@ -35,10 +35,11 @@ const PickCinemaStep = () => {
 
   const PinIcon = <Icon name="pin" />;
 
-  const renderItem = item => (
+  const renderItem = (item , index) => (
     <MenuItem
+      key={index}
       title={`${item.name}\n${
-        item.available ? addresify(item) : 'Temporarly unavailable'
+        item.available ? addresify(item) : I18n.t(TEXT_KEY.newCinemaShow.steps.firstStep.isAvailableLabel)
       }`}
       disabled={!item.available}
       accessoryLeft={PinIcon}

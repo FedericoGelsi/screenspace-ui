@@ -50,48 +50,66 @@ export default {
     cinemaStatusActive: 'cinemaSummary.cinemaStatusActive',
     cinemaStatusInactive: 'cinemaSummary.cinemaStatusInactive',
   },
-  cinemaShows:{
+  cinemaShows: {
     sectionName: 'cinemaShows.sectionName',
     noDataMessage: 'cinemaShows.noDataMessage',
     newShowButton: 'cinemaShows.newShowButton',
-    deleteShowWarningMessage: 'cinemaShows.deleteShowWarningMessage'
+    deleteShowWarningMessage: 'cinemaShows.deleteShowWarningMessage',
+    showCard: {
+      hallLabel: 'cinemaShows.showCard.hallLabel',
+      dateTimeLabel: 'cinemaShows.showCard.dateTimeLabel',
+    },
   },
-  newCinemaShow:{
+  newCinemaShow: {
     sectionName: 'newCinemaShow.sectionName',
     nextStepButtonLabel: 'newCinemaShow.nextStepButtonLabel',
     previousStepButtonLabel: 'newCinemaShow.previousStepButtonLabel',
     submitButtonLabel: 'newCinemaShow.submitButtonLabel',
+    finishButtonLabel: 'newCinemaShow.finishButtonLabel',
     steps: {
       firstStep: {
         label: 'newCinemaShow.steps.firstStep.label',
         title: 'newCinemaShow.steps.firstStep.title',
         subtitle: 'newCinemaShow.steps.firstStep.subtitle',
+        isAvailableLabel: 'newCinemaShow.steps.firstStep.isAvailableLabel',
         searchBar: {
-          placeholder: 'newCinemaShow.steps.firstStep.searchBar.placeholder'
-        }
+          placeholder: 'newCinemaShow.steps.firstStep.searchBar.placeholder',
+        },
       },
       secondStep: {
         label: 'newCinemaShow.steps.secondStep.label',
         title: 'newCinemaShow.steps.secondStep.title',
         subtitle: 'newCinemaShow.steps.secondStep.subtitle',
+        isAvailableLabel: 'newCinemaShow.steps.secondStep.isAvailableLabel',
         maxCapacityLabel: 'newCinemaShow.steps.secondStep.maxCapacityLabel',
         searchBar: {
-          placeholder: 'newCinemaShow.steps.secondStep.searchBar.placeholder'
-        }
+          placeholder: 'newCinemaShow.steps.secondStep.searchBar.placeholder',
+        },
       },
       thirdStep: {
         label: 'newCinemaShow.steps.thirdStep.label',
         title: 'newCinemaShow.steps.thirdStep.title',
         subtitle: 'newCinemaShow.steps.thirdStep.subtitle',
+        movieLenghtLabel: 'newCinemaShow.steps.thirdStep.movieLenghtLabel',
+        isShowingLabel: 'newCinemaShow.steps.thirdStep.isShowingLabel',
         searchBar: {
-          placeholder: 'newCinemaShow.steps.thirdStep.searchBar.placeholder'
-        }
+          placeholder: 'newCinemaShow.steps.thirdStep.searchBar.placeholder',
+        },
       },
       fourthStep: {
         label: 'newCinemaShow.steps.fourthStep.label',
         title: 'newCinemaShow.steps.fourthStep.title',
         subtitle: 'newCinemaShow.steps.fourthStep.subtitle',
+        timePickerLabel: 'newCinemaShow.steps.fourthStep.timePickerLabel',
+        timePickerPlaceholder:
+          'newCinemaShow.steps.fourthStep.timePickerPlaceholder',
+      },
+      summaryStep: {
+        label: 'newCinemaShow.steps.summaryStep.label',
+        title: 'newCinemaShow.steps.summaryStep.title',
+        subtitle: 'newCinemaShow.steps.summaryStep.subtitle',
       },
     },
-  }
+  },
+  calendar: 'calendar',
 };

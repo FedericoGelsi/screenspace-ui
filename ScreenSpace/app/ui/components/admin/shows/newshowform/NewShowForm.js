@@ -4,6 +4,7 @@ import PickCinemaStep from './PickCinemaStep';
 import PickHallStep from './PickHallStep';
 import PickMovieStep from './PickMovieStep';
 import PickDateTimeStep from './PickDateTimeStep';
+import NewShowSummary from './NewShowSummary';
 
 const NewShowForm = ({currentPosition}) => {
   return (
@@ -12,6 +13,7 @@ const NewShowForm = ({currentPosition}) => {
       {currentPosition === 1 && <PickHallStep />}
       {currentPosition === 2 && <PickMovieStep />}
       {currentPosition === 3 && <PickDateTimeStep />}
+      {currentPosition === 4 && <NewShowSummary />}
     </Layout>
   );
 };

@@ -16,6 +16,7 @@ const ViewTopNavigationContainer = ({
   headerSubtitle,
   children,
   navigation,
+  accessoryLeft,
   accessoryRight,
 }) => {
   const navigateBack = () => {
@@ -34,7 +35,7 @@ const ViewTopNavigationContainer = ({
   );
   return (
     <SafeAreaView style={{flex: 1}}>
-      { variant === "logo" ? (
+      {variant === 'logo' ? (
         <TopNavigation
           title={I18n.t(TEXT_KEY.appName)}
           alignment="center"
@@ -46,7 +47,7 @@ const ViewTopNavigationContainer = ({
           title={headerTitle}
           subtitle={headerSubtitle}
           alignment="center"
-          accessoryLeft={BackAction}
+          accessoryLeft={accessoryLeft ? accessoryLeft : BackAction}
           accessoryRight={accessoryRight}
         />
       )}

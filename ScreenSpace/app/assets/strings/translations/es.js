@@ -50,48 +50,110 @@ export default {
     cinemaStatusActive: 'Activo',
     cinemaStatusInactive: 'Temporalmente Inactivo',
   },
-  cinemaShows:{
+  cinemaShows: {
     sectionName: 'Funciones',
-    noDataMessage: 'Todavía no tienes ninguna función.\nComienza creando una nueva!',
+    noDataMessage:
+      'Todavía no tienes ninguna función.\nComienza creando una nueva!',
     newShowButton: 'Crear nueva función',
-    deleteShowWarningMessage: 'Está seguro de eliminar este item?\nEsta acción no se puede revertir'
+    deleteShowWarningMessage:
+      'Está seguro de eliminar este item?\nEsta acción no se puede revertir',
+    showCard: {
+      hallLabel: 'Sala',
+      dateTimeLabel: 'Horario',
+    },
   },
-  newCinemaShow:{
+  newCinemaShow: {
     sectionName: 'Nueva Función',
     nextStepButtonLabel: 'Siguiente paso',
     previousStepButtonLabel: 'Paso anterior',
     submitButtonLabel: 'Crear función',
+    finishButtonLabel: 'Volver a Funciones',
     steps: {
       firstStep: {
         label: 'Cine',
         title: 'Elige tu cine',
         subtitle: '',
+        isAvailableLabel: 'No disponible temporalmente',
         searchBar: {
-          placeholder: 'Busca tu cine'
-        }
+          placeholder: 'Busca tu cine',
+        },
       },
       secondStep: {
         label: 'Sala',
         title: 'Elige tu sala',
         subtitle: '',
         maxCapacityLabel: 'Capacidad máxima',
+        isAvailableLabel: 'No disponible temporalmente',
         searchBar: {
-          placeholder: 'Busca tu sala'
-        }
+          placeholder: 'Busca tu sala',
+        },
       },
       thirdStep: {
         label: 'Película',
         title: 'Elige la película',
         subtitle: '',
+        movieLenghtLabel: 'Duración',
+        isShowingLabel: 'No disponible por el momento',
         searchBar: {
-          placeholder: 'Busca la película'
-        }
+          placeholder: 'Busca la película',
+        },
       },
       fourthStep: {
         label: 'Fecha',
         title: 'Elige la fecha',
-        subtitle: 'Elige la fecha y hora de la función',
-      }
+        subtitle: 'Elige la fecha y horario de la función',
+        timePickerLabel: 'Horario de inicio',
+        timePickerPlaceholder: 'Elige el horario de inicio',
+      },
+      summaryStep: {
+        label: 'Resumen',
+        title: 'Tu función se ha creado exitosamente!',
+        subtitle: '',
+      },
     },
-  }
+  },
+  calendar: {
+    dayNames: {
+      short: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+      long: [
+        'Domingo',
+        'Lunes',
+        'Martes',
+        'Miércoles',
+        'Jueves',
+        'Viernes',
+        'Sábado',
+      ],
+    },
+    monthNames: {
+      short: [
+        'Ene',
+        'Feb',
+        'Mar',
+        'Abr',
+        'May',
+        'Jun',
+        'Jul',
+        'Ago',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dic',
+      ],
+      long: [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ],
+    },
+  },
 };

@@ -5,7 +5,7 @@ import {Button, Card, Icon, Layout, Modal, Text} from '@ui-kitten/components';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {deleteShow, getShowById} from '../../../../api/cinemaController';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 const Header = props => (
   <Layout {...props}>
@@ -18,14 +18,12 @@ const CardActionButton = props => {
     <Layout style={styles.buttonContainer}>
       <Button
         status="primary"
-        style={styles.footerControl}
         size="small"
         accessoryLeft={<Icon name="edit-2-outline" />}
         onPress={() => props.editShow(props.show.id)}
       />
       <Button
         status="danger"
-        style={styles.footerControl}
         size="small"
         accessoryLeft={<Icon name="trash-2-outline" />}
         onPress={() => props.setDeleteModalVisible(true)}
@@ -74,7 +72,7 @@ const ShowCard = ({show, navigation}) => {
 
   const dispatch = useDispatch();
 
-  const handleDeleteShow = (showId) => {
+  const handleDeleteShow = showId => {
     setDeleteModalVisible(false);
     deleteShow(showId);
   };
@@ -82,19 +80,48 @@ const ShowCard = ({show, navigation}) => {
   const editShow = showId => {
     console.info('Edit show:', showId);
     //TODO: Add logic to edit show
-    navigateEditCinema(showId)
+    navigateEditCinema(showId);
   };
 
-  const navigateEditCinema = (showId) => {
+  const navigateEditCinema = showId => {
     navigation.push('NewShow');
     // TODO: Load form using redux
     // dispatch(loadForm(getShowById(showId)));
   };
-
+  const CardListItem = ({title, label}) => (
+    <Layout>
+      <Text category="label">{title}</Text>
+      <Text appearance="hint" category="c1">
+        {label}
+      </Text>
+    </Layout>
+  );
   return (
-    <Card style={styles.card} header={<Header movieName={show.cinemaShow.name} />}>
-      <Layout style={styles.footerContainer}>
-        <Text>{show.name}</Text>
+    <Card
+      style={styles.card}
+      header={<Header movieName={show.cinemaShow.name} />}>
+      <Layout style={{flex: 1, flexDirection: 'row'}}>
+        <Layout
+          style={{
+            flex: 3,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}>
+          <CardListItem
+            title={show.name}
+            label={I18n.t(TEXT_KEY.cinemaShows.showCard.hallLabel)}
+          />
+          <CardListItem
+            title={new Date(show.cinemaShow.datetime).toLocaleString([], {
+              day: '2-digit',
+              month: '2-digit',
+              year: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+            label={I18n.t(TEXT_KEY.cinemaShows.showCard.dateTimeLabel)}
+          />
+        </Layout>
         <CardActionButton
           show={show}
           editShow={editShow}
@@ -117,17 +144,10 @@ const styles = StyleSheet.create({
   card: {
     marginVertical: 8,
   },
-  footerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
   buttonContainer: {
+    flex: 2,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  footerControl: {
-    marginHorizontal: 4,
+    justifyContent: 'space-around',
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
