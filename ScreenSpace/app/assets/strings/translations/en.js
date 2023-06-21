@@ -65,7 +65,7 @@ export default {
       firstStep: {
         label: 'Cinema',
         title: 'Pick your Cinema',
-        subtitle: 'sadsadasd',
+        subtitle: '',
         searchBar: {
           placeholder: 'Look for you cinema'
         }
