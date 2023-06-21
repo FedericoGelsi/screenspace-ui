@@ -9,7 +9,11 @@ export const getCinemaByName = cinemaName =>
   );
 
 export const getCinemas = (movieId, ownerId) => {
-  cinemas.filter(cinema => cinema.userId === ownerId);
+  if (ownerId) {
+    return cinemas.filter(cinema => cinema.userId === ownerId);
+  } else {
+    return cinemas;
+  }
 };
 
 export const getCinemaById = cinemaId =>
@@ -42,8 +46,22 @@ export const updateHall = (cinemaId, hallId, payload) => {};
 export const deleteHall = (cinemaId, hallId) => {};
 
 export const createShow = (cinemaId, hallId, payload) => {};
-export const getShows = cinemaId => {};
+export const getShows = cinemaId => {
+  return getCinemaById(cinemaId).halls.flatMap(o =>
+    o.cinemaShows.map(e => ({
+      id: o.id,
+      name: o.name,
+      width: o.width,
+      height: o.height,
+      available: o.available,
+      cinemaShow: e,
+    })),
+  );
+};
 export const getShowById = (cinemaId, showId) => {};
 export const updateShow = (cinemaId, showId, payload) => {};
-export const deleteShow = (cinemaId, showId) => {};
-
+export const deleteShow = showId => {
+  // TODO: Add logic to delete show
+  console.log('Deleted show with id: ', showId);
+  
+};
