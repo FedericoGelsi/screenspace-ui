@@ -37,7 +37,6 @@ const CinemaShowHome = ({cinema = cinemas[0], navigation}) => {
       headerTitle={I18n.t(TEXT_KEY.cinemaShows.sectionName)}
       headerSubtitle={cinema.name}
       navigation={navigation}>
-      {/* TODO: FILTER BY DATE */}
       <Layout style={{flex: 1, paddingHorizontal: 16}}>
         {console.log(data)}
         <DateFilter date={date} setDate={setDate} />

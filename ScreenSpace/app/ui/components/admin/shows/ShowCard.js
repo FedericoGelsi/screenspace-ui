@@ -87,6 +87,7 @@ const ShowCard = ({show, navigation}) => {
 
   const navigateEditCinema = (showId) => {
     navigation.push('NewShow');
+    // TODO: Load form using redux
     // dispatch(loadForm(getShowById(showId)));
   };
 
