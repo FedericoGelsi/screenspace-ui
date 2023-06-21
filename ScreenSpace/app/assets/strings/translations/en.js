@@ -74,6 +74,7 @@ export default {
         label: 'Hall',
         title: 'Pick your hall',
         subtitle: '',
+        maxCapacityLabel: 'Maximum capacity',
         searchBar: {
           placeholder: 'Look for you hall'
         }

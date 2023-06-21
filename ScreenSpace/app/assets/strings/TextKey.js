@@ -74,6 +74,7 @@ export default {
         label: 'newCinemaShow.steps.secondStep.label',
         title: 'newCinemaShow.steps.secondStep.title',
         subtitle: 'newCinemaShow.steps.secondStep.subtitle',
+        maxCapacityLabel: 'newCinemaShow.steps.secondStep.maxCapacityLabel',
         searchBar: {
           placeholder: 'newCinemaShow.steps.secondStep.searchBar.placeholder'
         }

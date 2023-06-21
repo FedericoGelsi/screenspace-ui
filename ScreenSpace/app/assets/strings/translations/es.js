@@ -66,16 +66,26 @@ export default {
         label: 'Cine',
         title: 'Elige tu cine',
         subtitle: '',
+        searchBar: {
+          placeholder: 'Busca tu cine'
+        }
       },
       secondStep: {
         label: 'Sala',
         title: 'Elige tu sala',
         subtitle: '',
+        maxCapacityLabel: 'Capacidad máxima',
+        searchBar: {
+          placeholder: 'Busca tu sala'
+        }
       },
       thirdStep: {
         label: 'Película',
         title: 'Elige la película',
         subtitle: '',
+        searchBar: {
+          placeholder: 'Busca la película'
+        }
       },
       fourthStep: {
         label: 'Fecha',
