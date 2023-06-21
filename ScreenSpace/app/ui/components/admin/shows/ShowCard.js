@@ -2,8 +2,8 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Button, Card, Icon, Layout, Modal, Text} from '@ui-kitten/components';
 
-import I18n from '../../assets/strings/I18n';
-import TEXT_KEY from '../../assets/strings/TextKey';
+import I18n from '../../../../assets/strings/I18n';
+import TEXT_KEY from '../../../../assets/strings/TextKey';
 
 const Header = props => (
   <Layout {...props}>
@@ -11,9 +11,8 @@ const Header = props => (
   </Layout>
 );
 
-const CardActionButton = () => {
-  const [deleteModalVisible, setDeleteModalVisible] = React.useState(false);
 
+const CardActionButton = (props) => {
   return (
     <Layout style={styles.buttonContainer}>
       <Button
@@ -21,18 +20,25 @@ const CardActionButton = () => {
         style={styles.footerControl}
         size="small"
         accessoryLeft={<Icon name="edit-2-outline" />}
+        onPress={() => props.editShow(props.show.id)}
       />
       <Button
         status="danger"
         style={styles.footerControl}
         size="small"
         accessoryLeft={<Icon name="trash-2-outline" />}
-        onPress={() => setDeleteModalVisible(true)}
+        onPress={() => props.setDeleteModalVisible(true)}
       />
-      <Modal
-        visible={deleteModalVisible}
+    </Layout>
+  );
+};
+
+const CardDeleteModal = (props) =>{
+  return (
+    <Modal
+        visible={props.deleteModalVisible}
         backdropStyle={styles.backdrop}
-        onBackdropPress={() => setDeleteModalVisible(false)}>
+        onBackdropPress={() => props.setDeleteModalVisible(false)}>
         <Card disabled={true}>
           <Text style={{textAlign:"center"}}>{I18n.t(TEXT_KEY.cinemaShows.deleteShowWarningMessage)}</Text>
           <Layout
@@ -44,29 +50,42 @@ const CardActionButton = () => {
             <Button
               style={styles.footerControl}
               status="basic"
-              onPress={() => setDeleteModalVisible(false)}>
+              onPress={() => props.setDeleteModalVisible(false)}>
               CANCEL
             </Button>
             <Button
               style={styles.footerControl}
               status="danger"
-              onPress={() => setDeleteModalVisible(false)}
+              onPress={() => props.deleteShow(props.show.id)}
               accessoryLeft={<Icon name="trash-2-outline" />}>
               DELETE
             </Button>
           </Layout>
         </Card>
       </Modal>
-    </Layout>
-  );
-};
+  )
+}
 
-const ShowCard = ({hall, movieName}) => {
+const ShowCard = ({show}) => {
+  const [deleteModalVisible, setDeleteModalVisible] = React.useState(false);
+
+  const deleteShow = (showId) => {
+    setDeleteModalVisible(false)
+    console.info("Delete show: ", showId);
+    //TODO: Add logic to remove show
+  }
+  
+  const editShow = (showId) => {
+    console.info("Edit show:", showId);
+    //TODO: Add logic to edit show
+  }
+
   return (
-    <Card style={styles.card} header={<Header movieName={movieName} />}>
+    <Card style={styles.card} header={<Header movieName={show.movieName} />}>
       <Layout style={styles.footerContainer}>
-        <Text>{hall}</Text>
-        <CardActionButton />
+        <Text>{show.hall}</Text>
+        <CardActionButton show={show} editShow={editShow} setDeleteModalVisible={setDeleteModalVisible} />
+        <CardDeleteModal show={show} deleteShow={deleteShow} setDeleteModalVisible={setDeleteModalVisible} deleteModalVisible={deleteModalVisible} />
       </Layout>
     </Card>
   );
