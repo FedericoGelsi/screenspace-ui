@@ -25,7 +25,7 @@ import {
   createHall,
   loadHallFromBack,
   editHall,
-  loadHalls
+  removeHall
 } from '../../../../redux/slices/hallSlice';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
@@ -77,9 +77,9 @@ export const CinemaHalls = ({navigation, route}) => {
     dispatch(loadHallFromBack(halls[hallIndex]));
   };
 
-  const handleRemove = () => {
-    const updatedData = data.slice(0, -1);
-    setData(updatedData);
+  const handleRemove = (hallIndex) => {
+    dispatch(completeHall({key:'hallId', value: halls[hallIndex].id}))
+    dispatch(removeHall(route.params.cinemaId));
   };
 
   const BackAction = () => (

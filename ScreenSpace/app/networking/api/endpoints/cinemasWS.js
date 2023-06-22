@@ -49,3 +49,10 @@ export const editCinemaHallAPI = async (cinemaId, hallInfo) => {
   const results = await axios.put(`/cinemas/${cinemaId}/halls/${hallInfo.hallId}`, body);
   return results.data;
 };
+
+export const removeCinemaHallAPI = async (cinemaId, hallId) => {
+  const results = await axios.delete(`/cinemas/${cinemaId}/halls/${hallId}`);
+  return results.data;
+};
+
+

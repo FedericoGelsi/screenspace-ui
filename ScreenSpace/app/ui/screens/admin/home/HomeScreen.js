@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {
   Divider,
@@ -7,6 +7,8 @@ import {
   TopNavigation,
   TopNavigationAction,
   Button,
+  Spinner,
+  Layout,
 } from '@ui-kitten/components';
 import {CinemaCard} from '../../../components/CinemaCard';
 import {NoData} from '../../../components/NoData';
@@ -15,22 +17,20 @@ import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {BackIcon} from '../../../kittenIcons/kittenIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {getOwnerCinemas} from '../../../../redux/slices/ownerCinemasSlice';
-import { loadHalls } from '../../../../redux/slices/hallSlice';
-
-const data = new Array(1).fill({
-  title: 'Item',
-});
+import {loadHalls} from '../../../../redux/slices/hallSlice';
+import ErrorScreen from '../../../components/ErrorScreen';
 
 export const HomeScreenAdmin = ({navigation, route}) => {
-  let refresh = route?.params ? route.params : false
+  let refresh = route?.params ? route.params : false;
   const dispatch = useDispatch();
-  const {cinemas, error, isLoading} = useSelector(state => state.ownerCinemas);
+  const {cinemas, error, isLoading, hasError} = useSelector(
+    state => state.ownerCinemas,
+  );
 
   React.useEffect(() => {
     dispatch(getOwnerCinemas(1));
-    if (refresh)
-      dispatch(getOwnerCinemas(1));
-      refresh = false
+    if (refresh) dispatch(getOwnerCinemas(1));
+    refresh = false;
   }, [dispatch, refresh]);
 
   const navigateBack = () => {
@@ -41,7 +41,7 @@ export const HomeScreenAdmin = ({navigation, route}) => {
     navigation.push('NewCinema');
   };
 
-  const navigateCinemaDetails = (cinemaIndex) => {
+  const navigateCinemaDetails = cinemaIndex => {
     dispatch(loadHalls(cinemas[cinemaIndex].halls));
     navigation.push('CinemaDetails', {cinemaDetails: cinemas[cinemaIndex]});
   };
@@ -50,9 +50,11 @@ export const HomeScreenAdmin = ({navigation, route}) => {
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
 
-  if (isLoading) {
+  if (hasError) {
     return (
-      <Text>Cargando...</Text>
+      <View>
+        <ErrorScreen message={error} />
+      </View>
     );
   }
 
@@ -66,26 +68,37 @@ export const HomeScreenAdmin = ({navigation, route}) => {
       />
       <Divider />
       <View style={styles.screenContainer}>
-        {data.length === 0 ? (
-          <View style={styles.noDataContainer}>
-            <Text category="h6" style={styles.title}>
-              {I18n.t(TEXT_KEY.cinemaHome.title)}
-            </Text>
-            <NoData message={I18n.t(TEXT_KEY.cinemaHome.noDataText)} />
-          </View>
+        {isLoading ? (
+          <Layout style={styles.noDataContainer}>
+            <Spinner size="giant" />
+          </Layout>
         ) : (
-          <View style={styles.cinemaContainer}>
-            <Text category="h6" style={styles.title}>
-              {I18n.t(TEXT_KEY.cinemaHome.title)}
-            </Text>
-            <List
-              contentContainerStyle={styles.contentContainer}
-              data={cinemas}
-              renderItem={(item) => (
-                <CinemaCard navigateAction={navigateCinemaDetails} item={item}/>
-              )}
-            />
-          </View>
+          <>
+            {cinemas.length === 0 ? (
+              <View style={styles.noDataContainer}>
+                <Text category="h6" style={styles.title}>
+                  {I18n.t(TEXT_KEY.cinemaHome.title)}
+                </Text>
+                <NoData message={I18n.t(TEXT_KEY.cinemaHome.noDataText)} />
+              </View>
+            ) : (
+              <View style={styles.cinemaContainer}>
+                <Text category="h6" style={styles.title}>
+                  {I18n.t(TEXT_KEY.cinemaHome.title)}
+                </Text>
+                <List
+                  contentContainerStyle={styles.contentContainer}
+                  data={cinemas}
+                  renderItem={item => (
+                    <CinemaCard
+                      navigateAction={navigateCinemaDetails}
+                      item={item}
+                    />
+                  )}
+                />
+              </View>
+            )}
+          </>
         )}
         <Divider />
         <View style={styles.actionLayout}>

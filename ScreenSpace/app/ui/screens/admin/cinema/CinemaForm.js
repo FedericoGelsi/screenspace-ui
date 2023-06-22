@@ -21,10 +21,10 @@ import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {SuccessModal} from '../../../components/SuccessModal';
 import {CustomStepIndicator} from '../../../components/CustomStepIndicator';
 import {BackIcon} from '../../../kittenIcons/kittenIcons';
-import { createCinema } from '../../../../redux/slices/formSlice';
+import {createCinema} from '../../../../redux/slices/formSlice';
 
 export const CinemaForm = ({navigation, route}) => {
-  let edit = route?.params?.edit ? route.params.edit : false
+  let edit = route?.params?.edit ? route.params.edit : false;
   const dispatch = useDispatch();
   const formValues = useSelector(state => state.form);
   const detailsComplete = useSelector(isDetailsComplete);
@@ -50,10 +50,8 @@ export const CinemaForm = ({navigation, route}) => {
   };
 
   const submitHandler = () => {
-    if (edit)
-      dispatch(editCinema(route.params.cinemaId))
-    else
-      dispatch(createCinema(1))
+    if (edit) dispatch(editCinema(route.params.cinemaId));
+    else dispatch(createCinema(1));
   };
 
   const BackAction = () => (

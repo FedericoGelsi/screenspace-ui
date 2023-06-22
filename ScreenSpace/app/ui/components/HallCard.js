@@ -15,7 +15,7 @@ export const HallCard = ({editHandler, removeHandler, item}) => (
           status="danger"
           size="tiny"
           style={[styles.buttonStyle, {marginRight: 5}]}
-          onPress={() => removeHandler()}>
+          onPress={() => removeHandler(item.index)}>
           {I18n.t(TEXT_KEY.hallCard.removeButtonText)}
         </Button>
         <Button

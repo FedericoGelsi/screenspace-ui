@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { editCinemaHallAPI, newCinemaHallAPI } from '../../networking/api/endpoints/cinemasWS';
+import { editCinemaHallAPI, newCinemaHallAPI, removeCinemaHallAPI } from '../../networking/api/endpoints/cinemasWS';
 import { getCinema } from './ownerCinemasSlice';
 
 const initialState = {
@@ -27,6 +27,16 @@ export const editHall = createAsyncThunk(
   async (cinemaId, thunkAPI) => {
     const state = thunkAPI.getState();
     const result = await editCinemaHallAPI(cinemaId, state.hall);
+    thunkAPI.dispatch(getCinema(cinemaId));
+    return result;
+  }
+);
+
+export const removeHall = createAsyncThunk(
+  'owner/removeHall',
+  async (cinemaId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const result = await removeCinemaHallAPI(cinemaId, state.hall.hallId);
     thunkAPI.dispatch(getCinema(cinemaId));
     return result;
   }
@@ -76,6 +86,15 @@ export const hallSlice = createSlice({
       state.error = false;
     })
     .addCase(editHall.rejected, (state, action) => {
+      state.error = true
+    })
+    .addCase(removeHall.pending, (state, action) => {
+      state.error = null;
+    })
+    .addCase(removeHall.fulfilled, (state, action) => {
+      state.error = false;
+    })
+    .addCase(removeHall.rejected, (state, action) => {
       state.error = true
     })
   }
