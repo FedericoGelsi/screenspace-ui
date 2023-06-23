@@ -22,6 +22,7 @@ import {SuccessModal} from '../../../components/SuccessModal';
 import {CustomStepIndicator} from '../../../components/CustomStepIndicator';
 import {BackIcon} from '../../../kittenIcons/kittenIcons';
 import {createCinema} from '../../../../redux/slices/formSlice';
+import ErrorScreen from '../../../components/ErrorScreen';
 
 export const CinemaForm = ({navigation, route}) => {
   let edit = route?.params?.edit ? route.params.edit : false;
@@ -57,6 +58,14 @@ export const CinemaForm = ({navigation, route}) => {
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
+
+  if (formValues.error) {
+    return (
+      <SafeAreaView>
+        <ErrorScreen message={error} />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>

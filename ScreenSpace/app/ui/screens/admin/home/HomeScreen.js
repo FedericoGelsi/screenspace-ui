@@ -52,9 +52,9 @@ export const HomeScreenAdmin = ({navigation, route}) => {
 
   if (hasError) {
     return (
-      <View>
+      <SafeAreaView>
         <ErrorScreen message={error} />
-      </View>
+      </SafeAreaView>
     );
   }
 

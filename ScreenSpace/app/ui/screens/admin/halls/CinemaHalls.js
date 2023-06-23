@@ -25,15 +25,17 @@ import {
   createHall,
   loadHallFromBack,
   editHall,
-  removeHall
+  removeHall,
 } from '../../../../redux/slices/hallSlice';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {BackIcon} from '../../../kittenIcons/kittenIcons';
 import {Stepper} from '../../../components/Stepper';
+import {CustomSpinner} from '../../../components/CustomSpinner';
+import ErrorScreen from '../../../components/ErrorScreen';
 
 export const CinemaHalls = ({navigation, route}) => {
-  const {halls} = useSelector(state => state.hall)
+  const {halls} = useSelector(state => state.hall);
   const hallValues = useSelector(state => state.hall);
   const dispatch = useDispatch();
   const hallComplete = useSelector(isComplete);
@@ -42,7 +44,6 @@ export const CinemaHalls = ({navigation, route}) => {
   const [isHallComplete, setIsHallComplete] = React.useState(true);
   const [data, setData] = React.useState(halls);
   const [edit, setEdit] = React.useState(false);
-
 
   React.useEffect(() => {
     setIsHallComplete(hallComplete);
@@ -61,30 +62,38 @@ export const CinemaHalls = ({navigation, route}) => {
   };
 
   const handleSubmit = () => {
-    if (edit){
+    if (edit) {
       dispatch(editHall(route.params.cinemaId));
-      setEdit(false)
-      dispatch(reset())
+      setEdit(false);
+      dispatch(reset());
     } else {
       dispatch(createHall(route.params.cinemaId));
     }
-  }
+  };
 
-  const handleEdit = (hallIndex) => {
+  const handleEdit = hallIndex => {
     setAddHallVisible(true);
-    setEdit(true)
-    dispatch(completeHall({key:'hallId', value: halls[hallIndex].id}))
+    setEdit(true);
+    dispatch(completeHall({key: 'hallId', value: halls[hallIndex].id}));
     dispatch(loadHallFromBack(halls[hallIndex]));
   };
 
-  const handleRemove = (hallIndex) => {
-    dispatch(completeHall({key:'hallId', value: halls[hallIndex].id}))
+  const handleRemove = hallIndex => {
+    dispatch(completeHall({key: 'hallId', value: halls[hallIndex].id}));
     dispatch(removeHall(route.params.cinemaId));
   };
 
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
+
+  if (hasError) {
+    return (
+      <SafeAreaView>
+        <ErrorScreen message={hallValues.error} />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={{backgroundColor: '#FFFFFF', height: '100%'}}>
@@ -95,6 +104,7 @@ export const CinemaHalls = ({navigation, route}) => {
         style={{height: '8%'}}
       />
       <Divider />
+      {hallValues.isLoading && <CustomSpinner />}
       {data.length === 0 ? (
         <Layout style={styles.noDataContainer}>
           <HallHeader handleModal={handleModal} />
@@ -106,8 +116,12 @@ export const CinemaHalls = ({navigation, route}) => {
           <List
             contentContainerStyle={styles.contentContainer}
             data={data}
-            renderItem={(item) => (
-              <HallCard editHandler={handleEdit} removeHandler={handleRemove} item={item}/>
+            renderItem={item => (
+              <HallCard
+                editHandler={handleEdit}
+                removeHandler={handleRemove}
+                item={item}
+              />
             )}
           />
         </Layout>
@@ -127,8 +141,7 @@ export const CinemaHalls = ({navigation, route}) => {
         onBackdropPress={() => {
           handleModal(false);
           dispatch(reset());
-          if (edit)
-            setEdit(false)
+          if (edit) setEdit(false);
         }}
         style={styles.modal}>
         <Card disabled={true}>
