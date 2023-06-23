@@ -5,14 +5,20 @@ import * as eva from '@eva-design/eva';
 import {store} from './redux/store';
 import {Provider} from 'react-redux';
 import {AppNavigator} from './navigation/Navigation';
+import SplashScreen from 'react-native-splash-screen';
 
-export default () => (
-  <>
-    <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <Provider store={store}>
-        <AppNavigator />
-      </Provider>
-    </ApplicationProvider>
-  </>
-);
+export default App = () => {
+  React.useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+  return (
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <Provider store={store}>
+          <AppNavigator />
+        </Provider>
+      </ApplicationProvider>
+    </>
+  );
+};

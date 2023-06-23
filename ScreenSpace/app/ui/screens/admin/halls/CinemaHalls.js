@@ -87,7 +87,7 @@ export const CinemaHalls = ({navigation, route}) => {
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
 
-  if (hasError) {
+  if (hallValues.hasError) {
     return (
       <SafeAreaView>
         <ErrorScreen message={hallValues.error} />
