@@ -69,7 +69,7 @@ export default {
       activeText: 'Active',
       inactiveText: 'Inactive',
       saveButtonText: 'Save Changes',
-    }
+    },
   },
   hallCard: {
     removeButtonText: 'Remove',
@@ -78,5 +78,111 @@ export default {
   hallHeader: {
     headerTitle: 'Halls',
     addButtonText: 'Add Hall',
+  },
+  cinemaShows: {
+    sectionName: 'Shows',
+    noDataMessage:
+      'You do not have any shows yet\nStart by creating a new one!',
+    newShowButton: 'Create new show',
+    deleteShowWarningMessage:
+      'Are you sure you want to delete this item?\nYou cannot revert this action',
+    showCard: {
+      hallLabel: 'Hall',
+      dateTimeLabel: 'DateTime',
+    },
+  },
+  newCinemaShow: {
+    sectionName: 'New Show',
+    nextStepButtonLabel: 'Next Step',
+    previousStepButtonLabel: 'Previous Step',
+    submitButtonLabel: 'Create show',
+    finishButtonLabel: 'Go back to Shows',
+    steps: {
+      firstStep: {
+        label: 'Cinema',
+        title: 'Pick your Cinema',
+        subtitle: '',
+        isAvailableLabel: 'Temporarly unavailable',
+        searchBar: {
+          placeholder: 'Look for you cinema',
+        },
+      },
+      secondStep: {
+        label: 'Hall',
+        title: 'Pick your hall',
+        subtitle: '',
+        maxCapacityLabel: 'Maximum capacity',
+        isAvailableLabel: 'Temporarly unavailable',
+        searchBar: {
+          placeholder: 'Look for you hall',
+        },
+      },
+      thirdStep: {
+        label: 'Movie',
+        title: 'Pick the movie',
+        subtitle: '',
+        movieLenghtLabel: 'Movie length',
+        isShowingLabel: 'Not showing at the moment',
+        searchBar: {
+          placeholder: 'Look for the movie',
+        },
+      },
+      fourthStep: {
+        label: 'Date',
+        title: 'Pick the date',
+        subtitle: 'Select the date and time of the show',
+        timePickerLabel: 'Start time',
+        timePickerPlaceholder: 'Select start time',
+      },
+      summaryStep: {
+        label: 'Summary',
+        title: 'Your show was created successfully!',
+        subtitle: '',
+      },
+    },
+  },
+  calendar: {
+    dayNames: {
+      short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      long: [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ],
+    },
+    monthNames: {
+      short: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ],
+      long: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
+    },
   },
 };

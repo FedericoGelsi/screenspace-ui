@@ -46,6 +46,10 @@ export const HomeScreenAdmin = ({navigation, route}) => {
     navigation.push('CinemaDetails', {cinemaDetails: cinemas[cinemaIndex]});
   };
 
+  const navigateCinemaShows = () => {
+    navigation.push('CinemaShows');
+  };
+
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
@@ -102,7 +106,7 @@ export const HomeScreenAdmin = ({navigation, route}) => {
         )}
         <Divider />
         <View style={styles.actionLayout}>
-          <Button style={styles.buttonStyle}>
+          <Button style={styles.buttonStyle} onPress={navigateCinemaShows}>
             {I18n.t(TEXT_KEY.cinemaHome.showsButtonText)}
           </Button>
           <Button style={styles.buttonStyle} onPress={navigateNewCinema}>
