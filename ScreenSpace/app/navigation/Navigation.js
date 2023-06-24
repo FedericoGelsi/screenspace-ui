@@ -29,6 +29,7 @@ const HomeNavigator = () => (
     <Screen name="CinemaHalls" component={CinemaHalls} />
     <Screen name="Registration" component={Registration} />
     <Screen name="ForgotPassword" component={ForgotPassword} />
+    <Screen name="ResetPassword" component={ResetPassword} />
   </Navigator>
 );
 

@@ -2,13 +2,17 @@ import React from 'react';
 import {CommonLogin} from '../../../components/CommonLogin';
 import {TextInput, StyleSheet} from 'react-native';
 
-export default function ForgotPassword() {
+export default function ForgotPassword({navigation}) {
+  const navigateResetPass = () => {
+    navigation.push('ResetPassword');
+  };
   return (
     <CommonLogin
       mainTitle="Forgot Password"
       mainButtonText="Continue"
       bottonSectionSubText="Or go back to "
-      bottonSectionMainText="Login page">
+      bottonSectionMainText="Login page"
+      mainButtonAction={navigateResetPass}>
       <TextInput
         style={styles.textInput}
         placeholder="Enter your email adress"

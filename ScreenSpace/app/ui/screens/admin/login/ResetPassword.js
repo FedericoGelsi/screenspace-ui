@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {CommonLogin} from '../../../components/CommonLogin';
 import {StyleSheet, TextInput, View, Text} from 'react-native';
 
-export default function ResetPassword() {
+export default function ResetPassword({navigation}) {
   const [pagina, setPagina] = useState(1);
   const [code, setCode] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -34,7 +34,7 @@ export default function ResetPassword() {
 
   //Logica tercer componente-----------------------------------------------
   function handleClick3() {
-    setPagina(1);
+    navigation.push('Login');
   }
 
   return (

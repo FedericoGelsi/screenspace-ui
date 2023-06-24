@@ -2,13 +2,17 @@ import React from 'react';
 import {CommonLogin} from '../../../components/CommonLogin';
 import {TextInput, StyleSheet} from 'react-native';
 
-export default function Registration() {
+export default function Registration({navigation}) {
+  const navigateLogin = () => {
+    navigation.push('Login');
+  };
   return (
     <CommonLogin
       mainTitle="Registration"
       mainButtonText="Create Account"
       bottonSectionSubText="Go back to "
-      bottonSectionMainText="Login page">
+      bottonSectionMainText="Login page"
+      bottonSectionAction={navigateLogin}>
       <TextInput
         style={styles.textInput}
         placeholder="Enter your email adress"
