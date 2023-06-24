@@ -206,6 +206,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    flex: 1,
   },
   noDataContainer: {
     height: '82%',
@@ -216,6 +217,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     width: '100%',
     paddingHorizontal: 20,
+    flex: 1,
   },
   actionLayout: {
     display: 'flex',

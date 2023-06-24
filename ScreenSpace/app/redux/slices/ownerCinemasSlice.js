@@ -56,17 +56,19 @@ const ownerCinemasSlice = createSlice({
 
         if (action.payload === 404) state.error = null;
         else {
-          state.hasError = false;
+          state.hasError = true;
           state.error = 'We are sorry. An error has occurred. Try again later.';
         }
       })
       .addCase(getCinema.pending, (state, action) => {
         state.isLoading = true;
         state.error = null;
+        state.hasError = false;
       })
       .addCase(getCinema.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        state.hasError = false;
 
         state.cinemas = state.cinemas.map(obj => {
           if (obj.id === action.payload.id) {
@@ -78,6 +80,7 @@ const ownerCinemasSlice = createSlice({
       .addCase(getCinema.rejected, (state, action) => {
         state.isLoading = false;
         state.error = 'Hubo un error en la carga de cines';
+        state.hasError = true;
       });
   },
 });

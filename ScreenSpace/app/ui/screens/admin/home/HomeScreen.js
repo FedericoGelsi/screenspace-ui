@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     accentBackgroundColor: '#FFFFFF',
     paddingHorizontal: 30,
+    flex: 1,
   },
   title: {
     marginTop: 20,

@@ -31,7 +31,6 @@ export const HallCard = ({editHandler, removeHandler, item}) => (
 
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
     marginTop: 30,
     borderColor: '#1677FF',
     borderRadius: 16,
