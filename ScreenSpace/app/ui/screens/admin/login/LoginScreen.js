@@ -1,21 +1,17 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-import { Button, Divider, Layout } from '@ui-kitten/components';
-import { TopNavigationScreenSpace } from '../../../components/TopNavigation';
+import {Button, Layout} from '@ui-kitten/components';
+import ViewTopNavigationContainer from '../../../components/ViewTopNavigationContainer';
 
-export const LoginScreen = ({ navigation }) => {
-
+export const LoginScreen = ({navigation}) => {
   const navigateDetails = () => {
     navigation.push('Home');
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-    <TopNavigationScreenSpace />
-      <Divider/>
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <ViewTopNavigationContainer variant='logo'>
+      <Layout style={{flex:1, justifyContent: "center", alignItems:"center", paddingHorizontal:16}}>
         <Button onPress={navigateDetails}>Click to Login</Button>
       </Layout>
-    </SafeAreaView>
+    </ViewTopNavigationContainer>
   );
 };
