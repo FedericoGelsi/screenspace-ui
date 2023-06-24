@@ -8,11 +8,14 @@ export default {
     title: 'Your Cinemas',
     showsButtonText: 'Shows',
     newCinemaButtonText: 'New Cinema',
+    noDataText: 'You do not have any cinema yet. Start by creating a new one!',
   },
   cinemaForm: {
     buttonNextText: 'Next',
     buttonPreviousText: 'Previous',
     buttonFinishText: 'Finish',
+    successModalMessage: 'Your cinema was created successfully',
+    successModalButtonMessage: 'Home',
     details: {
       title: 'Cinema details',
       inputName: 'Cinema Name',
@@ -49,6 +52,32 @@ export default {
     companyText: 'Company',
     cinemaStatusActive: 'Active',
     cinemaStatusInactive: 'Temporary Unavailable',
+  },
+  cinemaDetails: {
+    title: 'Cinema Details',
+    editButtonText: 'Edit Cinema',
+    hallsButtonText: 'Halls',
+  },
+  cinemaHalls: {
+    noDataText: 'You do not have halls yet',
+    finishButtonText: 'Finish',
+    form: {
+      name: 'Hall Name',
+      numberOfLinesText: 'Number of lines',
+      numberOfSeatsText: 'Number of seats per line',
+      status: 'Status',
+      activeText: 'Active',
+      inactiveText: 'Inactive',
+      saveButtonText: 'Save Changes',
+    },
+  },
+  hallCard: {
+    removeButtonText: 'Remove',
+    editButtonText: 'Edit',
+  },
+  hallHeader: {
+    headerTitle: 'Halls',
+    addButtonText: 'Add Hall',
   },
   cinemaShows: {
     sectionName: 'Shows',
