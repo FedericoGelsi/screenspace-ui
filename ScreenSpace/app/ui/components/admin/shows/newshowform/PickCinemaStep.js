@@ -5,24 +5,35 @@ import TEXT_KEY from '../../../../../assets/strings/TextKey';
 import SearchBar from '../../../SearchBar';
 import {getCinemaByName, getCinemas} from '../../../../../api/cinemaController';
 import {useSelector, useDispatch} from 'react-redux';
+import {completeForm} from '../../../../../redux/slices/showFormSlice';
 
 const PickCinemaStep = () => {
   const formValues = useSelector(state => state.newShowForm);
+  const ownerCinemas = useSelector(state => state.ownerCinemas);
   const dispatch = useDispatch();
 
-  const [items, setItems] = useState(getCinemas());
+  const [items, setItems] = useState(ownerCinemas.cinemas);
 
   const MenuOptions = ({items, renderItem}) => {
-    const useMenuState = (initialState = 1) => {
-      const [selectedIndex, setSelectedIndex] = useState(initialState);
-      return {selectedIndex, onSelect: setSelectedIndex};
+    const useMenuState = (items) => {
+      const [selectedIndex, setSelectedIndex] = useState(items.findIndex((item) => item.id=== formValues.cinemaId));
+      const handleSelected = index => {
+        setSelectedIndex(index);
+        dispatch(
+          completeForm({
+            key: 'cinemaId',
+            value: items[index?.row]?.id,
+          }),
+        );
+      };
+      return {selectedIndex, onSelect: handleSelected};
     };
 
     const menuState = useMenuState();
 
     return (
       <Menu style={{marginVertical: 16, maxHeight: '70%'}} {...menuState}>
-        {items.map((item,index) => renderItem(item, index))}
+        {items.map((item, index) => renderItem(item, index))}
       </Menu>
     );
   };
@@ -35,19 +46,20 @@ const PickCinemaStep = () => {
 
   const PinIcon = <Icon name="pin" />;
 
-  const renderItem = (item , index) => (
+  const renderItem = (item, index) => (
     <MenuItem
       key={index}
-      title={`${item.name}\n${
-        item.available ? addresify(item) : I18n.t(TEXT_KEY.newCinemaShow.steps.firstStep.isAvailableLabel)
+      title={`${item.cinemaName}\n${
+        item.active
+          ? addresify(item)
+          : I18n.t(TEXT_KEY.newCinemaShow.steps.firstStep.isAvailableLabel)
       }`}
-      disabled={!item.available}
-      accessoryLeft={PinIcon}
-    />
+      disabled={!item.active}
+      accessoryLeft={PinIcon}/>
   );
 
   const addresify = item => {
-    return `${item.calle} ${item.numero}, ${item.localidad}, ${item.provincia}, ${item.pais}`;
+    return `${item.address}, ${item.city}, ${item.province}, ${item.country}`;
   };
 
   return (

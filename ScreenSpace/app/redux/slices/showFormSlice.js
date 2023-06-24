@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    cinemaId: null,
+    cinemaId: 0,
     hallId: null,
     movieId: null,
     datetime: null,
