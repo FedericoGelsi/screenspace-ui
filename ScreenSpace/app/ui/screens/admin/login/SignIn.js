@@ -1,12 +1,22 @@
 import React, {useState} from 'react';
-import {Text, TextInput, StyleSheet} from 'react-native';
+import {Text, TextInput, StyleSheet, Alert} from 'react-native';
 import {CommonLogin} from '../../../components/CommonLogin';
 import {useDispatch, useSelector} from 'react-redux';
 import {userLogin} from '../../../../redux/slices/loginSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const storeLoggedSession = async value => {
+  try {
+    await AsyncStorage.setItem('logged', value);
+  } catch (e) {
+    // saving error
+  }
+};
 export const SignIn = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
+  const {token} = useSelector(state => state.login);
 
   const navigationForgotPassword = () => {
     navigation.push('ForgotPassword');
@@ -24,8 +34,18 @@ export const SignIn = ({navigation}) => {
   }
 
   const navigateDetails = async () => {
-    await dispatch(userLogin({email: email, password: password})).then(() =>
-      navigation.push('Home'),
+    await dispatch(userLogin({email: email, password: password})).then(
+      async response => {
+        if (response.payload && response.payload.token) {
+          await storeLoggedSession(response.payload.token);
+          navigation.push('Home');
+        } else {
+          Alert.alert(
+            'Error',
+            'Incorrect email or password.\nPlease try again.',
+          );
+        }
+      },
     );
   };
 

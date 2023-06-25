@@ -7,6 +7,14 @@ import {Provider} from 'react-redux';
 import {AppNavigator} from './navigation/Navigation';
 import SplashScreen from 'react-native-splash-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from '../app/networking/api/Api';
+
+export const verifyToken = async token => {
+  const results = await axios.post('/api/auths/verify-token', {
+    token: token,
+  });
+  return results.data;
+};
 
 export default App = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -20,10 +28,11 @@ export default App = () => {
     try {
       const value = await AsyncStorage.getItem('logged');
       if (value !== null) {
-        setIsLoggedIn(value === 'true');
+        const isValid = await verifyToken(value);
+        setIsLoggedIn(isValid);
       }
     } catch (e) {
-      console.log('Error retrieving login status:', error);
+      console.log('Error retrieving login status:', e);
     } finally {
       setIsLoading(false);
       SplashScreen.hide();
@@ -40,10 +49,10 @@ export default App = () => {
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
         <Provider store={store}>
-          {isLoggedIn ? (
-            <AppNavigator initialScreen="Home" />
-          ) : (
+          {isLoggedIn === false || isLoggedIn === 'false' ? (
             <AppNavigator initialScreen="Login" />
+          ) : (
+            <AppNavigator initialScreen="Home" />
           )}
         </Provider>
       </ApplicationProvider>
