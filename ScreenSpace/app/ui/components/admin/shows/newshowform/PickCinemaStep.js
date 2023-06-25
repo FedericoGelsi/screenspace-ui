@@ -3,7 +3,6 @@ import {Icon, Layout, Menu, MenuItem, Text} from '@ui-kitten/components';
 import I18n from '../../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../../assets/strings/TextKey';
 import SearchBar from '../../../SearchBar';
-import {getCinemaByName, getCinemas} from '../../../../../api/cinemaController';
 import {useSelector, useDispatch} from 'react-redux';
 import {completeForm} from '../../../../../redux/slices/showFormSlice';
 
@@ -34,9 +33,10 @@ const PickCinemaStep = () => {
     );
   };
 
-  const searchCinema = value => ownerCinemas.cinemas.filter(cinema =>
-    cinema.cinemaName.toLowerCase().includes(value.toLowerCase()),
-  );
+  const searchCinema = cinemaName =>
+    ownerCinemas.cinemas.filter(cinema =>
+      cinema.cinemaName.toLowerCase().includes(cinemaName.toLowerCase()),
+    );
 
   const handleSearch = value => {
     setItems(searchCinema(value));
