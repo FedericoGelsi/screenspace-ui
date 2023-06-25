@@ -45,6 +45,7 @@ export const SignIn = ({navigation}) => {
       <TextInput
         onChangeText={handleTextPassword}
         style={styles.textInput}
+        secureTextEntry={true}
         placeholder="Password"
       />
       <Text onPress={navigationForgotPassword} style={styles.forgotPass}>

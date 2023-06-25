@@ -6,6 +6,7 @@ const initialState = {
   refreshToken: null,
   userId: '',
   username: '',
+  email: '',
   isLoading: false,
   error: null,
   hasError: false,
@@ -35,6 +36,7 @@ const UserLoginSlice = createSlice({
         state.token = action.payload.token;
         state.userId = action.payload.userId;
         state.username = action.payload.username;
+        state.email = action.payload.email;
       })
       .addCase(userLogin.rejected, (state, action) => {
         console.log('rejected');

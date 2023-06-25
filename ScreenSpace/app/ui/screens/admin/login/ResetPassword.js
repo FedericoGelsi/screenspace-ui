@@ -1,17 +1,40 @@
 import React, {useState} from 'react';
 import {CommonLogin} from '../../../components/CommonLogin';
-import {StyleSheet, TextInput, View, Text} from 'react-native';
+import {StyleSheet, TextInput, View, Text, Alert} from 'react-native';
+import axios from '../../../../networking/api/Api';
 
-export default function ResetPassword({navigation}) {
+export const firstCodeVerify = async (email, verificationCode) => {
+  const results = await axios.post('/api/auths/verify-reset-code', {
+    email: email,
+    verificationCode: verificationCode,
+  });
+  return results;
+};
+
+export const secondResetPass = async (email, newPassword) => {
+  const results = await axios.post('/api/auths/new-password', {
+    email: email,
+    newPassword: newPassword,
+  });
+  return results;
+};
+
+export default function ResetPassword({navigation, route}) {
   const [pagina, setPagina] = useState(1);
   const [code, setCode] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const {email} = route.params;
 
   //Logica primer componente-----------------------------------------------
-  function handleClick1() {
+  async function handleClick1() {
     console.log('codigo de verificacion: hey ', code);
-    setPagina(2);
+    const results = await firstCodeVerify(email, code);
+    if (results.status === 200) {
+      setPagina(2);
+    } else {
+      Alert.alert('Error', 'Try again please.');
+    }
   }
 
   function handleTextCode(text) {
@@ -19,9 +42,19 @@ export default function ResetPassword({navigation}) {
   }
 
   //Logica segundo componente-----------------------------------------------
-  function handleClick2() {
+  async function handleClick2() {
     console.log('nueva pass: ', newPassword, 'confirm: ', confirmPassword);
-    setPagina(3);
+    if (newPassword === confirmPassword) {
+      const results = await secondResetPass(email, newPassword);
+      results.status === 200
+        ? setPagina(3)
+        : Alert.alert('Error', 'Try again please.');
+    } else {
+      Alert.alert(
+        'Error',
+        'Sorry, the new password and confirmation password do not match',
+      );
+    }
   }
 
   function handleTextNewPassword(text) {
