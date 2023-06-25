@@ -15,8 +15,9 @@ import {AdminProfile} from '../ui/screens/admin/profile/AdminProfile';
 
 const {Navigator, Screen} = createStackNavigator();
 
-const HomeNavigator = () => (
+const HomeNavigator = ({initialScreen}) => (
   <Navigator
+    initialRouteName={initialScreen}
     screenOptions={{
       headerShown: false,
       cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -32,8 +33,8 @@ const HomeNavigator = () => (
   </Navigator>
 );
 
-export const AppNavigator = () => (
+export const AppNavigator = ({initialScreen}) => (
   <NavigationContainer>
-    <HomeNavigator />
+    <HomeNavigator initialScreen={initialScreen} />
   </NavigationContainer>
 );

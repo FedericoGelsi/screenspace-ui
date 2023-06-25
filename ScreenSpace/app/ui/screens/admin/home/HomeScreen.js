@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   screenContainer: {
-    height: '92%',
+    height: '93%',
     backgroundColor: '#FFFFFF',
   },
   cinemaContainer: {
