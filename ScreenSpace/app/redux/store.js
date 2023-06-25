@@ -3,6 +3,7 @@ import formReducer from '../redux/slices/formSlice';
 import hallReducer from '../redux/slices/hallSlice';
 import ownerCinemasReducer from './slices/ownerCinemasSlice';
 import showFormSlice from './slices/showFormSlice';
+import moviesSlice from './slices/moviesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     hall: hallReducer,
     ownerCinemas: ownerCinemasReducer,
     newShowForm: showFormSlice,
+    movies: moviesSlice,
   },
 });
