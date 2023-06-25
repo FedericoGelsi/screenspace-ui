@@ -1,16 +1,24 @@
 import React, {useState} from 'react';
-import {Icon, Layout, Menu, MenuItem, Text} from '@ui-kitten/components';
+import {Icon, Image, Layout, Menu, MenuItem, Text} from '@ui-kitten/components';
 import I18n from '../../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../../assets/strings/TextKey';
 import SearchBar from '../../../SearchBar';
 import {useSelector, useDispatch} from 'react-redux';
-import {getMovieByName, getMovies} from '../../../../../api/movieController';
+import {getMoviesAPI} from '../../../../../networking/api/endpoints/moviesWS';
+import {getMovies} from '../../../../../redux/slices/moviesSlice';
+import { completeForm } from '../../../../../redux/slices/showFormSlice';
 
 const PickMovieStep = () => {
   const formValues = useSelector(state => state.newShowForm);
+  const moviesValues = useSelector(state => state.movies);
   const dispatch = useDispatch();
 
-  const [items, setItems] = useState(getMovies());
+  React.useEffect(() => {
+    dispatch(getMovies());
+  }, [dispatch]);
+  const [items, setItems] = useState(moviesValues.movies);
+
+  const initialItem = items.findIndex(item => item.id === formValues.movieId);
 
   const MenuOptions = ({items, renderItem}) => {
     const useMenuState = (initialState = 1) => {
@@ -21,16 +29,22 @@ const PickMovieStep = () => {
     const menuState = useMenuState();
 
     return (
-      <Menu style={{marginVertical: 16, maxHeight: '70%'}} {...menuState}>
+      <Menu
+        style={{marginVertical: 16, maxHeight: '70%'}}
+        {...menuState}
+        selectedIndex={{row: initialItem}}>
         {items.map((item, index) => renderItem(item, index))}
       </Menu>
     );
   };
 
-  const searchHall = value => getMovieByName(value);
+  const searchMovie = movieName =>
+  moviesValues.movies.filter(movie =>
+    movie.title.toLowerCase().includes(movieName.toLowerCase()),
+  );
 
   const handleSearch = value => {
-    setItems(searchHall(value));
+    setItems(searchMovie(value));
   };
 
   const MovieIcon = <Icon name="film-outline" />;
@@ -39,12 +53,20 @@ const PickMovieStep = () => {
     <MenuItem
       key={index}
       title={`${item.title}\n${
-        item.isShowing
+        item.showing
           ? getMovieLenght(item)
           : I18n.t(TEXT_KEY.newCinemaShow.steps.thirdStep.isShowingLabel)
       }`}
-      disabled={!item.isShowing}
+      disabled={!item.showing}
       accessoryLeft={MovieIcon}
+      onPress={() =>
+        dispatch(
+          completeForm({
+            key: 'movieId',
+            value: item.id,
+          }),
+        )
+      }
     />
   );
 
