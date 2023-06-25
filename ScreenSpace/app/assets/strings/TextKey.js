@@ -61,7 +61,7 @@ export default {
   cinemaHalls: {
     noDataText: 'cinemaHalls.noDataText',
     finishButtonText: 'cinemaHalls.finishButtonText',
-    confirmationModalText: 'confirmationModalText',
+    confirmationModalText: 'cinemaHalls.confirmationModalText',
     form: {
       name: 'cinemaHalls.form.name',
       numberOfLinesText: 'cinemaHalls.form.numberOfLinesText',
