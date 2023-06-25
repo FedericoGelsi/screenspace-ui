@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://screenspace-api.us-east-1.elasticbeanstalk.com/api',
+  baseURL: 'http://screenspace-api.us-east-1.elasticbeanstalk.com',
   timeout: 10000,
   common: {
     headers: {
