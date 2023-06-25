@@ -3,6 +3,7 @@ import {
   TopNavigation,
   TopNavigationAction,
   Button,
+  Icon,
 } from '@ui-kitten/components';
 import * as React from 'react';
 import {StyleSheet, View, SafeAreaView} from 'react-native';
@@ -20,7 +21,6 @@ import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {SuccessModal} from '../../../components/SuccessModal';
 import {CustomStepIndicator} from '../../../components/CustomStepIndicator';
-import {BackIcon} from '../../../kittenIcons/kittenIcons';
 import {createCinema} from '../../../../redux/slices/formSlice';
 import ErrorScreen from '../../../components/ErrorScreen';
 
@@ -55,8 +55,10 @@ export const CinemaForm = ({navigation, route}) => {
     else dispatch(createCinema(1));
   };
 
-  const BackAction = () => (
-    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+  const CancelIcon = props => <Icon {...props} name="close-outline" />;
+
+  const CancelAction = props => (
+    <TopNavigationAction icon={CancelIcon} onPress={navigateBack} />
   );
 
   if (formValues.error) {
@@ -72,7 +74,7 @@ export const CinemaForm = ({navigation, route}) => {
       <TopNavigation
         title="ScreenSpace"
         alignment="center"
-        accessoryLeft={BackAction}
+        accessoryLeft={CancelAction}
         style={{height: '8%'}}
       />
       <View style={styles.container}>

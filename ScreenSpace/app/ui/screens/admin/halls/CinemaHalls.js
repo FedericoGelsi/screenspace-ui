@@ -33,6 +33,7 @@ import {BackIcon} from '../../../kittenIcons/kittenIcons';
 import {Stepper} from '../../../components/Stepper';
 import {CustomSpinner} from '../../../components/CustomSpinner';
 import ErrorScreen from '../../../components/ErrorScreen';
+import {ConfirmationModal} from '../../../components/ConfirmationModal';
 
 export const CinemaHalls = ({navigation, route}) => {
   const {halls} = useSelector(state => state.hall);
@@ -44,6 +45,18 @@ export const CinemaHalls = ({navigation, route}) => {
   const [isHallComplete, setIsHallComplete] = React.useState(true);
   const [data, setData] = React.useState(halls);
   const [edit, setEdit] = React.useState(false);
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const [hallIndex, setHallIndex] = React.useState(0);
+
+  const handleConfirm = () => {
+    dispatch(completeHall({key: 'hallId', value: halls[hallIndex].id}));
+    dispatch(removeHall(route.params.cinemaId));
+    setModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
 
   React.useEffect(() => {
     setIsHallComplete(hallComplete);
@@ -79,8 +92,8 @@ export const CinemaHalls = ({navigation, route}) => {
   };
 
   const handleRemove = hallIndex => {
-    dispatch(completeHall({key: 'hallId', value: halls[hallIndex].id}));
-    dispatch(removeHall(route.params.cinemaId));
+    setModalVisible(true);
+    setHallIndex(hallIndex);
   };
 
   const BackAction = () => (
@@ -196,6 +209,11 @@ export const CinemaHalls = ({navigation, route}) => {
           </Button>
         </Card>
       </Modal>
+      <ConfirmationModal
+        visible={modalVisible}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
     </SafeAreaView>
   );
 };

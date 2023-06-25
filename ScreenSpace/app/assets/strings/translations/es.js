@@ -62,6 +62,7 @@ export default {
   cinemaHalls: {
     noDataText: 'No tiene salas actualmente',
     finishButtonText: 'Terminar',
+    confirmationModalText: 'Está seguro?',
     form: {
       name: 'Nombre Sala',
       numberOfLinesText: 'Numero de filas',
@@ -186,4 +187,5 @@ export default {
       ],
     },
   },
+  adminProfileTitle: 'Tu Perfil',
 };

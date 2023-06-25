@@ -4,21 +4,21 @@ import {
   Divider,
   List,
   Text,
-  TopNavigation,
   TopNavigationAction,
   Button,
   Spinner,
   Layout,
+  Icon,
 } from '@ui-kitten/components';
 import {CinemaCard} from '../../../components/CinemaCard';
 import {NoData} from '../../../components/NoData';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
-import {BackIcon} from '../../../kittenIcons/kittenIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {getOwnerCinemas} from '../../../../redux/slices/ownerCinemasSlice';
 import {loadHalls} from '../../../../redux/slices/hallSlice';
 import ErrorScreen from '../../../components/ErrorScreen';
+import ViewTopNavigationContainer from '../../../components/ViewTopNavigationContainer';
 
 export const HomeScreenAdmin = ({navigation, route}) => {
   let refresh = route?.params ? route.params : false;
@@ -50,8 +50,14 @@ export const HomeScreenAdmin = ({navigation, route}) => {
     navigation.push('CinemaShows');
   };
 
-  const BackAction = () => (
-    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+  const navigateAdminProfile = () => {
+    navigation.push('AdminProfile');
+  };
+
+  const AvatarIcon = props => <Icon {...props} name="person" />;
+
+  const AvatarAction = () => (
+    <TopNavigationAction icon={AvatarIcon} onPress={navigateAdminProfile} />
   );
 
   if (hasError) {
@@ -63,14 +69,10 @@ export const HomeScreenAdmin = ({navigation, route}) => {
   }
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
-      <TopNavigation
-        title="ScreenSpace"
-        alignment="center"
-        accessoryLeft={BackAction}
-        style={{height: '8%'}}
-      />
-      <Divider />
+    <ViewTopNavigationContainer
+      navigation={navigation}
+      variant="logo"
+      accessoryRight={AvatarAction}>
       <View style={styles.screenContainer}>
         {isLoading ? (
           <Layout style={styles.noDataContainer}>
@@ -114,7 +116,7 @@ export const HomeScreenAdmin = ({navigation, route}) => {
           </Button>
         </View>
       </View>
-    </SafeAreaView>
+    </ViewTopNavigationContainer>
   );
 };
 

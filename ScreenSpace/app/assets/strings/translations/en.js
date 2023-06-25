@@ -61,6 +61,7 @@ export default {
   cinemaHalls: {
     noDataText: 'You do not have halls yet',
     finishButtonText: 'Finish',
+    confirmationModalText: 'Are you sure?',
     form: {
       name: 'Hall Name',
       numberOfLinesText: 'Number of lines',
@@ -185,4 +186,5 @@ export default {
       ],
     },
   },
+  adminProfileTitle: 'Your Profile',
 };
