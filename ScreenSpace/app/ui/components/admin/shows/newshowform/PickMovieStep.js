@@ -1,12 +1,20 @@
 import React, {useState} from 'react';
-import {Icon, Image, Layout, Menu, MenuItem, Text} from '@ui-kitten/components';
+import {
+  Icon,
+  Image,
+  Layout,
+  Menu,
+  MenuItem,
+  Spinner,
+  Text,
+} from '@ui-kitten/components';
 import I18n from '../../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../../assets/strings/TextKey';
 import SearchBar from '../../../SearchBar';
 import {useSelector, useDispatch} from 'react-redux';
 import {getMoviesAPI} from '../../../../../networking/api/endpoints/moviesWS';
 import {getMovies} from '../../../../../redux/slices/moviesSlice';
-import { completeForm } from '../../../../../redux/slices/showFormSlice';
+import {completeForm} from '../../../../../redux/slices/showFormSlice';
 
 const PickMovieStep = () => {
   const formValues = useSelector(state => state.newShowForm);
@@ -16,6 +24,7 @@ const PickMovieStep = () => {
   React.useEffect(() => {
     dispatch(getMovies());
   }, [dispatch]);
+
   const [items, setItems] = useState(moviesValues.movies);
 
   const initialItem = items.findIndex(item => item.id === formValues.movieId);
@@ -39,9 +48,9 @@ const PickMovieStep = () => {
   };
 
   const searchMovie = movieName =>
-  moviesValues.movies.filter(movie =>
-    movie.title.toLowerCase().includes(movieName.toLowerCase()),
-  );
+    moviesValues.movies.filter(movie =>
+      movie.title.toLowerCase().includes(movieName.toLowerCase()),
+    );
 
   const handleSearch = value => {
     setItems(searchMovie(value));
@@ -92,7 +101,15 @@ const PickMovieStep = () => {
         )}
         setValue={handleSearch}
       />
-      <MenuOptions items={items} renderItem={renderItem} />
+      {moviesValues.isLoading && (
+        <Layout
+          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Spinner size="giant" />
+        </Layout>
+      )}
+      {!moviesValues.isLoading && (
+        <MenuOptions items={items} renderItem={renderItem} />
+      )}
     </Layout>
   );
 };
