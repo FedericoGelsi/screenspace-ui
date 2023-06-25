@@ -14,31 +14,29 @@ const PickCinemaStep = () => {
 
   const [items, setItems] = useState(ownerCinemas.cinemas);
 
+  const initialItem = items.findIndex(item => item.id === formValues.cinemaId);
+
   const MenuOptions = ({items, renderItem}) => {
-    const useMenuState = (items) => {
-      const [selectedIndex, setSelectedIndex] = useState(items.findIndex((item) => item.id=== formValues.cinemaId));
-      const handleSelected = index => {
-        setSelectedIndex(index);
-        dispatch(
-          completeForm({
-            key: 'cinemaId',
-            value: items[index?.row]?.id,
-          }),
-        );
-      };
-      return {selectedIndex, onSelect: handleSelected};
+    const useMenuState = () => {
+      const [selectedIndex, setSelectedIndex] = useState();
+      return {selectedIndex, onSelect: setSelectedIndex};
     };
 
     const menuState = useMenuState();
 
     return (
-      <Menu style={{marginVertical: 16, maxHeight: '70%'}} {...menuState}>
+      <Menu
+        style={{marginVertical: 16, maxHeight: '70%'}}
+        {...menuState}
+        selectedIndex={{row: initialItem}}>
         {items.map((item, index) => renderItem(item, index))}
       </Menu>
     );
   };
 
-  const searchCinema = value => getCinemaByName(value);
+  const searchCinema = value => ownerCinemas.cinemas.filter(cinema =>
+    cinema.cinemaName.toLowerCase().includes(value.toLowerCase()),
+  );
 
   const handleSearch = value => {
     setItems(searchCinema(value));
@@ -55,7 +53,16 @@ const PickCinemaStep = () => {
           : I18n.t(TEXT_KEY.newCinemaShow.steps.firstStep.isAvailableLabel)
       }`}
       disabled={!item.active}
-      accessoryLeft={PinIcon}/>
+      accessoryLeft={PinIcon}
+      onPress={() =>
+        dispatch(
+          completeForm({
+            key: 'cinemaId',
+            value: item.id,
+          }),
+        )
+      }
+    />
   );
 
   const addresify = item => {
