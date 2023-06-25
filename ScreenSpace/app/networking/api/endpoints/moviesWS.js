@@ -1,12 +1,12 @@
 import axios from '../Api';
 
-export const getMovies = async (
-  cinema = undefined,
-  latitude = undefined,
-  longitude = undefined,
-  title = undefined,
-  genre = undefined,
-  rating = undefined,
+export const getMoviesAPI = async (
+  cinema,
+  latitude,
+  longitude,
+  title,
+  genre,
+  rating,
 ) => {
   const params = {
     cinema: cinema,
@@ -20,17 +20,17 @@ export const getMovies = async (
   return results.data;
 };
 
-export const getMovieById = async movieId => {
+export const getMovieByIdAPI = async movieId => {
   const results = await axios.get(`/movies/${movieId}`);
   return results.data;
 };
 
-export const getMovieGenres = async () => {
+export const getMovieGenresAPI = async () => {
   const results = await axios.get(`/movies/genres`);
   return results.data;
 };
 
-export const postMovieReview = async (movieId, reviewInfo) => {
+export const postMovieReviewAPI = async (movieId, reviewInfo) => {
   // {
   //     "userId": 0,
   //     "rating": 0,
