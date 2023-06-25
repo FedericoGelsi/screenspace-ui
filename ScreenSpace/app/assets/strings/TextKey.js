@@ -91,6 +91,7 @@ export default {
   },
   newCinemaShow: {
     sectionName: 'newCinemaShow.sectionName',
+    editSectionName: 'newCinemaShow.editSectionName',
     nextStepButtonLabel: 'newCinemaShow.nextStepButtonLabel',
     previousStepButtonLabel: 'newCinemaShow.previousStepButtonLabel',
     submitButtonLabel: 'newCinemaShow.submitButtonLabel',

@@ -93,6 +93,7 @@ export default {
   },
   newCinemaShow: {
     sectionName: 'New Show',
+    editSectionName: 'Edit Show',
     nextStepButtonLabel: 'Next Step',
     previousStepButtonLabel: 'Previous Step',
     submitButtonLabel: 'Create show',

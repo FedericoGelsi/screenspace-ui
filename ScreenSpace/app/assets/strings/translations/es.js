@@ -94,6 +94,7 @@ export default {
   },
   newCinemaShow: {
     sectionName: 'Nueva Función',
+    editSectionName: 'Editar Función',
     nextStepButtonLabel: 'Siguiente paso',
     previousStepButtonLabel: 'Paso anterior',
     submitButtonLabel: 'Crear función',
