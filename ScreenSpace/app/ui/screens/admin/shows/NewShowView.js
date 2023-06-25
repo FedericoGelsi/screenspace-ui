@@ -5,8 +5,10 @@ import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 import NewShowForm from '../../../components/admin/shows/newshowform/NewShowForm';
 import {Button, Icon, Layout, TopNavigationAction} from '@ui-kitten/components';
+import {useSelector, useDispatch} from 'react-redux';
+import { reset } from '../../../../redux/slices/showFormSlice';
 
-const NewShowView = ({navigation}) => {
+const NewShowView = ({navigation, route}) => {
   const stepLabels = [
     {label: I18n.t(TEXT_KEY.newCinemaShow.steps.firstStep.label)},
     {label: I18n.t(TEXT_KEY.newCinemaShow.steps.secondStep.label)},
@@ -14,6 +16,9 @@ const NewShowView = ({navigation}) => {
     {label: I18n.t(TEXT_KEY.newCinemaShow.steps.fourthStep.label)},
     {label: I18n.t(TEXT_KEY.newCinemaShow.steps.summaryStep.label)},
   ];
+  const formValues = useSelector(state => state.newShowForm);
+  const dispatch = useDispatch();
+
   const labels = stepLabels.map(step => step.label);
   const [currentPosition, setCurrentPosition] = useState(0);
 
@@ -28,19 +33,40 @@ const NewShowView = ({navigation}) => {
   const navigateCinemaShows = () => navigation.navigate('CinemaShows');
 
   const navigateBack = () => {
+    dispatch(reset());
     navigation.goBack();
   };
 
+  console.log(formValues);
   const CancelIcon = props => <Icon {...props} name="close-outline" />;
 
   const CancelAction = props => (
-    <TopNavigationAction icon={CancelIcon} onPress={navigateBack}/>
+    <TopNavigationAction icon={CancelIcon} onPress={navigateBack} />
   );
+
+  const isDisabled = () => {
+    switch (currentPosition) {
+      case 0:
+        return formValues.cinemaId === null
+      case 1:
+        return formValues.hallId === null
+      case 2:
+        return formValues.movieId === null
+      case 3:
+        return formValues.datetime === null
+      default:
+        return true;
+    }
+  }
 
   return (
     <ViewTopNavigationContainer
       navigation={navigation}
-      headerTitle={I18n.t(TEXT_KEY.newCinemaShow.sectionName)}
+      headerTitle={I18n.t(
+        route
+          ? TEXT_KEY.newCinemaShow.sectionName
+          : TEXT_KEY.newCinemaShow.editSectionName,
+      )}
       accessoryLeft={
         currentPosition === labels.length - 1 ? (
           <TopNavigationAction />
@@ -71,7 +97,9 @@ const NewShowView = ({navigation}) => {
               style={{flex: 1}}
               appearance="outline"
               accessoryRight={<Icon name="arrow-forward" />}
-              onPress={nextStep}>
+              onPress={nextStep}
+              disabled={isDisabled()}
+              >
               {I18n.t(TEXT_KEY.newCinemaShow.nextStepButtonLabel)}
             </Button>
           )}
@@ -80,7 +108,9 @@ const NewShowView = ({navigation}) => {
               style={{flex: 1}}
               status="success"
               accessoryRight={<Icon name="checkmark" />}
-              onPress={nextStep}>
+              onPress={nextStep}
+              // TODO: Add validation
+              disabled={true}>
               {I18n.t(TEXT_KEY.newCinemaShow.submitButtonLabel)}
             </Button>
           )}
