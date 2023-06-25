@@ -26,10 +26,11 @@ export const HomeScreenAdmin = ({navigation, route}) => {
   const {cinemas, error, isLoading, hasError} = useSelector(
     state => state.ownerCinemas,
   );
+  const {userId} = useSelector(state => state.login);
 
   React.useEffect(() => {
-    dispatch(getOwnerCinemas(1));
-    if (refresh) dispatch(getOwnerCinemas(1));
+    dispatch(getOwnerCinemas(userId));
+    if (refresh) dispatch(getOwnerCinemas(userId));
     refresh = false;
   }, [dispatch, refresh]);
 

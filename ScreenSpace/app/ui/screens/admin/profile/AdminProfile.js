@@ -1,11 +1,16 @@
 import React from 'react';
 import {AdminProfileView} from './AdminProfileView';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
+import {reset} from '../../../../redux/slices/loginSlice';
 
 export const AdminProfile = ({navigation}) => {
   const [showModal, setShowModal] = React.useState(false);
+  const dispatch = useDispatch();
+
   const handleLogout = () => {
     storeLoggedSession('false');
+    dispatch(reset());
     navigation.push('Login');
   };
 

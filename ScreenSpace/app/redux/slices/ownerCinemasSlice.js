@@ -12,19 +12,22 @@ const initialState = {
   isLoading: false,
 };
 
-export const getOwnerCinemas = createAsyncThunk('cinemas', async ownerId => {
-  try {
-    const response = await getCinemas(ownerId);
-    return response;
-  } catch (error) {
-    if (error.response) {
-      const statusCode = error.response.status;
-      return rejectWithValue(statusCode);
-    } else {
-      throw error;
+export const getOwnerCinemas = createAsyncThunk(
+  'cinemas',
+  async (ownerId, thunkAPI) => {
+    try {
+      const response = await getCinemas(ownerId);
+      return response;
+    } catch (error) {
+      if (error.response) {
+        const statusCode = error.response.status;
+        return thunkAPI.rejectWithValue(statusCode);
+      } else {
+        throw error;
+      }
     }
-  }
-});
+  },
+);
 
 export const getCinema = createAsyncThunk(
   'cinemas/id',

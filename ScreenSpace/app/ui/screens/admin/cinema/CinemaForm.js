@@ -17,6 +17,7 @@ export const CinemaForm = ({navigation, route}) => {
   const formValues = useSelector(state => state.form);
   const detailsComplete = useSelector(isDetailsComplete);
   const addressComplete = useSelector(isAddressComplete);
+  const {userId} = useSelector(state => state.login);
 
   const [currentPage, setCurrentPage] = React.useState(0);
   const [visible, setVisible] = React.useState(false);
@@ -39,7 +40,7 @@ export const CinemaForm = ({navigation, route}) => {
 
   const submitHandler = () => {
     if (edit) dispatch(editCinema(route.params.cinemaId));
-    else dispatch(createCinema(1));
+    else dispatch(createCinema(userId));
   };
 
   if (formValues.error) {
