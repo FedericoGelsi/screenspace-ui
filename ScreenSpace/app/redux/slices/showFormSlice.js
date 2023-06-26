@@ -27,6 +27,7 @@ export const createShow = createAsyncThunk(
       state.newShowForm.hallId,
       state.newShowForm,
     );
+    thunkAPI.dispatch(getCinema(state.newShowForm.cinemaId));
     return result;
   },
 );
