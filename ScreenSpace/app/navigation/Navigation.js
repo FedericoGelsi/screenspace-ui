@@ -4,18 +4,17 @@ import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
-import {LoginScreen} from '../ui/screens/admin/login/LoginScreen';
 import {HomeScreenAdmin} from '../ui/screens/admin/home/HomeScreen';
 import {CinemaForm} from '../ui/screens/admin/cinema/CinemaForm';
 import {CinemaDetails} from '../ui/screens/admin/cinema/CinemaDetails';
 import {CinemaHalls} from '../ui/screens/admin/halls/CinemaHalls';
 import CinemaShowsHome from '../ui/screens/admin/shows/CinemaShowHome';
-import NewShowView from '../ui/screens/admin/shows/NewShowView';
 import {AdminProfile} from '../ui/screens/admin/profile/AdminProfile';
 import {SignIn} from '../ui/screens/admin/login/SignIn';
 import Registration from '../ui/screens/admin/login/Registration';
 import ForgotPassword from '../ui/screens/admin/login/ForgotPassword';
 import ResetPassword from '../ui/screens/admin/login/ResetPassword';
+import ShowView from '../ui/screens/admin/shows/ShowView';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -32,7 +31,7 @@ const HomeNavigator = ({initialScreen}) => (
     <Screen name="CinemaDetails" component={CinemaDetails} />
     <Screen name="CinemaHalls" component={CinemaHalls} />
     <Screen name="CinemaShows" component={CinemaShowsHome} />
-    <Screen name="NewShow" component={NewShowView} />
+    <Screen name="NewShow" component={ShowView} />
     <Screen name="AdminProfile" component={AdminProfile} />
     <Screen name="Registration" component={Registration} />
     <Screen name="ForgotPassword" component={ForgotPassword} />

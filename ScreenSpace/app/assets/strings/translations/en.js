@@ -80,6 +80,9 @@ export default {
     headerTitle: 'Halls',
     addButtonText: 'Add Hall',
   },
+  cinemaCard: {
+    showsButton: 'View Shows'
+  },
   cinemaShows: {
     sectionName: 'Shows',
     noDataMessage:
@@ -94,9 +97,10 @@ export default {
   },
   newCinemaShow: {
     sectionName: 'New Show',
+    editSectionName: 'Edit Show',
     nextStepButtonLabel: 'Next Step',
     previousStepButtonLabel: 'Previous Step',
-    submitButtonLabel: 'Create show',
+    submitButtonLabel: 'Submit show',
     finishButtonLabel: 'Go back to Shows',
     steps: {
       firstStep: {
@@ -137,8 +141,8 @@ export default {
       },
       summaryStep: {
         label: 'Summary',
-        title: 'Your show was created successfully!',
-        subtitle: '',
+        title: 'Show Summary',
+        subtitle: 'Please review your selection before submitting',
       },
     },
   },

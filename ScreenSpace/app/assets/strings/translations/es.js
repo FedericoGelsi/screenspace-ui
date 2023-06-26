@@ -93,11 +93,15 @@ export default {
       dateTimeLabel: 'Horario',
     },
   },
+  cinemaCard: {
+    showsButton: 'Ver funciones'
+  },
   newCinemaShow: {
     sectionName: 'Nueva Función',
+    editSectionName: 'Editar Función',
     nextStepButtonLabel: 'Siguiente paso',
     previousStepButtonLabel: 'Paso anterior',
-    submitButtonLabel: 'Crear función',
+    submitButtonLabel: 'Guardar función',
     finishButtonLabel: 'Volver a Funciones',
     steps: {
       firstStep: {
@@ -138,8 +142,8 @@ export default {
       },
       summaryStep: {
         label: 'Resumen',
-        title: 'Tu función se ha creado exitosamente!',
-        subtitle: '',
+        title: 'Resumen de la Función',
+        subtitle: 'Por favor revisa los datos antes de guardar',
       },
     },
   },

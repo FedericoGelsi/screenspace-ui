@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {
   Divider,
@@ -47,8 +47,8 @@ export const HomeScreenAdmin = ({navigation, route}) => {
     navigation.push('CinemaDetails', {cinemaDetails: cinemas[cinemaIndex]});
   };
 
-  const navigateCinemaShows = () => {
-    navigation.push('CinemaShows');
+  const navigateCinemaShows = cinemaId => {
+    navigation.push('CinemaShows', {cinemaId: cinemaId});
   };
 
   const navigateAdminProfile = () => {
@@ -99,6 +99,7 @@ export const HomeScreenAdmin = ({navigation, route}) => {
                   renderItem={item => (
                     <CinemaCard
                       navigateAction={navigateCinemaDetails}
+                      navigateShows={() => navigateCinemaShows(item.item.id)}
                       item={item}
                     />
                   )}
@@ -108,14 +109,11 @@ export const HomeScreenAdmin = ({navigation, route}) => {
           </>
         )}
         <Divider />
-        <View style={styles.actionLayout}>
-          <Button style={styles.buttonStyle} onPress={navigateCinemaShows}>
-            {I18n.t(TEXT_KEY.cinemaHome.showsButtonText)}
-          </Button>
+        <Layout style={styles.actionLayout}>
           <Button style={styles.buttonStyle} onPress={navigateNewCinema}>
             {I18n.t(TEXT_KEY.cinemaHome.newCinemaButtonText)}
           </Button>
-        </View>
+        </Layout>
       </View>
     </ViewTopNavigationContainer>
   );
@@ -126,11 +124,11 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   screenContainer: {
-    height: '93%',
+    flex: 1,
     backgroundColor: '#FFFFFF',
   },
   cinemaContainer: {
-    height: '88%',
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -153,14 +151,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   actionLayout: {
-    height: '12%',
-    display: 'flex',
+    marginVertical: 16,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    paddingHorizontal: 16,
   },
   buttonStyle: {
+    flex: 1,
     borderRadius: 1000,
-    width: 140,
   },
 });

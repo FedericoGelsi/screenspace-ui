@@ -4,8 +4,8 @@ import {Button, Card, Icon, Layout, Modal, Text} from '@ui-kitten/components';
 
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
-import {deleteShow, getShowById} from '../../../../api/cinemaController';
 import {useDispatch} from 'react-redux';
+import {loadFormBack, removeShow} from '../../../../redux/slices/showFormSlice';
 
 const Header = props => (
   <Layout {...props}>
@@ -20,7 +20,7 @@ const CardActionButton = props => {
         status="primary"
         size="small"
         accessoryLeft={<Icon name="edit-2-outline" />}
-        onPress={() => props.editShow(props.show.id)}
+        onPress={() => props.editShow(props.show)}
       />
       <Button
         status="danger"
@@ -57,7 +57,7 @@ const CardDeleteModal = props => {
           <Button
             style={styles.footerControl}
             status="danger"
-            onPress={() => props.deleteShow(props.show.id)}
+            onPress={() => props.deleteShow(props.show)}
             accessoryLeft={<Icon name="trash-2-outline" />}>
             DELETE
           </Button>
@@ -72,22 +72,21 @@ const ShowCard = ({show, navigation}) => {
 
   const dispatch = useDispatch();
 
-  const handleDeleteShow = showId => {
+  const handleDeleteShow = show => {
     setDeleteModalVisible(false);
-    deleteShow(showId);
+    console.log(show);
+    dispatch(removeShow({cinemaId: show.cinemaId, hallId: show.hallId, showId: show.showId}));
   };
 
-  const editShow = showId => {
-    console.info('Edit show:', showId);
-    //TODO: Add logic to edit show
-    navigateEditCinema(showId);
+  const editShow = show => {
+    navigateEditCinema(show);
   };
 
-  const navigateEditCinema = showId => {
-    navigation.push('NewShow');
-    // TODO: Load form using redux
-    // dispatch(loadForm(getShowById(showId)));
+  const navigateEditCinema = show => {
+    navigation.push('NewShow', {edit: true, show: show});
+    dispatch(loadFormBack(show));
   };
+
   const CardListItem = ({title, label}) => (
     <Layout>
       <Text category="label">{title}</Text>
@@ -99,7 +98,7 @@ const ShowCard = ({show, navigation}) => {
   return (
     <Card
       style={styles.card}
-      header={<Header movieName={show.cinemaShow.name} />}>
+      header={<Header movieName={show.showName} />}>
       <Layout style={{flex: 1, flexDirection: 'row'}}>
         <Layout
           style={{
@@ -108,11 +107,11 @@ const ShowCard = ({show, navigation}) => {
             justifyContent: 'space-around',
           }}>
           <CardListItem
-            title={show.name}
+            title={show.hallName}
             label={I18n.t(TEXT_KEY.cinemaShows.showCard.hallLabel)}
           />
           <CardListItem
-            title={new Date(show.cinemaShow.datetime).toLocaleString([], {
+            title={new Date(show.datetime).toLocaleString([], {
               day: '2-digit',
               month: '2-digit',
               year: '2-digit',

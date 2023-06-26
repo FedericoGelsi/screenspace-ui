@@ -80,6 +80,9 @@ export default {
     headerTitle: 'hallHeader.headerTitle',
     addButtonText: 'hallHeader.addButtonText',
   },
+  cinemaCard: {
+    showsButton: 'cinemaCard.showsButton',
+  },
   cinemaShows: {
     sectionName: 'cinemaShows.sectionName',
     noDataMessage: 'cinemaShows.noDataMessage',
@@ -92,6 +95,7 @@ export default {
   },
   newCinemaShow: {
     sectionName: 'newCinemaShow.sectionName',
+    editSectionName: 'newCinemaShow.editSectionName',
     nextStepButtonLabel: 'newCinemaShow.nextStepButtonLabel',
     previousStepButtonLabel: 'newCinemaShow.previousStepButtonLabel',
     submitButtonLabel: 'newCinemaShow.submitButtonLabel',

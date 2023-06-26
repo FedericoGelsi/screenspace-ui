@@ -56,10 +56,9 @@ const ownerCinemasSlice = createSlice({
       })
       .addCase(getOwnerCinemas.rejected, (state, action) => {
         state.isLoading = false;
-
         if (action.payload === 404) state.error = null;
         else {
-          state.hasError = true;
+          state.hasError = false;
           state.error = 'We are sorry. An error has occurred. Try again later.';
         }
       })
