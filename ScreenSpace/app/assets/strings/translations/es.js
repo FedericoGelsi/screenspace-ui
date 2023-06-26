@@ -91,6 +91,7 @@ export default {
       hallLabel: 'Sala',
       dateTimeLabel: 'Horario',
     },
+    dateFilterPlaceholder: "Filtrar por Fecha"
   },
   cinemaCard: {
     showsButton: 'Ver funciones'

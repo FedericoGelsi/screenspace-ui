@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import ViewTopNavigationContainer from '../../../components/ViewTopNavigationContainer';
 import ShowCard from '../../../components/admin/shows/ShowCard';
-import {Layout, List} from '@ui-kitten/components';
+import {Icon, Layout, List, TopNavigationAction} from '@ui-kitten/components';
 
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
@@ -9,12 +9,13 @@ import {NoData} from '../../../components/NoData';
 import {CreateNewShowButton} from '../../../components/admin/shows/CreateNewShowButton';
 import {DateFilter} from '../../../components/admin/shows/DateFilter';
 import {useDispatch, useSelector} from 'react-redux';
-import { reset } from '../../../../redux/slices/showFormSlice';
+import {reset} from '../../../../redux/slices/showFormSlice';
 
 const CinemaShowHome = ({navigation, route}) => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState();
   const {cinemaId} = route?.params;
   const ownerCinemas = useSelector(state => state.ownerCinemas);
+
   const dispatch = useDispatch();
   const getShows = cinema =>
     cinema.halls.flatMap(o =>
@@ -29,17 +30,19 @@ const CinemaShowHome = ({navigation, route}) => {
       })),
     );
 
-    console.log(cinemaId);
-    const cinema = ownerCinemas.cinemas.find(cinema => cinema.id === cinemaId);
-    console.log(cinema);
+  const cinema = ownerCinemas.cinemas.find(cinema => cinema.id === cinemaId);
   const [shows, setShows] = useState(getShows(cinema));
 
   React.useEffect(() => {
-    setShows(getShows(cinema));
-  }, [ownerCinemas]);
+    if (date) {
+      setShows(filterShows(date));
+    } else {
+      setShows(getShows(cinema));
+    }
+  }, [ownerCinemas, date]);
 
   const filterShows = date => {
-    return shows.filter(
+    return getShows(cinema).filter(
       show =>
         new Date(show.datetime).toLocaleDateString() ===
         date.toLocaleDateString(),

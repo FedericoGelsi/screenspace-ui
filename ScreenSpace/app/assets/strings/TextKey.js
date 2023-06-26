@@ -91,6 +91,7 @@ export default {
       hallLabel: 'cinemaShows.showCard.hallLabel',
       dateTimeLabel: 'cinemaShows.showCard.dateTimeLabel',
     },
+    dateFilterPlaceholder: 'cinemaShows.dateFilterPlaceholder'
   },
   newCinemaShow: {
     sectionName: 'newCinemaShow.sectionName',
