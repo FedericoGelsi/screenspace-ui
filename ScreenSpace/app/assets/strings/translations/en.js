@@ -94,6 +94,7 @@ export default {
       hallLabel: 'Hall',
       dateTimeLabel: 'DateTime',
     },
+    dateFilterPlaceholder: "Filter by Date"
   },
   newCinemaShow: {
     sectionName: 'New Show',

@@ -10,7 +10,6 @@ import {
   completeForm,
   createShow,
   editShow,
-  reset,
 } from '../../../../redux/slices/showFormSlice';
 import {SuccessModal} from '../../../components/SuccessModal';
 import EditShowForm from '../../../components/admin/shows/newshowform/EditShowForm';
