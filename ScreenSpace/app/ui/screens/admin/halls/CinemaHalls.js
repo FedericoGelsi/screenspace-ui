@@ -59,6 +59,7 @@ export const CinemaHalls = ({navigation, route}) => {
       dispatch(reset());
     } else {
       dispatch(createHall(route.params.cinemaId));
+      dispatch(reset());
     }
   };
 
