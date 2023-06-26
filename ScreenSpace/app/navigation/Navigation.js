@@ -15,10 +15,12 @@ import Registration from '../ui/screens/admin/login/Registration';
 import ForgotPassword from '../ui/screens/admin/login/ForgotPassword';
 import ResetPassword from '../ui/screens/admin/login/ResetPassword';
 import ShowView from '../ui/screens/admin/shows/ShowView';
+import {useDispatch} from 'react-redux';
+import {completeUserId} from '../redux/slices/loginSlice';
 
 const {Navigator, Screen} = createStackNavigator();
 
-const HomeNavigator = ({initialScreen}) => (
+const HomeNavigator = ({initialScreen, userId}) => (
   <Navigator
     initialRouteName={initialScreen}
     screenOptions={{
@@ -39,8 +41,12 @@ const HomeNavigator = ({initialScreen}) => (
   </Navigator>
 );
 
-export const AppNavigator = ({initialScreen}) => (
-  <NavigationContainer>
-    <HomeNavigator initialScreen={initialScreen} />
-  </NavigationContainer>
-);
+export const AppNavigator = ({initialScreen, userId}) => {
+  const dispatch = useDispatch();
+  if (userId) dispatch(completeUserId(userId));
+  return (
+    <NavigationContainer>
+      <HomeNavigator initialScreen={initialScreen} userId={userId} />
+    </NavigationContainer>
+  );
+};

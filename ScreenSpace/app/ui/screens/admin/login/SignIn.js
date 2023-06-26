@@ -8,7 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const storeLoggedSession = async (value, userId) => {
   try {
     await AsyncStorage.setItem('logged', value);
-    await AsyncStorage.setItem('userId', userId);
+    console.log(userId);
+    await AsyncStorage.setItem('userId', userId.toString());
   } catch (e) {
     // saving error
   }
