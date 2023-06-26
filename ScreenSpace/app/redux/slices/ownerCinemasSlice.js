@@ -12,14 +12,14 @@ const initialState = {
   isLoading: false,
 };
 
-export const getOwnerCinemas = createAsyncThunk('cinemas', async ownerId => {
+export const getOwnerCinemas = createAsyncThunk('cinemas', async (ownerId, thunkAPI) => {
   try {
     const response = await getCinemas(ownerId);
     return response;
   } catch (error) {
     if (error.response) {
       const statusCode = error.response.status;
-      return rejectWithValue(statusCode);
+      return thunkAPI.rejectWithValue(statusCode);
     } else {
       throw error;
     }
@@ -53,10 +53,9 @@ const ownerCinemasSlice = createSlice({
       })
       .addCase(getOwnerCinemas.rejected, (state, action) => {
         state.isLoading = false;
-
         if (action.payload === 404) state.error = null;
         else {
-          state.hasError = true;
+          state.hasError = false;
           state.error = 'We are sorry. An error has occurred. Try again later.';
         }
       })

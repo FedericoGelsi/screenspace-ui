@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {
   Icon,
-  Image,
   Layout,
   Menu,
   MenuItem,
@@ -12,8 +11,10 @@ import I18n from '../../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../../assets/strings/TextKey';
 import SearchBar from '../../../SearchBar';
 import {useSelector, useDispatch} from 'react-redux';
-import {getMoviesAPI} from '../../../../../networking/api/endpoints/moviesWS';
-import {getMovies} from '../../../../../redux/slices/moviesSlice';
+import {
+  filterMoviesByTitle,
+  getMovies,
+} from '../../../../../redux/slices/moviesSlice';
 import {completeForm} from '../../../../../redux/slices/showFormSlice';
 
 const PickMovieStep = () => {
@@ -23,13 +24,12 @@ const PickMovieStep = () => {
 
   React.useEffect(() => {
     dispatch(getMovies());
-  }, [dispatch]);
-
-  const [items, setItems] = useState(moviesValues.movies);
-
-  const initialItem = items.findIndex(item => item.id === formValues.movieId);
+  }, [dispatch, handleSearch]);
 
   const MenuOptions = ({items, renderItem}) => {
+    const initialItem = items?.findIndex(
+      item => item.id === formValues.movieId,
+    );
     const useMenuState = (initialState = 1) => {
       const [selectedIndex, setSelectedIndex] = useState(initialState);
       return {selectedIndex, onSelect: setSelectedIndex};
@@ -42,18 +42,13 @@ const PickMovieStep = () => {
         style={{marginVertical: 16, maxHeight: '70%'}}
         {...menuState}
         selectedIndex={{row: initialItem}}>
-        {items.map((item, index) => renderItem(item, index))}
+        {items?.map((item, index) => renderItem(item, index))}
       </Menu>
     );
   };
 
-  const searchMovie = movieName =>
-    moviesValues.movies.filter(movie =>
-      movie.title.toLowerCase().includes(movieName.toLowerCase()),
-    );
-
-  const handleSearch = value => {
-    setItems(searchMovie(value));
+  const handleSearch = movieName => {
+    dispatch(filterMoviesByTitle(movieName));
   };
 
   const MovieIcon = <Icon name="film-outline" />;
@@ -68,14 +63,20 @@ const PickMovieStep = () => {
       }`}
       disabled={!item.showing}
       accessoryLeft={MovieIcon}
-      onPress={() =>
+      onPress={() => {
         dispatch(
           completeForm({
             key: 'movieId',
             value: item.id,
           }),
-        )
-      }
+        );
+        dispatch(
+          completeForm({
+            key: 'name',
+            value: item.title,
+          }),
+        );
+      }}
     />
   );
 
@@ -101,14 +102,15 @@ const PickMovieStep = () => {
         )}
         setValue={handleSearch}
       />
-      {moviesValues.isLoading && (
+      {moviesValues.isLoading ? (
         <Layout
           style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Spinner size="giant" />
         </Layout>
-      )}
-      {!moviesValues.isLoading && (
-        <MenuOptions items={items} renderItem={renderItem} />
+      ) : (
+        moviesValues.movies.length !== 0 && (
+          <MenuOptions items={moviesValues.movies} renderItem={renderItem} />
+        )
       )}
     </Layout>
   );

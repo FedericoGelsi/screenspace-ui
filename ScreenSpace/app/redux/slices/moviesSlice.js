@@ -59,6 +59,17 @@ export const getMovieById = createAsyncThunk('movies/id', async movieId => {
 const moviesSlice = createSlice({
   name: 'movies',
   initialState,
+  reducers: {
+    filterMoviesByTitle: (state, action) => {
+      let filteredMovies = state.movies;
+      if ( action.payload !== ""){
+        filteredMovies = state.movies.filter(movie =>
+          movie.title.toLowerCase().includes(action.payload.toLowerCase()),
+        );
+      }
+      state.movies = filteredMovies;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getMovies.pending, (state, action) => {
@@ -74,7 +85,6 @@ const moviesSlice = createSlice({
       })
       .addCase(getMovies.rejected, (state, action) => {
         state.isLoading = false;
-
         if (action.payload === 404) state.error = null;
         else {
           state.hasError = true;
@@ -106,4 +116,6 @@ const moviesSlice = createSlice({
   },
 });
 
+// Action creators are generated for each case reducer function
+export const {filterMoviesByTitle} = moviesSlice.actions;
 export default moviesSlice.reducer;

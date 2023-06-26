@@ -13,9 +13,10 @@ const PickCinemaStep = () => {
 
   const [items, setItems] = useState(ownerCinemas.cinemas);
 
-  const initialItem = items.findIndex(item => item.id === formValues.cinemaId);
-
   const MenuOptions = ({items, renderItem}) => {
+    const initialItem = items.findIndex(
+      item => item.id === formValues.cinemaId,
+    );
     const useMenuState = () => {
       const [selectedIndex, setSelectedIndex] = useState();
       return {selectedIndex, onSelect: setSelectedIndex};

@@ -135,6 +135,7 @@ export const CinemaForm = ({navigation, route}) => {
           text={I18n.t(TEXT_KEY.cinemaForm.successModalMessage)}
           buttonText={I18n.t(TEXT_KEY.cinemaForm.successModalButtonMessage)}
           action={navigateHome}
+          isProcessing={formValues.isProcessing}
         />
       )}
     </SafeAreaView>

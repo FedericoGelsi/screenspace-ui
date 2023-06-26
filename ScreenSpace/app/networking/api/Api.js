@@ -14,7 +14,7 @@ const instance = axios.create({
 instance.interceptors.response.use(
   function (response) {
     if (response) {
-      console.log(
+      console.debug(
         `HTTP Response\n` +
           `> Status: ${response.status}\n` +
           `> Headers: ${JSON.stringify(response.headers)}\n` +
@@ -24,7 +24,7 @@ instance.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log('Response error', error);
+    console.error('Response error', error);
     return Promise.reject(error);
   },
 );
@@ -32,7 +32,7 @@ instance.interceptors.response.use(
 instance.interceptors.request.use(
   function (request) {
     if (request) {
-      console.log(
+      console.debug(
         `HTTP Request\n` +
           `> URL: ${request.url}\n` +
           `> Method: ${request.method}\n` +
@@ -44,7 +44,7 @@ instance.interceptors.request.use(
     return request;
   },
   function (error) {
-    console.log('Request error', error);
+    console.error('Request error', error);
     return Promise.reject(error);
   },
 );

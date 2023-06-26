@@ -4,6 +4,7 @@ import {
   editShowAPI,
   newShowAPI,
 } from '../../networking/api/endpoints/showsWS';
+import {getCinema, getOwnerCinemas} from './ownerCinemasSlice';
 
 const initialState = {
   showId: null,
@@ -19,36 +20,35 @@ const initialState = {
 
 export const createShow = createAsyncThunk(
   'owner/createShow',
-  async (cinemaId, hallId, thunkAPI) => {
+  async (args, thunkAPI) => {
     const state = thunkAPI.getState();
-    const result = await newShowAPI(cinemaId, hallId, state.newShowForm);
+    const result = await newShowAPI(
+      state.newShowForm.cinemaId,
+      state.newShowForm.hallId,
+      state.newShowForm,
+    );
     return result;
   },
 );
 
 export const editShow = createAsyncThunk(
   'owner/editShow',
-  async (cinemaId, hallId, thunkAPI) => {
+  async (args, thunkAPI) => {
     const state = thunkAPI.getState();
-    const result = await editShowAPI(cinemaId, hallId, state.newShowForm);
+    const result = await editShowAPI(state.newShowForm);
+    thunkAPI.dispatch(getCinema(state.newShowForm.cinemaId));
     return result;
   },
 );
 
 export const removeShow = createAsyncThunk(
   'owner/removeShow',
-  async (cinemaId, hallId, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const result = await deleteShowAPI(
-      cinemaId,
-      hallId,
-      state.newShowForm.showId,
-    );
-    thunkAPI.dispatch(getCinema(cinemaId));
+  async ({cinemaId, hallId, showId}, thunkAPI) => {
+    const result = await deleteShowAPI(cinemaId, hallId, showId);
+    thunkAPI.dispatch(getCinema(cinemaId))
     return result;
   },
 );
-
 export const showFormSlice = createSlice({
   name: 'newShowForm',
   initialState,
@@ -62,10 +62,11 @@ export const showFormSlice = createSlice({
     },
     loadFormBack: (state, action) => {
       state.cinemaId = action.payload.cinemaId;
-      state.name = action.payload.name;
+      state.hallId = action.payload.hallId;
+      state.name = action.payload.showName;
       state.movieId = action.payload.movieId;
-      state.datetime = action.payload.datetime;
-      state.showId = action.showId;
+      state.datetime = new Date(action.payload.datetime).toISOString();
+      state.showId = action.payload.showId;
     },
   },
   extraReducers: builder => {

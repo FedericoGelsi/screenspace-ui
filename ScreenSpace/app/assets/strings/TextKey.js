@@ -79,6 +79,9 @@ export default {
     headerTitle: 'hallHeader.headerTitle',
     addButtonText: 'hallHeader.addButtonText',
   },
+  cinemaCard: {
+    showsButton: 'cinemaCard.showsButton',
+  },
   cinemaShows: {
     sectionName: 'cinemaShows.sectionName',
     noDataMessage: 'cinemaShows.noDataMessage',
