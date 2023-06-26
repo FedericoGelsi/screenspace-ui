@@ -5,9 +5,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {userLogin} from '../../../../redux/slices/loginSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const storeLoggedSession = async value => {
+export const storeLoggedSession = async (value, userId) => {
   try {
     await AsyncStorage.setItem('logged', value);
+    await AsyncStorage.setItem('userId', userId);
   } catch (e) {
     // saving error
   }
@@ -37,7 +38,10 @@ export const SignIn = ({navigation}) => {
     await dispatch(userLogin({email: email, password: password})).then(
       async response => {
         if (response.payload && response.payload.token) {
-          await storeLoggedSession(response.payload.token);
+          await storeLoggedSession(
+            response.payload.token,
+            response.payload.userId,
+          );
           navigation.push('Home');
         } else {
           Alert.alert(

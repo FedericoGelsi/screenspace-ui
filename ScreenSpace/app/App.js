@@ -3,11 +3,12 @@ import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import {store} from './redux/store';
-import {Provider} from 'react-redux';
+import {Provider, useDispatch} from 'react-redux';
 import {AppNavigator} from './navigation/Navigation';
 import SplashScreen from 'react-native-splash-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from '../app/networking/api/Api';
+import {completeUserId} from './redux/slices/loginSlice';
 
 export const verifyToken = async token => {
   const results = await axios.post('/api/auths/verify-token', {
@@ -19,6 +20,7 @@ export const verifyToken = async token => {
 export default App = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     checkLoginStatus();
@@ -27,8 +29,12 @@ export default App = () => {
   const checkLoginStatus = async () => {
     try {
       const value = await AsyncStorage.getItem('logged');
+      const userId = await AsyncStorage.getItem('userId');
       if (value !== null) {
         const isValid = await verifyToken(value);
+        if (isValid) {
+          dispatch(completeUserId(userId));
+        }
         setIsLoggedIn(isValid);
       }
     } catch (e) {
@@ -45,7 +51,6 @@ export default App = () => {
 
   return (
     <>
-      {console.log('Rendering:', isLoggedIn)}
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
         <Provider store={store}>

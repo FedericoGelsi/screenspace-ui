@@ -22,6 +22,9 @@ const UserLoginSlice = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
+    completeUserId: (state, action) => {
+      state.userId = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -47,6 +50,6 @@ const UserLoginSlice = createSlice({
   },
 });
 
-export const {reset} = UserLoginSlice.actions;
+export const {reset, completeUserId} = UserLoginSlice.actions;
 
 export default UserLoginSlice.reducer;
