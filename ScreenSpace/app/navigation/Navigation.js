@@ -8,18 +8,22 @@ import { CinemaDetails } from '../ui/screens/admin/cinema/CinemaDetails';
 import { CinemaHalls } from '../ui/screens/admin/halls/CinemaHalls';
 import CinemaShowsHome from '../ui/screens/admin/shows/CinemaShowHome';
 import NewShowView from '../ui/screens/admin/shows/NewShowView';
+import InitialLoginScreen from '../ui/screens/admin/login/InitialLoginScreen';
+import UserHome from '../ui/screens/user/UserHome';
 
 const { Navigator, Screen } = createStackNavigator();
 
 const HomeNavigator = () => (
   <Navigator screenOptions={{headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS}} >
-    <Screen name='Login' component={LoginScreen}/>
+    <Screen name='InitialLogin' component={InitialLoginScreen}/>
+    <Screen name='AdminLogin' component={LoginScreen}/>
     <Screen name='Home' component={HomeScreenAdmin}/>
     <Screen name='NewCinema' component={CinemaForm}/>
     <Screen name='CinemaDetails' component={CinemaDetails}/>
     <Screen name='CinemaHalls' component={CinemaHalls}/>
     <Screen name='CinemaShows' component={CinemaShowsHome}/>
     <Screen name='NewShow' component={NewShowView}/>
+    <Screen name="UserHome" component={UserHome}/>
   </Navigator>
 );
 
