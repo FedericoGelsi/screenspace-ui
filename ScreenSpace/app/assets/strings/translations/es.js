@@ -4,6 +4,14 @@ export default {
   error: {
     upps: 'Upss algo salió mal',
   },
+  initialLogin: {
+    title: 'ScreenSpace',
+    subtitle: 'Bienvenido a la app de cines más completa',
+    buttons: {
+      userLogin: 'Ingresar con Google',
+      adminLogin: 'Ingreso para negocios',
+    },
+  },
   cinemaHome: {
     title: 'Tus Cines',
     showsButtonText: 'Shows',

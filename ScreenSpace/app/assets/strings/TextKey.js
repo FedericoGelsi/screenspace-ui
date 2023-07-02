@@ -4,6 +4,14 @@ export default {
   error: {
     upps: 'upps',
   },
+  initialLogin: {
+    title: 'initialLogin.title',
+    subtitle: 'initialLogin.subtitle',
+    buttons: {
+      userLogin: 'initialLogin.buttons.userLogin',
+      adminLogin: 'initialLogin.buttons.adminLogin',
+    },
+  },
   cinemaHome: {
     title: 'cinemaHome.title',
     showsButtonText: 'cinemaHome.showsButtonText',

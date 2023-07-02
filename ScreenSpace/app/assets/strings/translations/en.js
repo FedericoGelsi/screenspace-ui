@@ -4,6 +4,14 @@ export default {
   error: {
     upps: 'Upss something went wrong',
   },
+  initialLogin: {
+    title: 'ScreenSpace',
+    subtitle: 'Welcome to your all in one cinema booking app',
+    buttons: {
+      userLogin: 'Login with Google',
+      adminLogin: 'Business Login',
+    },
+  },
   cinemaHome: {
     title: 'Your Cinemas',
     showsButtonText: 'Shows',
