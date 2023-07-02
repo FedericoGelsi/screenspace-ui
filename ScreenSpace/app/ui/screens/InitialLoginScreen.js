@@ -1,6 +1,6 @@
 import {Button, Icon, Layout, Text} from '@ui-kitten/components';
 import React from 'react';
-import {Image, ImageBackground, SafeAreaView} from 'react-native';
+import {Image, ImageBackground, SafeAreaView, View} from 'react-native';
 import IMAGES from '../../assets/images/Images';
 import I18n from '../../assets/strings/I18n';
 import TEXT_KEY from '../../assets/strings/TextKey';
@@ -19,13 +19,13 @@ const InitialLoginScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <ImageBackground
-        source={IMAGES.PNG.BACKGROUND}
+        source={IMAGES.PNG.BACKGROUND2}
         resizeMode="cover"
         style={{flex: 1, justifyContent: 'center'}}>
-        <Layout style={{flex: 1, marginVertical: 72, borderRadius: 1000}}>
-          <Layout
+        <View style={{flex: 1, marginVertical: 72}}>
+          <View
             style={{flex: 5, justifyContent: 'center', alignItems: 'center'}}>
-            <Layout
+            <View
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -33,17 +33,17 @@ const InitialLoginScreen = ({navigation}) => {
               }}>
               <LogoIcon />
               <Text category="h1">{I18n.t(TEXT_KEY.initialLogin.title)}</Text>
-            </Layout>
+            </View>
             <Text
               style={{
                 textAlign: 'center',
-                marginHorizontal: 72,
+                marginHorizontal: 32,
               }}
               category="h4">
               {I18n.t(TEXT_KEY.initialLogin.subtitle)}
             </Text>
-          </Layout>
-          <Layout
+          </View>
+          <View
             style={{
               flex: 1,
               paddingHorizontal: 16,
@@ -52,19 +52,31 @@ const InitialLoginScreen = ({navigation}) => {
             }}>
             <Button
               accessoryLeft={<Icon name={'google'} />}
-              onPress={navigateUserLogin}>
+              onPress={navigateUserLogin}
+              style={{borderRadius: 50}}>
               {I18n.t(TEXT_KEY.initialLogin.buttons.userLogin)}
             </Button>
             <Button
-              appearance="ghost"
               status="basic"
               size="small"
-              accessoryLeft={<Icon name={'grid'} />}
-              onPress={navigateAdminLogin}>
-              {I18n.t(TEXT_KEY.initialLogin.buttons.adminLogin)}
+              accessoryLeft={(props) => <Icon {...props} name={'grid'} />}
+              onPress={navigateAdminLogin}
+              style={{backgroundColor:'transparent', borderColor:'transparent'}}>
+              {evaProps => (
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <Text
+                    {...evaProps}
+                    style={{
+                      color: '#333333',
+                      fontWeight:'bold'
+                    }}>
+                    {I18n.t(TEXT_KEY.initialLogin.buttons.adminLogin)}
+                  </Text>
+                </View>
+              )}
             </Button>
-          </Layout>
-        </Layout>
+          </View>
+        </View>
       </ImageBackground>
     </SafeAreaView>
   );
