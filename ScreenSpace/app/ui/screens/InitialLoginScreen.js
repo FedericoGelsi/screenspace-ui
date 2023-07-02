@@ -59,16 +59,19 @@ const InitialLoginScreen = ({navigation}) => {
             <Button
               status="basic"
               size="small"
-              accessoryLeft={(props) => <Icon {...props} name={'grid'} />}
+              accessoryLeft={props => <Icon {...props} name={'grid'} />}
               onPress={navigateAdminLogin}
-              style={{backgroundColor:'transparent', borderColor:'transparent'}}>
+              style={{
+                backgroundColor: 'transparent',
+                borderColor: 'transparent',
+              }}>
               {evaProps => (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
                   <Text
                     {...evaProps}
                     style={{
                       color: '#333333',
-                      fontWeight:'bold'
+                      fontWeight: 'bold',
                     }}>
                     {I18n.t(TEXT_KEY.initialLogin.buttons.adminLogin)}
                   </Text>

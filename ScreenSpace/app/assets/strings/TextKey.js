@@ -12,6 +12,21 @@ export default {
       adminLogin: 'initialLogin.buttons.adminLogin',
     },
   },
+  userLogin: {
+    sectionName: 'userLogin.sectionName',
+    form: {
+      avatarTip: 'userLogin.form.avatarTip',
+      username: {
+        label: 'userLogin.form.username.label',
+        placeholder: 'userLogin.form.username.placeholder',
+      },
+    },
+    saveButtonText: 'userLogin.saveButtonText',
+    footer: 'userLogin.footer',
+  },
+  userSettings: {
+    sectionName: 'userSettings.sectionName',
+  },
   cinemaHome: {
     title: 'cinemaHome.title',
     showsButtonText: 'cinemaHome.showsButtonText',

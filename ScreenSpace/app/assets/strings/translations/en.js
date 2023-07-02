@@ -12,6 +12,21 @@ export default {
       adminLogin: 'Business Login',
     },
   },
+  userLogin: {
+    sectionName: 'Profile setup',
+    form: {
+      avatarTip: 'Add profile picture',
+      username: {
+        label: 'Username',
+        placeholder: 'Add you prefered username',
+      },
+    },
+    saveButtonText: 'Save changes',
+    footer: 'You can always change it from ',
+  },
+  userSettings: {
+    sectionName: 'Settings',
+  },
   cinemaHome: {
     title: 'Your Cinemas',
     showsButtonText: 'Shows',
