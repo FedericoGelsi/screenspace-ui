@@ -13,6 +13,7 @@ import TEXT_KEY from '../../../../../assets/strings/TextKey';
 import {useSelector, useDispatch} from 'react-redux';
 import {completeForm} from '../../../../../redux/slices/showFormSlice';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {ScrollView} from 'react-native';
 
 const PickDateTimeStep = () => {
   const formValues = useSelector(state => state.newShowForm);
@@ -57,7 +58,7 @@ const PickDateTimeStep = () => {
   });
 
   return (
-    <Layout style={{flex: 1}}>
+    <ScrollView style={{flex: 1}}>
       <Layout style={{marginVertical: 16, alignItems: 'center'}}>
         <Text category="h4">
           {I18n.t(TEXT_KEY.newCinemaShow.steps.fourthStep.title)}
@@ -105,7 +106,7 @@ const PickDateTimeStep = () => {
           onChange={onChange}
         />
       )}
-    </Layout>
+    </ScrollView>
   );
 };
 

@@ -29,7 +29,6 @@ export default App = () => {
     try {
       const value = await AsyncStorage.getItem('logged');
       const userId = await AsyncStorage.getItem('userId');
-      console.log(userId);
       if (value !== null) {
         const isValid = await verifyToken(value);
         if (isValid) {
