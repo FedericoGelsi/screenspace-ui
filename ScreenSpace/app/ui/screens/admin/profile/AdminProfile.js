@@ -11,7 +11,7 @@ export const AdminProfile = ({navigation}) => {
   const handleLogout = () => {
     storeLoggedSession('false');
     dispatch(reset());
-    navigation.push('Login');
+    navigation.push('AdminLogin');
   };
 
   const handleDeleteProfile = () => {
@@ -24,7 +24,7 @@ export const AdminProfile = ({navigation}) => {
 
   const handleConfirmDelete = () => {
     setShowModal(false);
-    navigation.push('Login');
+    navigation.push('AdminLogin');
   };
 
   const storeLoggedSession = async value => {

@@ -67,7 +67,7 @@ export default function ResetPassword({navigation, route}) {
 
   //Logica tercer componente-----------------------------------------------
   function handleClick3() {
-    navigation.push('Login');
+    navigation.push('AdminLogin');
   }
 
   return (

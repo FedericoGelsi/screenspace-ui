@@ -19,7 +19,8 @@ export const CommonLogin = ({
   mainButtonText,
   bottonSectionSubText,
   bottonSectionMainText,
-  bottonSectionAction
+  bottonSectionAction,
+  tempGoBack,
 }) => {
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -36,6 +37,9 @@ export const CommonLogin = ({
               color="#00B578"
               title={mainButtonText}
             />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.botonVerde}>
+            <Button onPress={tempGoBack} color="#00B578" title="Back" />
           </TouchableOpacity>
           <View style={{display: 'flex', flexDirection: 'row', marginTop: 10}}>
             <Text>{bottonSectionSubText}</Text>
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     marginTop: 0,
     width: '90%',
-    minHeight:300
+    minHeight: 300,
   },
   containerSvg: {
     // flex: 1,
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
   },
   botonVerde: {
     width: '80%',
-    marginTop:15
+    marginTop: 15,
   },
 });
 

@@ -54,7 +54,7 @@ export default App = () => {
       <ApplicationProvider {...eva} theme={eva.light}>
         <Provider store={store}>
           {isLoggedIn === false || isLoggedIn === 'false' ? (
-            <AppNavigator initialScreen="Login" />
+            <AppNavigator initialScreen="InitialLogin" />
           ) : (
             <AppNavigator initialScreen="Home" userId={userId} />
           )}

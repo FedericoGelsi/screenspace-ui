@@ -28,6 +28,10 @@ export const SignIn = ({navigation}) => {
     navigation.push('Registration');
   };
 
+  const navigationBack = () => {
+    navigation.goBack();
+  };
+
   function handleTextEmail(text) {
     setEmail(text);
   }
@@ -61,7 +65,8 @@ export const SignIn = ({navigation}) => {
       mainButtonAction={navigateDetails}
       bottonSectionSubText="Or register now "
       bottonSectionMainText="here"
-      bottonSectionAction={navigationRegister}>
+      bottonSectionAction={navigationRegister}
+      tempGoBack={navigationBack}>
       <TextInput
         onChangeText={handleTextEmail}
         style={styles.textInput}

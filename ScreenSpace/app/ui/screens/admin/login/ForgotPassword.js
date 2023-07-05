@@ -25,7 +25,7 @@ export default function ForgotPassword({navigation}) {
     }
   };
   const navigateLogin = async () => {
-    navigation.push('Login');
+    navigation.push('AdminLogin');
   };
   return (
     <CommonLogin

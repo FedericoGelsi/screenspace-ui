@@ -17,17 +17,22 @@ import ResetPassword from '../ui/screens/admin/login/ResetPassword';
 import ShowView from '../ui/screens/admin/shows/ShowView';
 import {useDispatch} from 'react-redux';
 import {completeUserId} from '../redux/slices/loginSlice';
+import InitialLoginScreen from '../ui/screens/admin/login/InitialLoginScreen';
+import UserHome from '../ui/screens/user/UserHome';
+import {LoginScreen} from '../ui/screens/admin/login/LoginScreen';
+import MovieDetails from '../ui/screens/user/MovieDetails';
 
 const {Navigator, Screen} = createStackNavigator();
 
-const HomeNavigator = ({initialScreen, userId}) => (
+const HomeNavigator = ({initialScreen}) => (
   <Navigator
     initialRouteName={initialScreen}
     screenOptions={{
       headerShown: false,
       cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
     }}>
-    <Screen name="Login" component={SignIn} />
+    <Screen name="InitialLogin" component={InitialLoginScreen} />
+    <Screen name="AdminLogin" component={SignIn} />
     <Screen name="Home" component={HomeScreenAdmin} />
     <Screen name="NewCinema" component={CinemaForm} />
     <Screen name="CinemaDetails" component={CinemaDetails} />
@@ -38,6 +43,8 @@ const HomeNavigator = ({initialScreen, userId}) => (
     <Screen name="Registration" component={Registration} />
     <Screen name="ForgotPassword" component={ForgotPassword} />
     <Screen name="ResetPassword" component={ResetPassword} />
+    <Screen name="UserHome" component={UserHome} />
+    <Screen name="MovieDetails" component={MovieDetails} />
   </Navigator>
 );
 

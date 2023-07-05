@@ -26,12 +26,14 @@ export default function Registration({navigation}) {
     setConfirmPassword(text);
   }
   const navigateLogin = async () => {
-    navigation.push('Login');
+    navigation.push('AdminLogin');
   };
 
   const RegisterNewUser = async () => {
     if (password === confirmPassword) {
-      await registerAPI(email, password).then(() => navigation.push('Login'));
+      await registerAPI(email, password).then(() =>
+        navigation.push('AdminLogin'),
+      );
     } else {
       Alert.alert('Error', 'Try Again.');
     }
