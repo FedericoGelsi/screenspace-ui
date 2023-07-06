@@ -1,7 +1,16 @@
 import React, {useState} from 'react';
 import {CommonLogin} from '../../../components/CommonLogin';
-import {StyleSheet, TextInput, View, Text, Alert} from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  Alert,
+  SafeAreaView,
+  ImageBackground,
+} from 'react-native';
 import axios from '../../../../networking/api/Api';
+import IMAGES from '../../../../assets/images/Images';
 
 export const firstCodeVerify = async (email, verificationCode) => {
   const results = await axios.post('/api/auths/verify-reset-code', {
@@ -71,33 +80,48 @@ export default function ResetPassword({navigation, route}) {
   }
 
   return (
-    <CommonLogin
-      mainTitle={
-        pagina === 1
-          ? 'Check your mail'
-          : pagina === 2
-          ? 'Password reset'
-          : 'Successful reset'
-      }
-      mainButtonText={
-        pagina === 1 ? 'Confirm' : pagina === 2 ? 'Reset password' : 'Login.'
-      }
-      mainButtonAction={
-        pagina === 1 ? handleClick1 : pagina === 2 ? handleClick2 : handleClick3
-      }>
-      {pagina === 1 ? (
-        <FirstContent setcode={setCode} handleTextCode={handleTextCode} />
-      ) : pagina === 2 ? (
-        <SecondContent
-          setNewPassword={setNewPassword}
-          setConfirmPassword={setConfirmPassword}
-          handleTextConfirm={handleTextConfirm}
-          handleTextNewPassword={handleTextNewPassword}
-        />
-      ) : (
-        <ThirdContent />
-      )}
-    </CommonLogin>
+    <SafeAreaView style={{flex: 1}}>
+      <ImageBackground
+        source={IMAGES.PNG.BACKGROUND_LOGIN_ADMIN}
+        resizeMode="stretch"
+        style={{flex: 1, justifyContent: 'center'}}>
+        <CommonLogin
+          mainTitle={
+            pagina === 1
+              ? 'Check your mail'
+              : pagina === 2
+              ? 'Password reset'
+              : 'Successful reset'
+          }
+          mainButtonText={
+            pagina === 1
+              ? 'Confirm'
+              : pagina === 2
+              ? 'Reset password'
+              : 'Login.'
+          }
+          mainButtonAction={
+            pagina === 1
+              ? handleClick1
+              : pagina === 2
+              ? handleClick2
+              : handleClick3
+          }>
+          {pagina === 1 ? (
+            <FirstContent setcode={setCode} handleTextCode={handleTextCode} />
+          ) : pagina === 2 ? (
+            <SecondContent
+              setNewPassword={setNewPassword}
+              setConfirmPassword={setConfirmPassword}
+              handleTextConfirm={handleTextConfirm}
+              handleTextNewPassword={handleTextNewPassword}
+            />
+          ) : (
+            <ThirdContent />
+          )}
+        </CommonLogin>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 

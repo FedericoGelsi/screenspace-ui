@@ -1,9 +1,17 @@
 import React, {useState} from 'react';
-import {Text, TextInput, StyleSheet, Alert} from 'react-native';
+import {
+  Text,
+  TextInput,
+  StyleSheet,
+  Alert,
+  ImageBackground,
+} from 'react-native';
 import {CommonLogin} from '../../../components/CommonLogin';
 import {useDispatch, useSelector} from 'react-redux';
 import {userLogin} from '../../../../redux/slices/loginSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import IMAGES from '../../../../assets/images/Images';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export const storeLoggedSession = async (value, userId) => {
   try {
@@ -59,29 +67,36 @@ export const SignIn = ({navigation}) => {
   };
 
   return (
-    <CommonLogin
-      mainTitle="Sign in"
-      mainButtonText="Login"
-      mainButtonAction={navigateDetails}
-      bottonSectionSubText="Or register now "
-      bottonSectionMainText="here"
-      bottonSectionAction={navigationRegister}
-      tempGoBack={navigationBack}>
-      <TextInput
-        onChangeText={handleTextEmail}
-        style={styles.textInput}
-        placeholder="Email adress"
-      />
-      <TextInput
-        onChangeText={handleTextPassword}
-        style={styles.textInput}
-        secureTextEntry={true}
-        placeholder="Password"
-      />
-      <Text onPress={navigationForgotPassword} style={styles.forgotPass}>
-        Forgot password
-      </Text>
-    </CommonLogin>
+    <SafeAreaView style={{flex: 1}}>
+      <ImageBackground
+        source={IMAGES.PNG.BACKGROUND_LOGIN_ADMIN}
+        resizeMode="stretch"
+        style={{flex: 1, justifyContent: 'center'}}>
+        <CommonLogin
+          mainTitle="Sign in"
+          mainButtonText="Login"
+          mainButtonAction={navigateDetails}
+          bottonSectionSubText="Or register now "
+          bottonSectionMainText="here"
+          bottonSectionAction={navigationRegister}
+          tempGoBack={navigationBack}>
+          <TextInput
+            onChangeText={handleTextEmail}
+            style={styles.textInput}
+            placeholder="Email adress"
+          />
+          <TextInput
+            onChangeText={handleTextPassword}
+            style={styles.textInput}
+            secureTextEntry={true}
+            placeholder="Password"
+          />
+          <Text onPress={navigationForgotPassword} style={styles.forgotPass}>
+            Forgot password
+          </Text>
+        </CommonLogin>
+      </ImageBackground>
+    </SafeAreaView>
   );
 };
 

@@ -1,7 +1,14 @@
 import React, {useState} from 'react';
 import {CommonLogin} from '../../../components/CommonLogin';
-import {TextInput, StyleSheet, Alert} from 'react-native';
+import {
+  TextInput,
+  StyleSheet,
+  Alert,
+  SafeAreaView,
+  ImageBackground,
+} from 'react-native';
 import axios from '../../../../networking/api/Api';
+import IMAGES from '../../../../assets/images/Images';
 
 export const registerAPI = async email => {
   const results = await axios.post('/api/auths/reset-password', {
@@ -28,19 +35,26 @@ export default function ForgotPassword({navigation}) {
     navigation.push('AdminLogin');
   };
   return (
-    <CommonLogin
-      mainTitle="Forgot Password"
-      mainButtonText="Continue"
-      bottonSectionSubText="Or go back to "
-      bottonSectionMainText="Login page"
-      bottonSectionAction={navigateLogin}
-      mainButtonAction={navigateResetPass}>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={handleTextEmail}
-        placeholder="Enter your email adress"
-      />
-    </CommonLogin>
+    <SafeAreaView style={{flex: 1}}>
+      <ImageBackground
+        source={IMAGES.PNG.BACKGROUND_LOGIN_ADMIN}
+        resizeMode="stretch"
+        style={{flex: 1, justifyContent: 'center'}}>
+        <CommonLogin
+          mainTitle="Forgot Password"
+          mainButtonText="Continue"
+          bottonSectionSubText="Or go back to "
+          bottonSectionMainText="Login page"
+          bottonSectionAction={navigateLogin}
+          mainButtonAction={navigateResetPass}>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={handleTextEmail}
+            placeholder="Enter your email adress"
+          />
+        </CommonLogin>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 

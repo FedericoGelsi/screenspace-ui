@@ -8,13 +8,12 @@ const InitialLoginScreen = ({navigation}) => {
     <Image style={{height: 92, width: 92}} source={IMAGES.PNG.ICON_PNG} />
   );
 
-
   const navigateAdminLogin = () => {
-    navigation.push("AdminLogin")
-  }
+    navigation.push('AdminLogin');
+  };
   const navigateUserLogin = () => {
-    navigation.push("UserHome")
-  }
+    navigation.push('UserHome');
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -22,7 +21,7 @@ const InitialLoginScreen = ({navigation}) => {
         source={IMAGES.PNG.BACKGROUND}
         resizeMode="cover"
         style={{flex: 1, justifyContent: 'center'}}>
-        <Layout style={{flex:1, marginVertical:72, borderRadius:1000}}>
+        <Layout style={{flex: 1, marginVertical: 72, borderRadius: 1000}}>
           <Layout
             style={{flex: 5, justifyContent: 'center', alignItems: 'center'}}>
             <Layout
@@ -50,7 +49,9 @@ const InitialLoginScreen = ({navigation}) => {
               paddingVertical: 32,
               justifyContent: 'space-evenly',
             }}>
-            <Button accessoryLeft={<Icon name={'google'} />} onPress={navigateUserLogin}>
+            <Button
+              accessoryLeft={<Icon name={'google'} />}
+              onPress={navigateUserLogin}>
               Login with Google
             </Button>
             <Button
@@ -58,8 +59,7 @@ const InitialLoginScreen = ({navigation}) => {
               status="basic"
               size="small"
               accessoryLeft={<Icon name={'grid'} />}
-              onPress={navigateAdminLogin}
-              >
+              onPress={navigateAdminLogin}>
               Business Login
             </Button>
           </Layout>
