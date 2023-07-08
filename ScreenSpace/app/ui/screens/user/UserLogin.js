@@ -9,8 +9,13 @@ import ImagePicker from '../../components/user/ImagePicker';
 const UserLogin = ({navigation, route}) => {
   const [value, setValue] = useState('');
   const {userClaims} = route.params;
+  // TODO: Get user data from redux
   const avatarUrl = userClaims?.user?.photo ?? IMAGES.PNG.AVATAR_PNG;
-  console.log(avatarUrl);
+
+  const handleSave = props => {
+    navigation.push('UserHome');
+  };
+
   const Header = props => (
     <Layout {...props} style={{marginVertical: 16}}>
       <Button appearance="ghost" status="control" size="tiny">
@@ -82,7 +87,7 @@ const UserLogin = ({navigation, route}) => {
             <Button
               status="success"
               style={{borderRadius: 50}}
-              onPress={() => navigation.push('UserHome')}>
+              onPress={handleSave}>
               {I18n.t(TEXT_KEY.userLogin.saveButtonText)}
             </Button>
           </View>

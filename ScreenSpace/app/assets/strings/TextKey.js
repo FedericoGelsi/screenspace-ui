@@ -24,6 +24,14 @@ export default {
     saveButtonText: 'userLogin.saveButtonText',
     footer: 'userLogin.footer',
   },
+  userHome: {
+    sectionName: 'userHome.sectionName',
+    bottonTabBar: {
+      firstTab: 'userHome.bottonTabBar.firstTab',
+      secondTab: 'userHome.bottonTabBar.secondTab',
+      thirdTab: 'userHome.bottonTabBar.thirdTab',
+    },
+  },
   userSettings: {
     sectionName: 'userSettings.sectionName',
   },
@@ -115,7 +123,7 @@ export default {
       hallLabel: 'cinemaShows.showCard.hallLabel',
       dateTimeLabel: 'cinemaShows.showCard.dateTimeLabel',
     },
-    dateFilterPlaceholder: 'cinemaShows.dateFilterPlaceholder'
+    dateFilterPlaceholder: 'cinemaShows.dateFilterPlaceholder',
   },
   newCinemaShow: {
     sectionName: 'newCinemaShow.sectionName',

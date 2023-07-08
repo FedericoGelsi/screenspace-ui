@@ -17,10 +17,10 @@ import ResetPassword from '../ui/screens/admin/login/ResetPassword';
 import ShowView from '../ui/screens/admin/shows/ShowView';
 import {useDispatch} from 'react-redux';
 import {completeUserId} from '../redux/slices/loginSlice';
-import UserHome from '../ui/screens/user/UserHome';
 import MovieDetails from '../ui/screens/user/MovieDetails';
 import UserLogin from '../ui/screens/user/UserLogin';
 import InitialLoginScreen from '../ui/screens/InitialLoginScreen';
+import UserViewsNavigator from '../ui/screens/user/UserViewsNavigator';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -43,7 +43,7 @@ const HomeNavigator = ({initialScreen}) => (
     <Screen name="Registration" component={Registration} />
     <Screen name="ForgotPassword" component={ForgotPassword} />
     <Screen name="ResetPassword" component={ResetPassword} />
-    <Screen name="UserHome" component={UserHome} />
+    <Screen name="UserHome" component={UserViewsNavigator} />
     <Screen name="MovieDetails" component={MovieDetails} />
     <Screen name="UserLogin" component={UserLogin} />
   </Navigator>

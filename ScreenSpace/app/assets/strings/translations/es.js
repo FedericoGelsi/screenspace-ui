@@ -24,6 +24,14 @@ export default {
     saveButtonText: 'Guardar cambios',
     footer: 'Siempre vas a poder modificarlo desde ',
   },
+  userHome: {
+    sectionName: 'Cartelera',
+    bottonTabBar: {
+      firstTab: 'Inicio',
+      secondTab: 'Tus entradas',
+      thirdTab: 'Configuraciones',
+    },
+  },
   userSettings: {
     sectionName: 'Configuraciones',
   },

@@ -24,6 +24,14 @@ export default {
     saveButtonText: 'Save changes',
     footer: 'You can always change it from ',
   },
+  userHome: {
+    sectionName: 'User Home',
+    bottonTabBar: {
+      firstTab: 'Home',
+      secondTab: 'Your Bookings',
+      thirdTab: 'Settings',
+    },
+  },
   userSettings: {
     sectionName: 'Settings',
   },
