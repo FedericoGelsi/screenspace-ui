@@ -1,7 +1,14 @@
 import React, {useState} from 'react';
 import {CommonLogin} from '../../../components/CommonLogin';
-import {TextInput, StyleSheet, Alert} from 'react-native';
+import {
+  TextInput,
+  StyleSheet,
+  Alert,
+  ImageBackground,
+  SafeAreaView,
+} from 'react-native';
 import axios from '../../../../networking/api/Api';
+import IMAGES from '../../../../assets/images/Images';
 
 export const registerAPI = async (email, password) => {
   const results = await axios.post('/api/user', {
@@ -40,31 +47,38 @@ export default function Registration({navigation}) {
   };
 
   return (
-    <CommonLogin
-      mainTitle="Registration"
-      mainButtonText="Create Account"
-      bottonSectionSubText="Go back to "
-      bottonSectionMainText="Login page"
-      bottonSectionAction={navigateLogin}
-      mainButtonAction={RegisterNewUser}>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={handleTextEmail}
-        placeholder="Enter your email adress"
-      />
-      <TextInput
-        onChangeText={handleTextPassword}
-        style={styles.textInput}
-        secureTextEntry={true}
-        placeholder="Enter a password"
-      />
-      <TextInput
-        onChangeText={handleTextConfirmPassword}
-        style={styles.textInput}
-        secureTextEntry={true}
-        placeholder="Confirm password"
-      />
-    </CommonLogin>
+    <SafeAreaView style={{flex: 1}}>
+      <ImageBackground
+        source={IMAGES.PNG.BACKGROUND_LOGIN_ADMIN}
+        resizeMode="stretch"
+        style={{flex: 1, justifyContent: 'center'}}>
+        <CommonLogin
+          mainTitle="Registration"
+          mainButtonText="Create Account"
+          bottonSectionSubText="Go back to "
+          bottonSectionMainText="Login page"
+          bottonSectionAction={navigateLogin}
+          mainButtonAction={RegisterNewUser}>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={handleTextEmail}
+            placeholder="Enter your email adress"
+          />
+          <TextInput
+            onChangeText={handleTextPassword}
+            style={styles.textInput}
+            secureTextEntry={true}
+            placeholder="Enter a password"
+          />
+          <TextInput
+            onChangeText={handleTextConfirmPassword}
+            style={styles.textInput}
+            secureTextEntry={true}
+            placeholder="Confirm password"
+          />
+        </CommonLogin>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 
