@@ -4,6 +4,29 @@ export default {
   error: {
     upps: 'Upss algo salió mal',
   },
+  initialLogin: {
+    title: 'ScreenSpace',
+    subtitle: 'Bienvenido a la app de cines más completa',
+    buttons: {
+      userLogin: 'Ingresar con Google',
+      adminLogin: 'Ingreso para negocios',
+    },
+  },
+  userLogin: {
+    sectionName: 'Configuración de Perfil',
+    form: {
+      avatarTip: 'Cambiar foto de perfil',
+      username: {
+        label: 'Nombre de Usuario',
+        placeholder: 'Agrega tu nombre de usuario',
+      },
+    },
+    saveButtonText: 'Guardar cambios',
+    footer: 'Siempre vas a poder modificarlo desde ',
+  },
+  userSettings: {
+    sectionName: 'Configuraciones',
+  },
   cinemaHome: {
     title: 'Tus Cines',
     showsButtonText: 'Shows',
