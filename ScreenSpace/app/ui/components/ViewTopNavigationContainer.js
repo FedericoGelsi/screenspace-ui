@@ -1,6 +1,7 @@
 import {
   Divider,
   Icon,
+  Layout,
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components';
@@ -18,6 +19,7 @@ const ViewTopNavigationContainer = ({
   navigation,
   accessoryLeft,
   accessoryRight,
+  footer,
 }) => {
   const navigateBack = () => {
     navigation.goBack();
@@ -52,7 +54,10 @@ const ViewTopNavigationContainer = ({
         />
       )}
       <Divider />
+      <Layout style={{flex:1}}>
       {children}
+      </Layout>
+      {footer}
     </SafeAreaView>
   );
 };
