@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Avatar, Button, Card, Input, Layout, Text} from '@ui-kitten/components';
-import {Image, ImageBackground, SafeAreaView, View} from 'react-native';
+import { ImageBackground, SafeAreaView, View} from 'react-native';
 import IMAGES from '../../../assets/images/Images';
 import I18n from '../../../assets/strings/I18n';
 import TEXT_KEY from '../../../assets/strings/TextKey';
@@ -13,7 +13,7 @@ const UserLogin = ({navigation, route}) => {
   const avatarUrl = userClaims?.user?.photo ?? IMAGES.PNG.AVATAR_PNG;
 
   const handleSave = props => {
-    navigation.push('UserHome');
+    navigation.push('UserHome', {userClaims: userClaims});
   };
 
   const Header = props => (
