@@ -4,6 +4,9 @@ import {Image, ImageBackground, SafeAreaView, View} from 'react-native';
 import IMAGES from '../../assets/images/Images';
 import I18n from '../../assets/strings/I18n';
 import TEXT_KEY from '../../assets/strings/TextKey';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+
+
 const InitialLoginScreen = ({navigation}) => {
   const LogoIcon = () => (
     <Image style={{height: 92, width: 92}} source={IMAGES.PNG.ICON_PNG} />
@@ -13,8 +16,33 @@ const InitialLoginScreen = ({navigation}) => {
     navigation.push('AdminLogin');
   };
   const navigateUserLogin = () => {
-    navigation.push('UserLogin');
+    console.log("Pressed button");
+    // GoogleSignin.revokeAccess();
+    // GoogleSignin.signOut();
+    GoogleSignUp();
+    // navigation.push('UserLogin');
   };
+
+  const GoogleSignUp = async () => {
+    try {
+        await GoogleSignin.hasPlayServices();
+        await GoogleSignin.signIn().then(result => { console.log(result) });
+      } catch (error) {
+        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+          // user cancelled the login flow
+          alert('User cancelled the login flow !');
+        } else if (error.code === statusCodes.IN_PROGRESS) {
+          alert('Signin in progress');
+          // operation (f.e. sign in) is in progress already
+        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+          alert('Google play services not available or outdated !');
+          // play services not available or outdated
+        } else {
+          console.log("Standard Error");
+          console.log(error)
+        }
+      }
+  }
 
   return (
     <SafeAreaView style={{flex: 1}}>
