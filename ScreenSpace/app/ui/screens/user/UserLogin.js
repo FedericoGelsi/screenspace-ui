@@ -1,21 +1,22 @@
 import React, {useState} from 'react';
-import ViewTopNavigationContainer from '../../components/ViewTopNavigationContainer';
 import {Avatar, Button, Card, Input, Layout, Text} from '@ui-kitten/components';
-import {ImageBackground, SafeAreaView, View} from 'react-native';
+import {Image, ImageBackground, SafeAreaView, View} from 'react-native';
 import IMAGES from '../../../assets/images/Images';
 import I18n from '../../../assets/strings/I18n';
 import TEXT_KEY from '../../../assets/strings/TextKey';
 import ImagePicker from '../../components/user/ImagePicker';
 
-const UserLogin = ({navigation}) => {
+const UserLogin = ({navigation, route}) => {
   const [value, setValue] = useState('');
-
+  const { userClaims } = route.params
+  const avatarUrl = userClaims?.user?.photo ?? IMAGES.PNG.AVATAR_PNG;
+  console.log(avatarUrl);
   const Header = props => (
     <Layout {...props} style={{marginVertical: 16}}>
       <Button appearance="ghost" status="control" size="tiny">
         {evaProps => (
-          <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <Avatar size="giant" source={IMAGES.PNG.AVATAR_PNG} />
+          <View style={{justifyContent: 'center', alignItems: 'center', marginVertical:16}}>
+            <Avatar style={{height:80, width:80}} source={{uri: avatarUrl}} />
             <Text
               {...evaProps}
               style={{
@@ -76,7 +77,6 @@ const UserLogin = ({navigation}) => {
             <Button status="success" style={{borderRadius: 50}}>
               {I18n.t(TEXT_KEY.userLogin.saveButtonText)}
             </Button>
-            <ImagePicker/>
           </View>
         </View>
       </ImageBackground>

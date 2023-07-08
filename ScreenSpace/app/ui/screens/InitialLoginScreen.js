@@ -19,14 +19,13 @@ const InitialLoginScreen = ({navigation}) => {
     console.log("Pressed button");
     // GoogleSignin.revokeAccess();
     // GoogleSignin.signOut();
-    GoogleSignUp();
-    // navigation.push('UserLogin');
+    GoogleSignUp().then(result => {navigation.push('UserLogin', {userClaims:result})});
   };
 
   const GoogleSignUp = async () => {
     try {
         await GoogleSignin.hasPlayServices();
-        await GoogleSignin.signIn().then(result => { console.log(result) });
+        return await GoogleSignin.signIn().then(result => result);
       } catch (error) {
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
           // user cancelled the login flow

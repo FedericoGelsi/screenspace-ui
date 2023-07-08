@@ -15,7 +15,7 @@ export default {
   userLogin: {
     sectionName: 'Configuración de Perfil',
     form: {
-      avatarTip: 'Agregar una foto',
+      avatarTip: 'Cambiar foto de perfil',
       username: {
         label: 'Nombre de Usuario',
         placeholder: 'Agrega tu nombre de usuario',

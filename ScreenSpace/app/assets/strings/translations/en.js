@@ -15,7 +15,7 @@ export default {
   userLogin: {
     sectionName: 'Profile setup',
     form: {
-      avatarTip: 'Add profile picture',
+      avatarTip: 'Change profile picture',
       username: {
         label: 'Username',
         placeholder: 'Add you prefered username',
