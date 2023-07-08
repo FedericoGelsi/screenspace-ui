@@ -9,7 +9,7 @@ import TEXT_KEY from '../../../assets/strings/TextKey';
 
 const HomeIcon = props => <Icon {...props} name="home-outline" />;
 
-const BellIcon = props => <Icon {...props} name="bell-outline" />;
+const BookingsIcon = props => <Icon {...props} name="credit-card-outline" />;
 
 const SettingsIcon = props => <Icon {...props} name="settings-outline" />;
 
@@ -23,7 +23,7 @@ export const AppFooter = ({state}) => {
       />
       <BottomNavigationTab
         title={I18n.t(TEXT_KEY.userHome.bottonTabBar.secondTab)}
-        icon={BellIcon}
+        icon={BookingsIcon}
       />
       <BottomNavigationTab
         title={I18n.t(TEXT_KEY.userHome.bottonTabBar.thirdTab)}
