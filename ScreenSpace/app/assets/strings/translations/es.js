@@ -26,6 +26,8 @@ export default {
   },
   userHome: {
     sectionName: 'Inicio',
+    title: 'Bienvenido',
+    subtitle: 'Relajemonos y veamos una película!',
   },
   userSettings: {
     sectionName: 'Configuraciones',

@@ -9,6 +9,9 @@ import {
   Layout,
   Text,
 } from '@ui-kitten/components';
+import I18n from '../../../assets/strings/I18n';
+import TEXT_KEY from '../../../assets/strings/TextKey';
+
 
 const UserHome = ({navigation, route}) => {
   const navigateDetails = () => {
@@ -25,14 +28,14 @@ const UserHome = ({navigation, route}) => {
   const headerTitle = props => {
     return (
       <Text {...props} category="label">
-        Welcome {userClaims.user.givenName}!
+        {I18n.t(TEXT_KEY.userHome.title)} {userClaims.user.givenName}!
       </Text>
     );
   };
   const headerSubTitle = props => {
     return (
       <Text {...props} category="s1">
-        Let’s relax and watch a movie!
+        {I18n.t(TEXT_KEY.userHome.subtitle)}
       </Text>
     );
   };
