@@ -1,9 +1,10 @@
 import React from 'react';
 import ViewTopNavigationContainer from '../../components/ViewTopNavigationContainer';
-import {Text} from '@ui-kitten/components';
 import ShareContent from '../../components/ShareContent';
 import UserGeolocation from '../../components/UserGeolocation';
 import {Button} from 'react-native';
+import {Layout, Text} from '@ui-kitten/components';
+import AppFooter from '../../components/user/AppFooter';
 
 const UserHome = ({navigation}) => {
   const navigateDetails = () => {
@@ -11,11 +12,12 @@ const UserHome = ({navigation}) => {
   };
 
   return (
-    <ViewTopNavigationContainer navigation={navigation}>
-      <Text>USER HOME</Text>
-      <ShareContent />
-      <UserGeolocation />
-      <Button title="Details" onPress={navigateDetails} />
+    <ViewTopNavigationContainer navigation={navigation} footer={<AppFooter />}>
+      <Layout>
+        <ShareContent />
+        <UserGeolocation />
+        <Button title="Details" onPress={navigateDetails} />
+      </Layout>
     </ViewTopNavigationContainer>
   );
 };
