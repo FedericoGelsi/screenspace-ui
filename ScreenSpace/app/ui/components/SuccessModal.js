@@ -8,11 +8,10 @@ import {
   Layout,
 } from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
-import {useSelector} from 'react-redux';
 
-export const SuccessModal = ({text, buttonText, action}) => {
+export const SuccessModal = ({text, buttonText, action, isProcessing}) => {
   const [visible, setVisible] = React.useState(true);
-  const {error, isProcessing, hasError} = useSelector(state => state.form);
+
 
   return (
     <Modal

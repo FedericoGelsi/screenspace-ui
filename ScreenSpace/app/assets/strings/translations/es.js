@@ -85,6 +85,7 @@ export default {
   cinemaHalls: {
     noDataText: 'No tiene salas actualmente',
     finishButtonText: 'Terminar',
+    confirmationModalText: 'Está seguro?',
     form: {
       name: 'Nombre Sala',
       numberOfLinesText: 'Numero de filas',
@@ -114,12 +115,17 @@ export default {
       hallLabel: 'Sala',
       dateTimeLabel: 'Horario',
     },
+    dateFilterPlaceholder: "Filtrar por Fecha"
+  },
+  cinemaCard: {
+    showsButton: 'Ver funciones'
   },
   newCinemaShow: {
     sectionName: 'Nueva Función',
+    editSectionName: 'Editar Función',
     nextStepButtonLabel: 'Siguiente paso',
     previousStepButtonLabel: 'Paso anterior',
-    submitButtonLabel: 'Crear función',
+    submitButtonLabel: 'Guardar función',
     finishButtonLabel: 'Volver a Funciones',
     steps: {
       firstStep: {
@@ -160,8 +166,8 @@ export default {
       },
       summaryStep: {
         label: 'Resumen',
-        title: 'Tu función se ha creado exitosamente!',
-        subtitle: '',
+        title: 'Resumen de la Función',
+        subtitle: 'Por favor revisa los datos antes de guardar',
       },
     },
   },
@@ -209,4 +215,5 @@ export default {
       ],
     },
   },
+  adminProfileTitle: 'Tu Perfil',
 };

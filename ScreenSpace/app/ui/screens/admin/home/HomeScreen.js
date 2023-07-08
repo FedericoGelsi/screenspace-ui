@@ -1,24 +1,24 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {
   Divider,
   List,
   Text,
-  TopNavigation,
   TopNavigationAction,
   Button,
   Spinner,
   Layout,
+  Icon,
 } from '@ui-kitten/components';
 import {CinemaCard} from '../../../components/CinemaCard';
 import {NoData} from '../../../components/NoData';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
-import {BackIcon} from '../../../kittenIcons/kittenIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {getOwnerCinemas} from '../../../../redux/slices/ownerCinemasSlice';
 import {loadHalls} from '../../../../redux/slices/hallSlice';
 import ErrorScreen from '../../../components/ErrorScreen';
+import ViewTopNavigationContainer from '../../../components/ViewTopNavigationContainer';
 
 export const HomeScreenAdmin = ({navigation, route}) => {
   let refresh = route?.params ? route.params : false;
@@ -26,10 +26,11 @@ export const HomeScreenAdmin = ({navigation, route}) => {
   const {cinemas, error, isLoading, hasError} = useSelector(
     state => state.ownerCinemas,
   );
+  const {userId} = useSelector(state => state.login);
 
   React.useEffect(() => {
-    dispatch(getOwnerCinemas(1));
-    if (refresh) dispatch(getOwnerCinemas(1));
+    dispatch(getOwnerCinemas(userId));
+    if (refresh) dispatch(getOwnerCinemas(userId));
     refresh = false;
   }, [dispatch, refresh]);
 
@@ -46,12 +47,18 @@ export const HomeScreenAdmin = ({navigation, route}) => {
     navigation.push('CinemaDetails', {cinemaDetails: cinemas[cinemaIndex]});
   };
 
-  const navigateCinemaShows = () => {
-    navigation.push('CinemaShows');
+  const navigateCinemaShows = cinemaId => {
+    navigation.push('CinemaShows', {cinemaId: cinemaId});
   };
 
-  const BackAction = () => (
-    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+  const navigateAdminProfile = () => {
+    navigation.push('AdminProfile');
+  };
+
+  const AvatarIcon = props => <Icon {...props} name="person" />;
+
+  const AvatarAction = () => (
+    <TopNavigationAction icon={AvatarIcon} onPress={navigateAdminProfile} />
   );
 
   if (hasError) {
@@ -63,14 +70,10 @@ export const HomeScreenAdmin = ({navigation, route}) => {
   }
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
-      <TopNavigation
-        title="ScreenSpace"
-        alignment="center"
-        accessoryLeft={BackAction}
-        style={{height: '8%'}}
-      />
-      <Divider />
+    <ViewTopNavigationContainer
+      navigation={navigation}
+      variant="logo"
+      accessoryRight={AvatarAction}>
       <View style={styles.screenContainer}>
         {isLoading ? (
           <Layout style={styles.noDataContainer}>
@@ -96,6 +99,7 @@ export const HomeScreenAdmin = ({navigation, route}) => {
                   renderItem={item => (
                     <CinemaCard
                       navigateAction={navigateCinemaDetails}
+                      navigateShows={() => navigateCinemaShows(item.item.id)}
                       item={item}
                     />
                   )}
@@ -105,16 +109,13 @@ export const HomeScreenAdmin = ({navigation, route}) => {
           </>
         )}
         <Divider />
-        <View style={styles.actionLayout}>
-          <Button style={styles.buttonStyle} onPress={navigateCinemaShows}>
-            {I18n.t(TEXT_KEY.cinemaHome.showsButtonText)}
-          </Button>
+        <Layout style={styles.actionLayout}>
           <Button style={styles.buttonStyle} onPress={navigateNewCinema}>
             {I18n.t(TEXT_KEY.cinemaHome.newCinemaButtonText)}
           </Button>
-        </View>
+        </Layout>
       </View>
-    </SafeAreaView>
+    </ViewTopNavigationContainer>
   );
 };
 
@@ -123,11 +124,11 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   screenContainer: {
-    height: '92%',
+    flex: 1,
     backgroundColor: '#FFFFFF',
   },
   cinemaContainer: {
-    height: '88%',
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -150,14 +151,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   actionLayout: {
-    height: '12%',
-    display: 'flex',
+    marginVertical: 16,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    paddingHorizontal: 16,
   },
   buttonStyle: {
+    flex: 1,
     borderRadius: 1000,
-    width: 140,
   },
 });

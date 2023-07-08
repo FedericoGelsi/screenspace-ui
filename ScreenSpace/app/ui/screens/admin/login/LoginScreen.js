@@ -1,10 +1,20 @@
 import React from 'react';
 import {Button, Icon, Layout, TopNavigationAction} from '@ui-kitten/components';
 import ViewTopNavigationContainer from '../../../components/ViewTopNavigationContainer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const LoginScreen = ({navigation}) => {
   const navigateDetails = () => {
+    storeLoggedSession('true');
     navigation.push('Home');
+  };
+
+  const storeLoggedSession = async value => {
+    try {
+      await AsyncStorage.setItem('logged', value);
+    } catch (e) {
+      // saving error
+    }
   };
 
   const CancelLogin = () => {

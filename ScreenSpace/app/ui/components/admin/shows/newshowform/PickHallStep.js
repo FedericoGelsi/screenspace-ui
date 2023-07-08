@@ -3,14 +3,19 @@ import {Icon, Layout, Menu, MenuItem, Text} from '@ui-kitten/components';
 import I18n from '../../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../../assets/strings/TextKey';
 import SearchBar from '../../../SearchBar';
-import {getHallByName, getHalls} from '../../../../../api/cinemaController';
 import {useSelector, useDispatch} from 'react-redux';
+import {completeForm} from '../../../../../redux/slices/showFormSlice';
 
 const PickHallStep = () => {
   const formValues = useSelector(state => state.newShowForm);
+  const ownerCinemas = useSelector(state => state.ownerCinemas);
+
   const dispatch = useDispatch();
 
-  const [items, setItems] = useState(getHalls(0));
+  const halls = ownerCinemas.cinemas.find(cinema=> cinema.id === formValues.cinemaId).halls
+
+  const [items, setItems] = useState(halls);
+  const initialItem = items.findIndex(item => item.id === formValues.hallId);
 
   const MenuOptions = ({items, renderItem}) => {
     const useMenuState = (initialState = 1) => {
@@ -21,13 +26,19 @@ const PickHallStep = () => {
     const menuState = useMenuState();
 
     return (
-      <Menu style={{marginVertical: 16, maxHeight: '70%'}} {...menuState}>
+      <Menu
+        style={{marginVertical: 16, maxHeight: '70%'}}
+        {...menuState}
+        selectedIndex={{row: initialItem}}>
         {items.map((item, index) => renderItem(item, index))}
       </Menu>
     );
   };
 
-  const searchHall = value => getHallByName(value);
+  const searchHall = hallName =>
+    halls.filter(hall =>
+      hall.name.toLowerCase().includes(hallName.toLowerCase()),
+    );
 
   const handleSearch = value => {
     setItems(searchHall(value));
@@ -39,15 +50,27 @@ const PickHallStep = () => {
     <MenuItem
       key={index}
       title={`${item.name}\n${
-        item.available ? getMaxCapacity(item) : I18n.t(TEXT_KEY.newCinemaShow.steps.secondStep.isAvailableLabel)
+        item.available
+          ? getMaxCapacity(item)
+          : I18n.t(TEXT_KEY.newCinemaShow.steps.secondStep.isAvailableLabel)
       }`}
       disabled={!item.available}
       accessoryLeft={HallIcon}
+      onPress={() =>
+        dispatch(
+          completeForm({
+            key: 'hallId',
+            value: item.id,
+          }),
+        )
+      }
     />
   );
 
   const getMaxCapacity = item => {
-    return `${I18n.t(TEXT_KEY.newCinemaShow.steps.secondStep.maxCapacityLabel)}: ${item.width*item.height}`;
+    return `${I18n.t(
+      TEXT_KEY.newCinemaShow.steps.secondStep.maxCapacityLabel,
+    )}: ${item.width * item.height}`;
   };
 
   return (

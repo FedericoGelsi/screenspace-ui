@@ -1,18 +1,40 @@
 import React, {useState} from 'react';
-import {Icon, Layout, Menu, MenuItem, Text} from '@ui-kitten/components';
+import {
+  Icon,
+  Layout,
+  Menu,
+  MenuItem,
+  Spinner,
+  Text,
+} from '@ui-kitten/components';
 import I18n from '../../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../../assets/strings/TextKey';
 import SearchBar from '../../../SearchBar';
 import {useSelector, useDispatch} from 'react-redux';
-import {getMovieByName, getMovies} from '../../../../../api/movieController';
+import {
+  filterMoviesByTitle,
+  getMovies,
+} from '../../../../../redux/slices/moviesSlice';
+import {completeForm} from '../../../../../redux/slices/showFormSlice';
 
 const PickMovieStep = () => {
   const formValues = useSelector(state => state.newShowForm);
+  const moviesValues = useSelector(state => state.movies);
   const dispatch = useDispatch();
+  const [moviesData, setMoviesData] = React.useState(moviesValues.movies);
 
-  const [items, setItems] = useState(getMovies());
+  React.useEffect(() => {
+    dispatch(getMovies());
+  }, [dispatch, handleSearch]);
+
+  React.useEffect(() => {
+    setMoviesData(moviesValues.movies);
+  }, [moviesValues]);
 
   const MenuOptions = ({items, renderItem}) => {
+    const initialItem = items?.findIndex(
+      item => item.id === formValues.movieId,
+    );
     const useMenuState = (initialState = 1) => {
       const [selectedIndex, setSelectedIndex] = useState(initialState);
       return {selectedIndex, onSelect: setSelectedIndex};
@@ -21,16 +43,21 @@ const PickMovieStep = () => {
     const menuState = useMenuState();
 
     return (
-      <Menu style={{marginVertical: 16, maxHeight: '70%'}} {...menuState}>
-        {items.map((item, index) => renderItem(item, index))}
+      <Menu
+        style={{marginVertical: 16, maxHeight: '70%'}}
+        {...menuState}
+        selectedIndex={{row: initialItem}}>
+        {items?.map((item, index) => renderItem(item, index))}
       </Menu>
     );
   };
 
-  const searchHall = value => getMovieByName(value);
-
-  const handleSearch = value => {
-    setItems(searchHall(value));
+  const handleSearch = movieName => {
+    setMoviesData(
+      moviesValues.movies.filter(movie =>
+        movie.title.toLowerCase().includes(movieName.toLowerCase()),
+      ),
+    );
   };
 
   const MovieIcon = <Icon name="film-outline" />;
@@ -39,12 +66,26 @@ const PickMovieStep = () => {
     <MenuItem
       key={index}
       title={`${item.title}\n${
-        item.isShowing
+        item.showing
           ? getMovieLenght(item)
           : I18n.t(TEXT_KEY.newCinemaShow.steps.thirdStep.isShowingLabel)
       }`}
-      disabled={!item.isShowing}
+      disabled={!item.showing}
       accessoryLeft={MovieIcon}
+      onPress={() => {
+        dispatch(
+          completeForm({
+            key: 'movieId',
+            value: item.id,
+          }),
+        );
+        dispatch(
+          completeForm({
+            key: 'name',
+            value: item.title,
+          }),
+        );
+      }}
     />
   );
 
@@ -70,7 +111,16 @@ const PickMovieStep = () => {
         )}
         setValue={handleSearch}
       />
-      <MenuOptions items={items} renderItem={renderItem} />
+      {moviesValues.isLoading ? (
+        <Layout
+          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Spinner size="giant" />
+        </Layout>
+      ) : (
+        moviesData.length !== 0 && (
+          <MenuOptions items={moviesData} renderItem={renderItem} />
+        )
+      )}
     </Layout>
   );
 };

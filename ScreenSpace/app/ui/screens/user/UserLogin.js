@@ -8,15 +8,20 @@ import ImagePicker from '../../components/user/ImagePicker';
 
 const UserLogin = ({navigation, route}) => {
   const [value, setValue] = useState('');
-  const { userClaims } = route.params
+  const {userClaims} = route.params;
   const avatarUrl = userClaims?.user?.photo ?? IMAGES.PNG.AVATAR_PNG;
   console.log(avatarUrl);
   const Header = props => (
     <Layout {...props} style={{marginVertical: 16}}>
       <Button appearance="ghost" status="control" size="tiny">
         {evaProps => (
-          <View style={{justifyContent: 'center', alignItems: 'center', marginVertical:16}}>
-            <Avatar style={{height:80, width:80}} source={{uri: avatarUrl}} />
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginVertical: 16,
+            }}>
+            <Avatar style={{height: 80, width: 80}} source={{uri: avatarUrl}} />
             <Text
               {...evaProps}
               style={{
@@ -74,7 +79,10 @@ const UserLogin = ({navigation, route}) => {
               flex: 1,
               paddingVertical: 32,
             }}>
-            <Button status="success" style={{borderRadius: 50}}>
+            <Button
+              status="success"
+              style={{borderRadius: 50}}
+              onPress={() => navigation.push('UserHome')}>
               {I18n.t(TEXT_KEY.userLogin.saveButtonText)}
             </Button>
           </View>
