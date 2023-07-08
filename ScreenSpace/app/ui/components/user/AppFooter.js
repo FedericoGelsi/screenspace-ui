@@ -18,15 +18,15 @@ export const AppFooter = ({state}) => {
   return (
     <BottomNavigation {...state}>
       <BottomNavigationTab
-        title={I18n.t(TEXT_KEY.userHome.bottonTabBar.firstTab)}
+        title={I18n.t(TEXT_KEY.userHome.sectionName)}
         icon={HomeIcon}
       />
       <BottomNavigationTab
-        title={I18n.t(TEXT_KEY.userHome.bottonTabBar.secondTab)}
+        title={I18n.t(TEXT_KEY.userBookings.sectionName)}
         icon={BookingsIcon}
       />
       <BottomNavigationTab
-        title={I18n.t(TEXT_KEY.userHome.bottonTabBar.thirdTab)}
+        title={I18n.t(TEXT_KEY.userSettings.sectionName)}
         icon={SettingsIcon}
       />
     </BottomNavigation>

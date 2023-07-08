@@ -26,14 +26,12 @@ export default {
   },
   userHome: {
     sectionName: 'userHome.sectionName',
-    bottonTabBar: {
-      firstTab: 'userHome.bottonTabBar.firstTab',
-      secondTab: 'userHome.bottonTabBar.secondTab',
-      thirdTab: 'userHome.bottonTabBar.thirdTab',
-    },
   },
   userSettings: {
     sectionName: 'userSettings.sectionName',
+  },
+  userBookings: {
+    sectionName: 'userBookings.sectionName'
   },
   cinemaHome: {
     title: 'cinemaHome.title',
