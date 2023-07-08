@@ -25,15 +25,13 @@ export default {
     footer: 'You can always change it from ',
   },
   userHome: {
-    sectionName: 'User Home',
-    bottonTabBar: {
-      firstTab: 'Home',
-      secondTab: 'Your Bookings',
-      thirdTab: 'Settings',
-    },
+    sectionName: 'Home',
   },
   userSettings: {
     sectionName: 'Settings',
+  },
+  userBookings: {
+    sectionName: 'Your Bookings'
   },
   cinemaHome: {
     title: 'Your Cinemas',

@@ -25,15 +25,13 @@ export default {
     footer: 'Siempre vas a poder modificarlo desde ',
   },
   userHome: {
-    sectionName: 'Cartelera',
-    bottonTabBar: {
-      firstTab: 'Inicio',
-      secondTab: 'Tus entradas',
-      thirdTab: 'Configuraciones',
-    },
+    sectionName: 'Inicio',
   },
   userSettings: {
     sectionName: 'Configuraciones',
+  },
+  userBookings: {
+    sectionName: 'Tus entradas'
   },
   cinemaHome: {
     title: 'Tus Cines',

@@ -1,11 +1,15 @@
 import React from 'react';
-import {Text} from '@ui-kitten/components';
 import ViewTopNavigationContainer from '../../components/ViewTopNavigationContainer';
+import I18n from '../../../assets/strings/I18n';
+import TEXT_KEY from '../../../assets/strings/TextKey';
 
 const BookingsView = ({navigation}) => {
   return (
-    <ViewTopNavigationContainer navigation={navigation}>
-      <Text>Your Bookings</Text>
+    <ViewTopNavigationContainer
+      navigation={navigation}
+      accessoryLeft={<></>}
+      headerTitle={I18n.t(TEXT_KEY.userBookings.sectionName)}>
+
     </ViewTopNavigationContainer>
   );
 };
