@@ -3,7 +3,7 @@ import ViewTopNavigationContainer from '../../components/ViewTopNavigationContai
 import ShareContent from '../../components/ShareContent';
 import UserGeolocation from '../../components/UserGeolocation';
 import {Button} from 'react-native';
-import {Layout, Text} from '@ui-kitten/components';
+import { Layout, Text } from '@ui-kitten/components';
 import AppFooter from '../../components/user/AppFooter';
 
 const UserHome = ({navigation}) => {

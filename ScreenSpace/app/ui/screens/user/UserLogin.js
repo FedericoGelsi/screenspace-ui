@@ -9,6 +9,7 @@ import ImagePicker from '../../components/user/ImagePicker';
 const UserLogin = ({navigation, route}) => {
   const [value, setValue] = useState('');
   const {userClaims} = route.params;
+  // TODO: Get user data from redux
   const avatarUrl = userClaims?.user?.photo ?? IMAGES.PNG.AVATAR_PNG;
 
   const handleSave = props => {
