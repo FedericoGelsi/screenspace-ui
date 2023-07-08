@@ -4,6 +4,29 @@ export default {
   error: {
     upps: 'Upss something went wrong',
   },
+  initialLogin: {
+    title: 'ScreenSpace',
+    subtitle: 'Welcome to your all in one cinema booking app',
+    buttons: {
+      userLogin: 'Login with Google',
+      adminLogin: 'Business Login',
+    },
+  },
+  userLogin: {
+    sectionName: 'Profile setup',
+    form: {
+      avatarTip: 'Change profile picture',
+      username: {
+        label: 'Username',
+        placeholder: 'Add you prefered username',
+      },
+    },
+    saveButtonText: 'Save changes',
+    footer: 'You can always change it from ',
+  },
+  userSettings: {
+    sectionName: 'Settings',
+  },
   cinemaHome: {
     title: 'Your Cinemas',
     showsButtonText: 'Shows',
