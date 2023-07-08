@@ -1,33 +1,34 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {
   BottomNavigation,
-  BottomNavigationProps,
   BottomNavigationTab,
   Icon,
-  IconElement,
 } from '@ui-kitten/components';
+import I18n from '../../../assets/strings/I18n';
+import TEXT_KEY from '../../../assets/strings/TextKey';
 
-const PersonIcon = props => <Icon {...props} name="person-outline" />;
+const HomeIcon = props => <Icon {...props} name="home-outline" />;
 
 const BellIcon = props => <Icon {...props} name="bell-outline" />;
 
-const EmailIcon = props => <Icon {...props} name="email-outline" />;
+const SettingsIcon = props => <Icon {...props} name="settings-outline" />;
 
-const useBottomNavigationState = (initialState = 0) => {
-  const [selectedIndex, setSelectedIndex] = React.useState(initialState);
-  return {selectedIndex, onSelect: setSelectedIndex};
-};
-
-export const AppFooter = () => {
-  const topState = useBottomNavigationState();
-  const bottomState = useBottomNavigationState();
-
+export const AppFooter = ({state}) => {
+  
   return (
-    <BottomNavigation {...topState}>
-      <BottomNavigationTab title="USERS" icon={PersonIcon} />
-      <BottomNavigationTab title="ORDERS" icon={BellIcon} />
-      <BottomNavigationTab title="TRANSACTIONS" icon={EmailIcon} />
+    <BottomNavigation {...state}>
+      <BottomNavigationTab
+        title={I18n.t(TEXT_KEY.userHome.bottonTabBar.firstTab)}
+        icon={HomeIcon}
+      />
+      <BottomNavigationTab
+        title={I18n.t(TEXT_KEY.userHome.bottonTabBar.secondTab)}
+        icon={BellIcon}
+      />
+      <BottomNavigationTab
+        title={I18n.t(TEXT_KEY.userHome.bottonTabBar.thirdTab)}
+        icon={SettingsIcon}
+      />
     </BottomNavigation>
   );
 };

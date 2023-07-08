@@ -3,8 +3,6 @@ import ViewTopNavigationContainer from '../../components/ViewTopNavigationContai
 import ShareContent from '../../components/ShareContent';
 import UserGeolocation from '../../components/UserGeolocation';
 import {Button} from 'react-native';
-import { Layout, Text } from '@ui-kitten/components';
-import AppFooter from '../../components/user/AppFooter';
 
 const UserHome = ({navigation}) => {
   const navigateDetails = () => {
@@ -12,12 +10,10 @@ const UserHome = ({navigation}) => {
   };
 
   return (
-    <ViewTopNavigationContainer navigation={navigation} footer={<AppFooter />}>
-      <Layout>
-        <ShareContent />
-        <UserGeolocation />
-        <Button title="Details" onPress={navigateDetails} />
-      </Layout>
+    <ViewTopNavigationContainer variant="logo" navigation={navigation}>
+      <ShareContent />
+      <UserGeolocation />
+      <Button title="Details" onPress={navigateDetails} />
     </ViewTopNavigationContainer>
   );
 };
