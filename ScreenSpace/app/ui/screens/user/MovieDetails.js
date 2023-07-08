@@ -11,17 +11,13 @@ import {Button, Divider} from '@ui-kitten/components';
 import {Text as KittenText} from '@ui-kitten/components';
 import {Icon} from '@ui-kitten/components';
 import ViewTopNavigationContainer from '../../components/ViewTopNavigationContainer';
-import CommentsModal from '../../components/CommentsModal';
+import {CommentsModal} from '../../components/CommentsModal';
 
 const MovieDetails = ({navigation}) => {
-  const bottomSheetRef = React.useRef();
+  const [isModalVisible, setModalVisible] = React.useState(false);
 
-  const openBottomSheet = () => {
-    bottomSheetRef.current.open();
-  };
-
-  const closeBottomSheet = () => {
-    bottomSheetRef.current.close();
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
   };
   return (
     <ViewTopNavigationContainer
@@ -91,7 +87,7 @@ const MovieDetails = ({navigation}) => {
           <View style={styles.overlayButton}>
             <Button
               onPress={() => {
-                openBottomSheet();
+                toggleModal(true);
               }}
               style={styles.commentButton}
               appearance="outline"
@@ -118,9 +114,8 @@ const MovieDetails = ({navigation}) => {
         </View>
       </ScrollView>
       <CommentsModal
-        bottomSheetRef={bottomSheetRef}
-        openBottomSheet={openBottomSheet}
-        closeBottomSheet={closeBottomSheet}
+        isModalVisible={isModalVisible}
+        toggleModal={toggleModal}
       />
     </ViewTopNavigationContainer>
   );
