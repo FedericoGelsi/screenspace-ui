@@ -26,12 +26,14 @@ export default {
   },
   userHome: {
     sectionName: 'Home',
+    title: 'Welcome',
+    subtitle: 'Let’s relax and watch a movie!',
   },
   userSettings: {
     sectionName: 'Settings',
   },
   userBookings: {
-    sectionName: 'Your Bookings'
+    sectionName: 'Your Bookings',
   },
   cinemaHome: {
     title: 'Your Cinemas',
@@ -110,7 +112,7 @@ export default {
     addButtonText: 'Add Hall',
   },
   cinemaCard: {
-    showsButton: 'View Shows'
+    showsButton: 'View Shows',
   },
   cinemaShows: {
     sectionName: 'Shows',
@@ -123,7 +125,7 @@ export default {
       hallLabel: 'Hall',
       dateTimeLabel: 'DateTime',
     },
-    dateFilterPlaceholder: "Filter by Date"
+    dateFilterPlaceholder: 'Filter by Date',
   },
   newCinemaShow: {
     sectionName: 'New Show',

@@ -26,6 +26,8 @@ export default {
   },
   userHome: {
     sectionName: 'userHome.sectionName',
+    title: 'userHome.title',
+    subtitle: 'userHome.subtitle',
   },
   userSettings: {
     sectionName: 'userSettings.sectionName',
