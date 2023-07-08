@@ -14,7 +14,6 @@ export const CommonLogin = ({
   bottonSectionSubText,
   bottonSectionMainText,
   bottonSectionAction,
-  tempGoBack,
 }) => {
   return (
     <View style={styles.container}>
@@ -26,9 +25,6 @@ export const CommonLogin = ({
           color="#00B578"
           title={mainButtonText}
         />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.botonVerde}>
-        <Button onPress={tempGoBack} color="#00B578" title="Back" />
       </TouchableOpacity>
       <View style={{display: 'flex', flexDirection: 'row', marginTop: 10}}>
         <Text>{bottonSectionSubText}</Text>
