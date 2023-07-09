@@ -9,11 +9,10 @@ import NewShowSummary from './NewShowSummary';
 const NewShowForm = ({currentPosition}) => {
   return (
     <Layout style={{flex: 1}}>
-      {currentPosition === 0 && <PickCinemaStep />}
-      {currentPosition === 1 && <PickHallStep />}
-      {currentPosition === 2 && <PickMovieStep />}
-      {currentPosition === 3 && <PickDateTimeStep />}
-      {currentPosition === 4 && <NewShowSummary />}
+      {currentPosition === 0 && <PickHallStep />}
+      {currentPosition === 1 && <PickMovieStep />}
+      {currentPosition === 2 && <PickDateTimeStep />}
+      {currentPosition === 3 && <NewShowSummary />}
     </Layout>
   );
 };

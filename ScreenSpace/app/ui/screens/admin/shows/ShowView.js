@@ -17,7 +17,6 @@ import EditShowForm from '../../../components/admin/shows/newshowform/EditShowFo
 const ShowView = ({navigation, route}) => {
   let edit = route?.params?.edit ? route.params.edit : false;
   const stepLabels = [
-    {label: I18n.t(TEXT_KEY.newCinemaShow.steps.firstStep.label)},
     {label: I18n.t(TEXT_KEY.newCinemaShow.steps.secondStep.label)},
     {label: I18n.t(TEXT_KEY.newCinemaShow.steps.thirdStep.label)},
     {label: I18n.t(TEXT_KEY.newCinemaShow.steps.fourthStep.label)},
@@ -78,17 +77,17 @@ const ShowView = ({navigation, route}) => {
   const isDisabled = () => {
     switch (currentPosition) {
       case 0:
-        return formValues.cinemaId === null;
-      case 1:
         return formValues.hallId === null;
-      case 2:
+      case 1:
         return formValues.movieId === null;
-      case 3:
+      case 2:
         return formValues.datetime === null;
       default:
         return true;
     }
   };
+
+  const ownerCinemas = useSelector(state => state.ownerCinemas);
 
   return (
     <ViewTopNavigationContainer
@@ -98,6 +97,13 @@ const ShowView = ({navigation, route}) => {
           ? TEXT_KEY.newCinemaShow.editSectionName
           : TEXT_KEY.newCinemaShow.sectionName,
       )}
+      headerSubtitle={
+        edit
+          ? formValues.name
+          : ownerCinemas.cinemas.find(
+              cinema => cinema.id === route?.params?.cinemaId,
+            ).cinemaName
+      }
       accessoryLeft={
         currentPosition === labels.length - 1 ? (
           <TopNavigationAction />
