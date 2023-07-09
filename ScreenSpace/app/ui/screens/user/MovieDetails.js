@@ -105,7 +105,7 @@ const MovieDetails = ({navigation}) => {
           <View style={styles.buttonContainer}>
             <Button
               onPress={() => {
-                // Handle button press
+                navigation.push('BookingForm', {movieId: '1'});
               }}
               style={styles.button}>
               <KittenText style={styles.buttonText}>Get Reservation</KittenText>

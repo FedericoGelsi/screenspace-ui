@@ -5,6 +5,11 @@ export const getCinemas = async ownerId => {
   return results.data;
 };
 
+export const getCinemasByMovieId = async movieId => {
+  const results = await axios.get(`/api/cinemas?movieId=${movieId}`);
+  return results.data;
+};
+
 export const getCinemaById = async cinemaId => {
   const results = await axios.get(`/api/cinemas/${cinemaId}`);
   return results.data;
