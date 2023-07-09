@@ -80,7 +80,7 @@ const BookingsView = ({navigation}) => {
   ];
   const dispatch = useDispatch();
 
-  // const {bookings, error, isLoading} = useSelector(state => state.Bookings);
+  // const {bookings, error, isLoading} = useSelector(state => state.booking);
   const {userId} = useSelector(state => state.login);
 
   React.useEffect(() => {
