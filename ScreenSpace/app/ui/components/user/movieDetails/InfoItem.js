@@ -20,13 +20,14 @@ export default InfoItem;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 16,
   },
   icon: {
-    width: 32,
-    height: 32,
+    width: 24,
+    height: 24,
   },
   label: {
     textAlign: 'center',
@@ -34,6 +35,6 @@ const styles = StyleSheet.create({
   },
   value: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 14,
   },
 });
