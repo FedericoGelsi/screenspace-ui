@@ -12,7 +12,7 @@ const MovieDetails = ({navigation, route}) => {
   const {movie} = route.params;
 
   const navigateBooking = () => {
-    // navigation.push('', {movie: movie});
+    navigation.push('BookingForm', {movieId: movie.id});
   };
 
   const accessoryRight = () => {
@@ -34,7 +34,12 @@ const MovieDetails = ({navigation, route}) => {
             />
             <InfoColumn movie={movie} />
           </View>
-          <View style={{flex: 3, alignContent: 'flex-start', marginTop: 8}}>
+          <View
+            style={{
+              flex: 3,
+              alignContent: 'flex-start',
+              marginTop: 8,
+            }}>
             <Text category="h5">{movie.title}</Text>
             <Divider style={styles.divider} />
             <Text category="h6">
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
   },
   movieImage: {
     flex: 4,
-    marginHorizontal:16,
+    marginHorizontal: 16,
     aspectRatio: 2 / 3,
     borderRadius: 16,
   },
