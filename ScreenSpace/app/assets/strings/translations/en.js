@@ -43,6 +43,19 @@ export default {
   },
   userBookings: {
     sectionName: 'Your Bookings',
+    noData: 'You do not have bookings yet.\nIt is time to book a ticket.',
+    date: 'Date',
+  },
+  bookingDetail: {
+    cinema: 'Cinema',
+    date: 'Date',
+    time: 'Time',
+    seats: 'Seats',
+    price: 'Price per seat',
+    cinemaFee: 'Cinema fee',
+    serviceFee: 'Service fee',
+    total: 'Total Bill',
+    code: 'Reservation Code',
   },
   movieDetails: {
     sectionName: 'Movie Details',

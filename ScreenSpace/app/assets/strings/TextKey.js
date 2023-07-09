@@ -42,6 +42,19 @@ export default {
   },
   userBookings: {
     sectionName: 'userBookings.sectionName',
+    noData: 'userBookings.noData',
+    date: 'userBookings.date',
+  },
+  bookingDetail: {
+    cinema: 'bookingDetail.cinema',
+    date: 'bookingDetail.date',
+    time: 'bookingDetail.time',
+    seats: 'bookingDetail.seats',
+    price: 'bookingDetail.price',
+    cinemaFee: 'bookingDetail.cinemaFee',
+    serviceFee: 'bookingDetail.serviceFee',
+    total: 'bookingDetail.total',
+    code: 'bookingDetail.code',
   },
   movieDetails: {
     sectionName: 'movieDetails.sectionName',
