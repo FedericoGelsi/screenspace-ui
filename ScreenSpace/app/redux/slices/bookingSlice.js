@@ -3,6 +3,8 @@ import {getBookingAPI} from '../../networking/api/endpoints/bookingWS';
 
 const initialState = {
   bookings: [],
+  error: null,
+  isLoading: false,
 };
 
 export const getBooking = createAsyncThunk('getBookings', async userId => {
@@ -20,12 +22,10 @@ const BookingSlice = createSlice({
         console.log('pending');
         state.isLoading = true;
         state.error = null;
-        state.hasError = false;
       })
       .addCase(getBooking.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.hasError = false;
         state.bookings = action.payload;
       })
       .addCase(getBooking.rejected, (state, action) => {
