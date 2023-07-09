@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {loginAPI} from '../../networking/api/endpoints/loginWS';
-import {loginGoogleAPI, loginUpdateGoogleUserAPI} from '../../networking/api/endpoints/loginGoogleWS';
+import {loginGoogleAPI, loginUpdateGoogleUserAPI, deleteGoogleUserAPI} from '../../networking/api/endpoints/loginGoogleWS';
 
 const initialState = {
   token: '',
@@ -30,6 +30,11 @@ export const userUpdateGoogle = createAsyncThunk('userUpdateGoogle', async userI
     console.log(userInfo);
     const response = await loginUpdateGoogleUserAPI(userInfo.userId, userInfo.email, userInfo.username, userInfo.avatar);
     return response;
+});
+
+export const deleteGoogleUser = createAsyncThunk('deleteGoogleUser', async userId => {
+  const response = await deleteGoogleUserAPI(userId);
+  return response;
 });
 
 const UserLoginSlice = createSlice({
@@ -100,6 +105,27 @@ const UserLoginSlice = createSlice({
         state.isUserUpdateFinished = action.payload.enabled;
       })
       .addCase(userUpdateGoogle.rejected, (state, action) => {
+        console.log('rejected');
+        state.isLoading = false;
+      })
+      .addCase(deleteGoogleUser.pending, (state, action) => {
+        console.log('pending');
+        state.isLoading = true;
+        state.error = null;
+        state.hasError = false;
+      })
+      .addCase(deleteGoogleUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.hasError = false;
+        state.userClaims = {};
+        state.userId = '';
+        state.username = '';
+        state.email = '';
+        state.isNewUser = false;
+        state.isUserUpdateFinished = false;
+      })
+      .addCase(deleteGoogleUser.rejected, (state, action) => {
         console.log('rejected');
         state.isLoading = false;
       });
