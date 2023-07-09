@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Avatar, Button, Card, Input, Layout, Text} from '@ui-kitten/components';
-import { ImageBackground, SafeAreaView, View} from 'react-native';
+import { Image, ImageBackground, SafeAreaView, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import IMAGES from '../../../assets/images/Images';
 import I18n from '../../../assets/strings/I18n';
 import TEXT_KEY from '../../../assets/strings/TextKey';
@@ -8,12 +9,13 @@ import ImagePicker from '../../components/user/ImagePicker';
 
 const UserLogin = ({navigation, route}) => {
   const [value, setValue] = useState('');
-  const {userClaims} = route.params;
   // TODO: Get user data from redux
-  const avatarUrl = userClaims?.user?.photo ?? IMAGES.PNG.AVATAR_PNG;
+  const userClaims = useSelector(state => state.login.userClaims);
+  const uri = Image.resolveAssetSource(IMAGES.PNG.AVATAR_PNG).uri;
+  const avatarUrl = userClaims?.avatar ?? uri;
 
   const handleSave = props => {
-    navigation.push('UserHome', {userClaims: userClaims});
+    navigation.push('UserHome');
   };
 
   const Header = props => (

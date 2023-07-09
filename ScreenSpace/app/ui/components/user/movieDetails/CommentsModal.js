@@ -14,10 +14,10 @@ const CommentsModal = ({isModalVisible, toggleModal, reviews}) => {
   const renderItem = ({item}) => {
     return (
       <View style={styles.commentItem}>
-        <Avatar source={{uri: `data:image/png;base64,${imageBytes}`}} />
+        <Avatar source={{uri: item.user.avatar}} />
         <View style={styles.commentView}>
-          <Text style={styles.commentUser}>{item.user}</Text>
-          <Text style={styles.commentText}>{item.text}</Text>
+          <Text style={styles.commentUser}>{item.user.username}</Text>
+          <Text style={styles.commentText}>{item.comment}</Text>
         </View>
       </View>
     );
@@ -43,7 +43,9 @@ const CommentsModal = ({isModalVisible, toggleModal, reviews}) => {
               <View style={styles.commentListContainer}>
                 <Text style={styles.sectionTitle}>Comments</Text>
                 {comments.length === 0 ? (
-                  <NoData message="This movies has no comments yet" />
+                  <View style={styles.noDataContainer}>
+                    <NoData message="This movies has no comments yet" />
+                  </View>
                 ) : (
                   <FlatList
                     data={comments}
@@ -118,7 +120,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   contentContainer: {
-    marginTop: 20,
+    marginTop: 10,
     width: '100%',
     flex: 1,
     paddingHorizontal: 16,
@@ -152,6 +154,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'column',
     marginLeft: 15,
+    width: '85%',
   },
   commentSeparator: {
     marginVertical: 4,
@@ -178,5 +181,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '60%',
     borderRadius: 500,
+  },
+  noDataContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginBottom: 90,
+    flex: 3,
   },
 });

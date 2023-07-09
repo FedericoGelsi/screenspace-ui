@@ -4,10 +4,30 @@ import {Image, ImageBackground, SafeAreaView, View} from 'react-native';
 import IMAGES from '../../assets/images/Images';
 import I18n from '../../assets/strings/I18n';
 import TEXT_KEY from '../../assets/strings/TextKey';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
-
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import {useDispatch, useSelector} from 'react-redux';
+import {userLoginGoogle} from '../../redux/slices/loginSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const InitialLoginScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+
+  const isNewUser = useSelector(state => state.login.isNewUser);
+  const token = useSelector(state => state.login.token);
+
+  React.useEffect(() => {
+    if (token != '') {
+      if (isNewUser) {
+        navigation.push('UserLogin');
+      } else {
+        navigation.push('UserHome');
+      }
+    }
+  }, [token]);
+
   const LogoIcon = () => (
     <Image style={{height: 92, width: 92}} source={IMAGES.PNG.ICON_PNG} />
   );
@@ -15,33 +35,36 @@ const InitialLoginScreen = ({navigation}) => {
   const navigateAdminLogin = () => {
     navigation.push('AdminLogin');
   };
-  const navigateUserLogin = () => {
-    console.log("Pressed button");
+  const navigateUserLogin = async () => {
+    console.log('Pressed button');
     // GoogleSignin.revokeAccess();
     // GoogleSignin.signOut();
-    GoogleSignUp().then(result => {navigation.push('UserLogin', {userClaims:result})});
+    await GoogleSignUp();
   };
 
   const GoogleSignUp = async () => {
     try {
-        await GoogleSignin.hasPlayServices();
-        return await GoogleSignin.signIn().then(result => result);
-      } catch (error) {
-        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-          // user cancelled the login flow
-          alert('User cancelled the login flow !');
-        } else if (error.code === statusCodes.IN_PROGRESS) {
-          alert('Signin in progress');
-          // operation (f.e. sign in) is in progress already
-        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-          alert('Google play services not available or outdated !');
-          // play services not available or outdated
-        } else {
-          console.log("Standard Error");
-          console.log(error)
-        }
+      await GoogleSignin.hasPlayServices();
+      // var googleInfo = await GoogleSignin.signIn().then(result => result);
+      var googleInfo = await GoogleSignin.signIn();
+      console.log(googleInfo);
+      dispatch(userLoginGoogle(googleInfo.idToken));
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+        alert('User cancelled the login flow !');
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        alert('Signin in progress');
+        // operation (f.e. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        alert('Google play services not available or outdated !');
+        // play services not available or outdated
+      } else {
+        console.log('Standard Error');
+        console.log(error);
       }
-  }
+    }
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>

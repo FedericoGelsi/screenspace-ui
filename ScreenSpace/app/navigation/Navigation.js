@@ -21,6 +21,7 @@ import MovieDetails from '../ui/screens/user/MovieDetails';
 import UserLogin from '../ui/screens/user/UserLogin';
 import InitialLoginScreen from '../ui/screens/InitialLoginScreen';
 import UserViewsNavigator from '../ui/screens/user/UserViewsNavigator';
+import BookingForm from '../ui/screens/user/booking/BookingForm';
 import BookingsViewDetail from '../ui/screens/user/BookingViewDetail';
 import SelectSeatsStep from '../ui/components/user/bookingForm/SelectSeatsStep';
 
@@ -48,6 +49,7 @@ const HomeNavigator = ({initialScreen}) => (
     <Screen name="UserHome" component={UserViewsNavigator} />
     <Screen name="MovieDetails" component={MovieDetails} />
     <Screen name="UserLogin" component={UserLogin} />
+    <Screen name="BookingForm" component={BookingForm} />
     <Screen name="BookingsViewDetail" component={BookingsViewDetail} />
     <Screen name="SelectSeats" component={SelectSeatsStep} />
   </Navigator>

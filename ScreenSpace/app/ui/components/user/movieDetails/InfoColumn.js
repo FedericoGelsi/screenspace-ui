@@ -8,6 +8,8 @@ import TEXT_KEY from '../../../../assets/strings/TextKey';
 const InfoColumn = ({movie}) => {
   const genres = movie.genres.flatMap(o => o.genre);
 
+  console.log(movie);
+
   const data = [
     {
       label: I18n.t(TEXT_KEY.movieDetails.infoColumn.genreLabel),
