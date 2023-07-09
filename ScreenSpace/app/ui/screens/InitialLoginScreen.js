@@ -5,9 +5,25 @@ import IMAGES from '../../assets/images/Images';
 import I18n from '../../assets/strings/I18n';
 import TEXT_KEY from '../../assets/strings/TextKey';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import {useDispatch, useSelector} from 'react-redux';
+import { userLoginGoogle } from '../../redux/slices/loginSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const InitialLoginScreen = ({navigation}) => {
+
+  const dispatch = useDispatch();
+
+  const isNewUser = useSelector(state => state.login.isNewUser);
+
+  React.useEffect(() => {
+    if (isNewUser) {
+        navigation.push('UserLogin');
+      } else {
+        navigation.push('UserHome');
+      }
+  }, [isNewUser])
+
   const LogoIcon = () => (
     <Image style={{height: 92, width: 92}} source={IMAGES.PNG.ICON_PNG} />
   );
@@ -15,17 +31,20 @@ const InitialLoginScreen = ({navigation}) => {
   const navigateAdminLogin = () => {
     navigation.push('AdminLogin');
   };
-  const navigateUserLogin = () => {
+  const navigateUserLogin = async () => {
     console.log("Pressed button");
     // GoogleSignin.revokeAccess();
     // GoogleSignin.signOut();
-    GoogleSignUp().then(result => {navigation.push('UserLogin', {userClaims:result})});
+    await GoogleSignUp();
   };
 
   const GoogleSignUp = async () => {
     try {
         await GoogleSignin.hasPlayServices();
-        return await GoogleSignin.signIn().then(result => result);
+        // var googleInfo = await GoogleSignin.signIn().then(result => result);
+        var googleInfo = await GoogleSignin.signIn();
+        console.log(googleInfo);
+        dispatch(userLoginGoogle(googleInfo.idToken))
       } catch (error) {
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
           // user cancelled the login flow
