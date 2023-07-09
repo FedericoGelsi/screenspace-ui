@@ -28,6 +28,13 @@ export default {
     sectionName: 'Home',
     title: 'Welcome',
     subtitle: 'Let’s relax and watch a movie!',
+    searchBar: {
+      placeholder: 'What are you looking for?',
+    },
+    filter: {
+      buttonTitle: 'Filter',
+    },
+    showingSectionName: 'Currently Showing',
   },
   userSettings: {
     sectionName: 'Settings',
