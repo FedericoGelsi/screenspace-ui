@@ -5,6 +5,7 @@ import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet} from 'react-native';
 import {NoData} from '../../../components/NoData';
+import {completeForm} from '../../../../redux/slices/movieBookingSlice';
 
 const BookingTimeStep = () => {
   const formValues = useSelector(state => state.movieBooking);
@@ -44,7 +45,8 @@ const BookingTimeStep = () => {
     return `${hours}:${formattedMinutes}`;
   };
 
-  const handleCardPress = index => {
+  const handleCardPress = (index, showId) => {
+    dispatch(completeForm({key: 'showId', value: showId}));
     setSelectedCard(index);
   };
 
@@ -52,7 +54,7 @@ const BookingTimeStep = () => {
     const isSelected = selectedCard === index;
     const cardStyle = [styles.item, isSelected && styles.selectedCard];
     return (
-      <Card style={cardStyle} onPress={() => handleCardPress(index)}>
+      <Card style={cardStyle} onPress={() => handleCardPress(index, item.id)}>
         <Text style={styles.text}>{extractTime(item.datetime)}</Text>
       </Card>
     );
@@ -62,7 +64,7 @@ const BookingTimeStep = () => {
     <Layout style={{flex: 1}}>
       <Layout style={{marginVertical: 16, alignItems: 'center'}}>
         <Text category="h4">Pick Your Show</Text>
-        <Text category="s1">Select the time of your show</Text>
+        <Text category="s1">Select the time of the show</Text>
       </Layout>
       {showsTimes.length !== 0 ? (
         <Layout style={{marginVertical: 16, alignItems: 'center'}}>

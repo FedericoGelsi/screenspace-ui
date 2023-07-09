@@ -30,13 +30,14 @@ export const getMovieGenresAPI = async () => {
   return results.data;
 };
 
-export const postMovieReviewAPI = async (movieId, reviewInfo) => {
+export const postMovieReviewAPI = async (movieId, userId, reviewInfo) => {
   // {
   //     "userId": 0,
   //     "rating": 0,
   //     "comment": "string"
   //   }
   body = {
+    userId: userId,
     ...reviewInfo,
   };
   const results = await axios.get(`api/movies/${movieId}/review`, body);
