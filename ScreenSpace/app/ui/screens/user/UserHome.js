@@ -17,6 +17,7 @@ import GridLayout from '../../components/user/GridLayout';
 import {useDispatch, useSelector} from 'react-redux';
 import {getMoviesInTheaters} from '../../../redux/slices/showingSlice';
 import SearchBar from '../../components/SearchBar';
+import {NoData} from '../../components/NoData';
 
 const UserHome = ({navigation, route}) => {
   const showing = useSelector(state => state.showing);
@@ -24,10 +25,10 @@ const UserHome = ({navigation, route}) => {
   function removeDuplicates(arr) {
     const uniqueIds = [];
     let unique = arr.filter(element => {
-      const isDuplicate = uniqueIds.includes(element.id);
+      const isDuplicate = uniqueIds.includes(element.movie.id);
 
       if (!isDuplicate) {
-        uniqueIds.push(element.id);
+        uniqueIds.push(element.movie.id);
 
         return true;
       }
@@ -47,9 +48,10 @@ const UserHome = ({navigation, route}) => {
   }, [showing]);
   const handleSearch = movieName => {
     setMoviesData(
-      showing.movies.filter(movie =>
-        movie.title.toLowerCase().includes(movieName.toLowerCase()),
-      ),
+      showing.movies.filter(item => {
+
+        return item.movie.title.toLowerCase().includes(movieName.toLowerCase());
+      }),
     );
   };
   const LogoIcon = () => (
@@ -110,20 +112,19 @@ const UserHome = ({navigation, route}) => {
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <Spinner size="giant" />
             </Layout>
+          ) : moviesData.length !== 0 ? (
+            <GridLayout
+              data={removeDuplicates(moviesData)}
+              renderItem={(style, item) => (
+                <MovieCard
+                  style={style}
+                  item={item.movie}
+                  navigation={navigation}
+                />
+              )}
+            />
           ) : (
-            moviesData.length !== 0 && (
-              <GridLayout
-                data={removeDuplicates(moviesData)}
-                renderItem={(style, item) => (
-                  <MovieCard
-                    style={style}
-                    item={item}
-                    navigation={navigation}
-                  />
-                )}
-                numColumns={2}
-              />
-            )
+            <NoData message={I18n.t(TEXT_KEY.userHome.noShowsMessage)}></NoData>
           )}
         </Layout>
       </Layout>

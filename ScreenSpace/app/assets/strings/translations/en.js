@@ -35,12 +35,25 @@ export default {
       buttonTitle: 'Filter',
     },
     showingSectionName: 'Currently Showing',
+    noShowsMessage:
+      'There are no shows currently available\nPlease try again later',
   },
   userSettings: {
     sectionName: 'Settings',
   },
   userBookings: {
     sectionName: 'Your Bookings',
+  },
+  movieDetails: {
+    sectionName: 'Movie Details',
+    infoColumn: {
+      genreLabel: 'Genre',
+      durationLabel: 'Duration',
+      ratingLabel: 'Rating',
+      reviewsLabel: 'Comments',
+    },
+    synopsisLabel: 'Synopsis',
+    bookingButtonLabel: 'Get Reservation',
   },
   cinemaHome: {
     title: 'Your Cinemas',

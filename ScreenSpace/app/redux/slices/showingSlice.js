@@ -39,7 +39,26 @@ const showingSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.hasError = false;
-        state.movies = action.payload.flatMap(o => o.moviesInTheaters);
+        const activeCinemas = action.payload.filter(
+          item => item.active === true,
+        );
+        const flattenedHalls = activeCinemas.flatMap(o =>
+          o.halls.map(e => ({
+            cinemaId: o.id,
+            hallId: e.id,
+            cinemaShows: e.cinemaShows,
+          })),
+        );
+        const flattenedShows = flattenedHalls.flatMap(o =>
+          o.cinemaShows.map(e => ({
+            cinemaId: o.cinemaId,
+            hallId: o.hallId,
+            showId: e.id,
+            availableSeats: e.availableSeats,
+            movie: e.movie,
+          })),
+        );
+        state.movies = flattenedShows;
       })
       .addCase(getMoviesInTheaters.rejected, (state, action) => {
         state.isLoading = false;
