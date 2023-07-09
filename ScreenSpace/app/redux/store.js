@@ -5,6 +5,7 @@ import ownerCinemasReducer from './slices/ownerCinemasSlice';
 import userLoginReducer from './slices/loginSlice';
 import newShowFormReducer from './slices/showFormSlice';
 import moviesReducer from './slices/moviesSlice';
+import bookingReducer from './slices/bookingSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     login: userLoginReducer,
     newShowForm: newShowFormReducer,
     movies: moviesReducer,
+    booking: bookingReducer,
   },
 });
