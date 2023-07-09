@@ -9,7 +9,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import {SuccessModal} from '../../../components/SuccessModal';
 import BookingSteps from './BookingSteps';
 import {getCinemasByMovie} from '../../../../redux/slices/userCinemaSlice';
-import {completeForm} from '../../../../redux/slices/movieBookingSlice';
+import {
+  completeForm,
+  newUserBooking,
+  reset,
+} from '../../../../redux/slices/movieBookingSlice';
 
 const BookingForm = ({navigation, route}) => {
   const movieId = route?.params?.movieId;
@@ -32,7 +36,7 @@ const BookingForm = ({navigation, route}) => {
   const [visible, setVisible] = React.useState(false);
 
   const submitHandler = () => {
-    dispatch(createShow());
+    dispatch(newUserBooking());
     setVisible(true);
   };
 
@@ -49,6 +53,7 @@ const BookingForm = ({navigation, route}) => {
   };
 
   const navigateBack = () => {
+    dispatch(reset());
     navigation.goBack();
   };
 

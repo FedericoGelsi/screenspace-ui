@@ -21,6 +21,10 @@ const BookingCinemaStep = () => {
   const dispatch = useDispatch();
   const [items, setItems] = useState(cinemas.cinemas);
 
+  React.useEffect(() => {
+    setItems(cinemas.cinemas);
+  }, [cinemas.cinemas]);
+
   const MenuOptions = ({items, renderItem}) => {
     const initialItem = items.findIndex(
       item => item.id === formValues.cinemaId,
@@ -100,7 +104,7 @@ const BookingCinemaStep = () => {
             )}
             setValue={handleSearch}
           />
-          <MenuOptions items={cinemas.cinemas} renderItem={renderItem} />
+          <MenuOptions items={items} renderItem={renderItem} />
         </>
       )}
     </Layout>
