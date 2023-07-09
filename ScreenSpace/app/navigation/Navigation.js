@@ -22,6 +22,7 @@ import UserLogin from '../ui/screens/user/UserLogin';
 import InitialLoginScreen from '../ui/screens/InitialLoginScreen';
 import UserViewsNavigator from '../ui/screens/user/UserViewsNavigator';
 import BookingForm from '../ui/screens/user/booking/BookingForm';
+import BookingsViewDetail from '../ui/screens/user/BookingViewDetail';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -48,6 +49,7 @@ const HomeNavigator = ({initialScreen}) => (
     <Screen name="MovieDetails" component={MovieDetails} />
     <Screen name="UserLogin" component={UserLogin} />
     <Screen name="BookingForm" component={BookingForm} />
+    <Screen name="BookingsViewDetail" component={BookingsViewDetail} />
   </Navigator>
 );
 

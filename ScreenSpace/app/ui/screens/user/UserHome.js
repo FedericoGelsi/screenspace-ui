@@ -2,29 +2,58 @@ import React from 'react';
 import ViewTopNavigationContainer from '../../components/ViewTopNavigationContainer';
 import {Image} from 'react-native';
 import IMAGES from '../../../assets/images/Images';
-import {Avatar, Layout, Spinner, Text} from '@ui-kitten/components';
+import {
+  Avatar,
+  Button,
+  Icon,
+  Layout,
+  Spinner,
+  Text,
+} from '@ui-kitten/components';
 import I18n from '../../../assets/strings/I18n';
 import TEXT_KEY from '../../../assets/strings/TextKey';
 import MovieCard from '../../components/user/MovieCard';
 import GridLayout from '../../components/user/GridLayout';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  getMovies,
-} from '../../../redux/slices/moviesSlice';
+import {getMoviesInTheaters} from '../../../redux/slices/showingSlice';
+import SearchBar from '../../components/SearchBar';
+import {NoData} from '../../components/NoData';
 
 const UserHome = ({navigation, route}) => {
-  const moviesValues = useSelector(state => state.movies);
+  const showing = useSelector(state => state.showing);
   const dispatch = useDispatch();
-  const [moviesData, setMoviesData] = React.useState(moviesValues.movies);
+  function removeDuplicates(arr) {
+    const uniqueIds = [];
+    let unique = arr.filter(element => {
+      const isDuplicate = uniqueIds.includes(element.movie.id);
+
+      if (!isDuplicate) {
+        uniqueIds.push(element.movie.id);
+
+        return true;
+      }
+
+      return false;
+    });
+    return unique;
+  }
+  const [moviesData, setMoviesData] = React.useState(showing.movies);
 
   React.useEffect(() => {
-    dispatch(getMovies());
-  }, [dispatch]);
+    dispatch(getMoviesInTheaters());
+  }, [dispatch, handleSearch]);
 
   React.useEffect(() => {
-    setMoviesData(moviesValues.movies);
-  }, [moviesValues]);
+    setMoviesData(showing.movies);
+  }, [showing]);
+  const handleSearch = movieName => {
+    setMoviesData(
+      showing.movies.filter(item => {
 
+        return item.movie.title.toLowerCase().includes(movieName.toLowerCase());
+      }),
+    );
+  };
   const LogoIcon = () => (
     <Image
       style={{height: 36, width: 36, marginLeft: 16}}
@@ -60,23 +89,44 @@ const UserHome = ({navigation, route}) => {
       accessoryRight={accesoryRight}
       headerTitle={headerTitle}
       headerSubtitle={headerSubTitle}>
-      <Layout style={{flex: 1, padding: 16}}>
-        {moviesValues.isLoading ? (
-          <Layout
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Spinner size="giant" />
-          </Layout>
-        ) : (
-          moviesData.length !== 0 && (
+      <Layout style={{flex: 1, paddingHorizontal: 16}}>
+        <Layout style={{flexDirection: 'row', paddingVertical: 16}}>
+          <SearchBar
+            style={{flex: 1, marginRight: 8}}
+            placeholder={I18n.t(TEXT_KEY.userHome.searchBar.placeholder)}
+            setValue={handleSearch}
+          />
+          <Button
+            appearance="outline"
+            size="small"
+            accessoryLeft={props => <Icon {...props} name="funnel-outline" />}>
+            {I18n.t(TEXT_KEY.userHome.filter.buttonTitle)}
+          </Button>
+        </Layout>
+        <Text category="h5">
+          {I18n.t(TEXT_KEY.userHome.showingSectionName)}
+        </Text>
+        <Layout style={{flex: 1, paddingTop: 16, paddingBottom: 8}}>
+          {showing.isLoading ? (
+            <Layout
+              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <Spinner size="giant" />
+            </Layout>
+          ) : moviesData.length !== 0 ? (
             <GridLayout
-              data={moviesData}
+              data={removeDuplicates(moviesData)}
               renderItem={(style, item) => (
-                <MovieCard style={style} item={item} navigation={navigation} />
+                <MovieCard
+                  style={style}
+                  item={item.movie}
+                  navigation={navigation}
+                />
               )}
-              numColumns={2}
             />
-          )
-        )}
+          ) : (
+            <NoData message={I18n.t(TEXT_KEY.userHome.noShowsMessage)}></NoData>
+          )}
+        </Layout>
       </Layout>
     </ViewTopNavigationContainer>
   );

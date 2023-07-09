@@ -1,23 +1,25 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {Dimensions} from 'react-native';
 
-const windowHeight = Dimensions.get('window').height;
-
-const GridLayout = ({data, renderItem, numColumns}) => {
+const GridLayout = ({data, renderItem, numColumns = 2}) => {
   const formatData = (data, numColumns) => {
-    const numberOfFullRows = Math.floor(data.lenght / numColumns);
+    const dataLenght = Array.from(data).length;
+    const numberOfFullRows = Math.floor(dataLenght / numColumns);
 
-    let numberOfElementsLastRow = data.lenght - numberOfFullRows * numColumns;
+    let numberOfElementsLastRow = dataLenght - numberOfFullRows * numColumns;
+    let items = [];
+    data.forEach(element => {
+      items.push({value: element, empty: false});
+    });
 
-    // while (
-    //   numberOfElementsLastRow !== numColumns &&
-    //   numberOfElementsLastRow !== 0
-    // ) {
-    //   data.push({empty: true});
-    //   numberOfElementsLastRow++;
-    // }
-    return data;
+    while (
+      numberOfElementsLastRow !== numColumns &&
+      numberOfElementsLastRow !== 0
+    ) {
+      items.push({value: data, empty: true});
+      numberOfElementsLastRow++;
+    }
+    return items;
   };
 
   const renderItemFunction = ({item, index}) => {
@@ -26,7 +28,7 @@ const GridLayout = ({data, renderItem, numColumns}) => {
         <View key={index} style={[styles.item, styles.itemInvisible]}></View>
       );
     }
-    return renderItem(styles.item, item);
+    return renderItem(styles.item, item.value);
   };
   return (
     <FlatList
@@ -34,7 +36,6 @@ const GridLayout = ({data, renderItem, numColumns}) => {
       style={styles.container}
       renderItem={renderItemFunction}
       numColumns={numColumns}
-      refreshing={true}
     />
   );
 };

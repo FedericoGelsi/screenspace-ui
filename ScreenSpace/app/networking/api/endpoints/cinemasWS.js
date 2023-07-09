@@ -1,7 +1,10 @@
 import axios from '../Api';
 
 export const getCinemas = async ownerId => {
-  const results = await axios.get(`/api/cinemas?ownerID=${ownerId}`);
+  const params = {
+    ownerId: ownerId,
+  };
+  const results = await axios.get("/api/cinemas", params);
   return results.data;
 };
 

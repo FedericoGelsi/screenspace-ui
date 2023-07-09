@@ -28,12 +28,44 @@ export default {
     sectionName: 'userHome.sectionName',
     title: 'userHome.title',
     subtitle: 'userHome.subtitle',
+    searchBar: {
+      placeholder: 'userHome.searchBar.placeholder',
+    },
+    filter: {
+      buttonTitle: 'userHome.filter.buttonTitle',
+    },
+    showingSectionName: 'userHome.showingSectionName',
+    noShowsMessage: 'userHome.noShowsMessage',
   },
   userSettings: {
     sectionName: 'userSettings.sectionName',
   },
   userBookings: {
-    sectionName: 'userBookings.sectionName'
+    sectionName: 'userBookings.sectionName',
+    noData: 'userBookings.noData',
+    date: 'userBookings.date',
+  },
+  bookingDetail: {
+    cinema: 'bookingDetail.cinema',
+    date: 'bookingDetail.date',
+    time: 'bookingDetail.time',
+    seats: 'bookingDetail.seats',
+    price: 'bookingDetail.price',
+    cinemaFee: 'bookingDetail.cinemaFee',
+    serviceFee: 'bookingDetail.serviceFee',
+    total: 'bookingDetail.total',
+    code: 'bookingDetail.code',
+  },
+  movieDetails: {
+    sectionName: 'movieDetails.sectionName',
+    infoColumn: {
+      genreLabel: 'movieDetails.infoColumn.genreLabel',
+      durationLabel: 'movieDetails.infoColumn.durationLabel',
+      ratingLabel: 'movieDetails.infoColumn.ratingLabel',
+      reviewsLabel: 'movieDetails.infoColumn.reviewsLabel',
+    },
+    synopsisLabel: 'movieDetails.synopsisLabel',
+    bookingButtonLabel: 'movieDetails.bookingButtonLabel',
   },
   cinemaHome: {
     title: 'cinemaHome.title',

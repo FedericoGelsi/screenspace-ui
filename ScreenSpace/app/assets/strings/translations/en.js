@@ -28,12 +28,45 @@ export default {
     sectionName: 'Home',
     title: 'Welcome',
     subtitle: 'Let’s relax and watch a movie!',
+    searchBar: {
+      placeholder: 'What are you looking for?',
+    },
+    filter: {
+      buttonTitle: 'Filter',
+    },
+    showingSectionName: 'Currently Showing',
+    noShowsMessage:
+      'There are no shows currently available\nPlease try again later',
   },
   userSettings: {
     sectionName: 'Settings',
   },
   userBookings: {
     sectionName: 'Your Bookings',
+    noData: 'You do not have bookings yet.\nIt is time to book a ticket.',
+    date: 'Date',
+  },
+  bookingDetail: {
+    cinema: 'Cinema',
+    date: 'Date',
+    time: 'Time',
+    seats: 'Seats',
+    price: 'Price per seat',
+    cinemaFee: 'Cinema fee',
+    serviceFee: 'Service fee',
+    total: 'Total Bill',
+    code: 'Reservation Code',
+  },
+  movieDetails: {
+    sectionName: 'Movie Details',
+    infoColumn: {
+      genreLabel: 'Genre',
+      durationLabel: 'Duration',
+      ratingLabel: 'Rating',
+      reviewsLabel: 'Comments',
+    },
+    synopsisLabel: 'Synopsis',
+    bookingButtonLabel: 'Get Reservation',
   },
   cinemaHome: {
     title: 'Your Cinemas',
