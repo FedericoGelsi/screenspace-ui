@@ -21,6 +21,7 @@ import {NoData} from '../../components/NoData';
 
 const UserHome = ({navigation, route}) => {
   const showing = useSelector(state => state.showing);
+  const userClaims = useSelector(state => state.login.userClaims);
   const dispatch = useDispatch();
   function removeDuplicates(arr) {
     const uniqueIds = [];
@@ -64,7 +65,7 @@ const UserHome = ({navigation, route}) => {
   const headerTitle = props => {
     return (
       <Text {...props} category="label">
-        {I18n.t(TEXT_KEY.userHome.title)} {userClaims.user.givenName}!
+        {I18n.t(TEXT_KEY.userHome.title)} {userClaims.username}!
       </Text>
     );
   };
@@ -80,8 +81,9 @@ const UserHome = ({navigation, route}) => {
     return <Avatar size="large" source={{uri: avatarUrl}} />;
   };
 
-  const {userClaims} = route.params;
-  const avatarUrl = userClaims?.user?.photo ?? IMAGES.PNG.AVATAR_PNG;
+  const uri = Image.resolveAssetSource(IMAGES.PNG.AVATAR_PNG).uri;
+
+  const avatarUrl = userClaims?.avatar ?? uri;
 
   return (
     <ViewTopNavigationContainer
