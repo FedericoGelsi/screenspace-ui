@@ -17,6 +17,7 @@ import GridLayout from '../../components/user/GridLayout';
 import {useDispatch, useSelector} from 'react-redux';
 import {getMoviesInTheaters} from '../../../redux/slices/showingSlice';
 import SearchBar from '../../components/SearchBar';
+import { NoData } from '../../components/NoData';
 
 const UserHome = ({navigation, route}) => {
   const showing = useSelector(state => state.showing);
@@ -111,7 +112,7 @@ const UserHome = ({navigation, route}) => {
               <Spinner size="giant" />
             </Layout>
           ) : (
-            moviesData.length !== 0 && (
+            moviesData.length !== 0 ? (
               <GridLayout
                 data={removeDuplicates(moviesData)}
                 renderItem={(style, item) => (
@@ -123,7 +124,7 @@ const UserHome = ({navigation, route}) => {
                 )}
                 numColumns={2}
               />
-            )
+            ) : ( <NoData message={I18n.t(TEXT_KEY.userHome.noShowsMessage)}></NoData>)
           )}
         </Layout>
       </Layout>

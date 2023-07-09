@@ -35,6 +35,7 @@ export default {
       buttonTitle: 'userHome.filter.buttonTitle',
     },
     showingSectionName: 'userHome.showingSectionName',
+    noShowsMessage: 'userHome.noShowsMessage'
   },
   userSettings: {
     sectionName: 'userSettings.sectionName',

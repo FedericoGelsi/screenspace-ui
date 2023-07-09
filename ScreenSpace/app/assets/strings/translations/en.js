@@ -35,6 +35,7 @@ export default {
       buttonTitle: 'Filter',
     },
     showingSectionName: 'Currently Showing',
+    noShowsMessage: 'There are no shows currently available\nPlease try again later'
   },
   userSettings: {
     sectionName: 'Settings',

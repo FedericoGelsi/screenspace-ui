@@ -35,6 +35,7 @@ export default {
       buttonTitle: 'Filtro',
     },
     showingSectionName: 'Actualmente en cartelera',
+    noDataMessage: 'No hay ninguna función en cartelera actualmente\nPor favor, pruebe de nuevo más tarde'
   },
   userSettings: {
     sectionName: 'Configuraciones',
