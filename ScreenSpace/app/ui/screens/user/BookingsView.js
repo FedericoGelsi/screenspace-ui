@@ -30,6 +30,8 @@ const BookingsView = ({navigation}) => {
       timetable: 1625792045000,
       totalPrice: 1899.99,
       seats: ['C5', 'C6', 'C7'],
+      cinemaName: 'Cinema XYZ',
+      pricePerSeat: 630,
     },
     {
       bookingCode: 'X5M3QK9',
@@ -50,6 +52,8 @@ const BookingsView = ({navigation}) => {
       timetable: 1625935261000,
       totalPrice: 1450.75,
       seats: ['A2', 'A3', 'A4'],
+      cinemaName: 'Cinema QWE',
+      pricePerSeat: 450,
     },
     {
       bookingCode: 'P2R6NJ7',
@@ -70,11 +74,13 @@ const BookingsView = ({navigation}) => {
       timetable: 1626064609000,
       totalPrice: 1650.5,
       seats: ['D8', 'D9', 'D10'],
+      cinemaName: 'Cinema ABC',
+      pricePerSeat: 500,
     },
   ];
   const dispatch = useDispatch();
 
- // const {bookings, error, isLoading} = useSelector(state => state.Bookings);
+  // const {bookings, error, isLoading} = useSelector(state => state.Bookings);
   const {userId} = useSelector(state => state.login);
 
   React.useEffect(() => {

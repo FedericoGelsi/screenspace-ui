@@ -27,7 +27,7 @@ const BookingsViewDetail = ({navigation, route}) => {
         style={{flex: 1, justifyContent: 'center'}}>
         <View style={styles.container}>
           {/*PRIMER COMPONENTE */}
-          {/*Cinema 
+          {/*Cinema*/}
           <Layout style={{flexDirection: 'row', alignItems: 'center'}}>
             <Icon
               style={{width: 32, height: 32}}
@@ -38,11 +38,10 @@ const BookingsViewDetail = ({navigation, route}) => {
               {I18n.t(TEXT_KEY.bookingDetail.cinema)}
             </Text>
             <Text category="s1" style={styles.textBooking}>
-              Hoyts Alto Palermo
+              {booking?.item?.cinemaName}
             </Text>
           </Layout>
           <Divider style={styles.divider} />
-          */}
           {/*Date */}
           <Layout style={{flexDirection: 'row', alignItems: 'center'}}>
             <Icon
@@ -102,9 +101,7 @@ const BookingsViewDetail = ({navigation, route}) => {
               {I18n.t(TEXT_KEY.bookingDetail.price)}
             </Text>
             <Text category="s1" style={styles.textBooking}>
-              {Math.floor(
-                totalPrice / booking.item.seats.length,
-              ).toLocaleString()}
+              {booking.item.pricePerSeat}
             </Text>
           </Layout>
           <Divider style={styles.divider} />
@@ -120,9 +117,8 @@ const BookingsViewDetail = ({navigation, route}) => {
             </Text>
             <Text category="s1" style={styles.textBooking}>
               {(
-                (totalPrice % booking.item.seats.length) +
-                (Math.floor(totalPrice / booking.item.seats.length) % 1) *
-                  booking.item.seats.length
+                totalPrice -
+                booking?.item?.pricePerSeat * booking?.item.seats.length
               ).toFixed(2)}
             </Text>
           </Layout>
