@@ -11,7 +11,7 @@ export const AdminProfile = ({navigation}) => {
   const handleLogout = () => {
     storeLoggedSession('false');
     dispatch(reset());
-    navigation.push('AdminLogin');
+    navigation.popToTop();
   };
 
   const handleDeleteProfile = () => {

@@ -26,12 +26,21 @@ export default {
   },
   userHome: {
     sectionName: 'userHome.sectionName',
+    title: 'userHome.title',
+    subtitle: 'userHome.subtitle',
+    searchBar: {
+      placeholder: 'userHome.searchBar.placeholder',
+    },
+    filter: {
+      buttonTitle: 'userHome.filter.buttonTitle',
+    },
+    showingSectionName: 'userHome.showingSectionName',
   },
   userSettings: {
     sectionName: 'userSettings.sectionName',
   },
   userBookings: {
-    sectionName: 'userBookings.sectionName'
+    sectionName: 'userBookings.sectionName',
   },
   cinemaHome: {
     title: 'cinemaHome.title',

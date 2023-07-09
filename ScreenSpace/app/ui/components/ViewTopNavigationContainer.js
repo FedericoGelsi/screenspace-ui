@@ -9,6 +9,7 @@ import {Image, SafeAreaView} from 'react-native';
 
 import I18n from '../../assets/strings/I18n';
 import TEXT_KEY from '../../assets/strings/TextKey';
+import IMAGES from '../../assets/images/Images';
 
 const ViewTopNavigationContainer = ({
   variant,
@@ -26,7 +27,7 @@ const ViewTopNavigationContainer = ({
   const LogoIcon = () => (
     <Image
       style={{height: 36, width: 36, marginLeft: 16}}
-      source={require('../../assets/images/icons/screenspace-logo.png')}
+      source={IMAGES.PNG.ICON_PNG}
     />
   );
 

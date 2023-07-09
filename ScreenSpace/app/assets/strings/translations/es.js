@@ -26,6 +26,15 @@ export default {
   },
   userHome: {
     sectionName: 'Inicio',
+    title: 'Bienvenido',
+    subtitle: 'Relajemonos y veamos una película!',
+    searchBar: {
+      placeholder: 'Qué película queres ver?',
+    },
+    filter: {
+      buttonTitle: 'Filtro',
+    },
+    showingSectionName: 'Actualmente en cartelera',
   },
   userSettings: {
     sectionName: 'Configuraciones',
