@@ -5,7 +5,7 @@ import {CommentsModal} from './CommentsModal';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 
-const MovieReviews = ({reviews}) => {
+const MovieReviews = ({reviews, movieId}) => {
   const [isModalVisible, setModalVisible] = React.useState(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -23,6 +23,7 @@ const MovieReviews = ({reviews}) => {
       </Button>
       <CommentsModal
         reviews={reviews}
+        movieId={movieId}
         isModalVisible={isModalVisible}
         toggleModal={toggleModal}
       />

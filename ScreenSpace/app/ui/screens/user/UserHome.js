@@ -50,7 +50,6 @@ const UserHome = ({navigation, route}) => {
   const handleSearch = movieName => {
     setMoviesData(
       showing.movies.filter(item => {
-
         return item.movie.title.toLowerCase().includes(movieName.toLowerCase());
       }),
     );
