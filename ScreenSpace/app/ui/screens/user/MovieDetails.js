@@ -12,7 +12,7 @@ const MovieDetails = ({navigation, route}) => {
   const {movie} = route.params;
 
   const navigateBooking = () => {
-    // navigation.push('', {movie: movie});
+    navigation.push('SelectSeats', {movie: movie});
   };
 
   const accessoryRight = () => {
