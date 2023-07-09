@@ -9,6 +9,7 @@ import movieBookingReducer from './slices/movieBookingSlice';
 import userCinemasReducer from './slices/userCinemaSlice';
 import showingReducer from './slices/showingSlice';
 import bookingReducer from './slices/bookingSlice';
+import reviewReducer from './slices/reviewSlice';
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     movieBooking: movieBookingReducer,
     showing: showingReducer,
     booking: bookingReducer,
+    review: reviewReducer,
   },
 });
