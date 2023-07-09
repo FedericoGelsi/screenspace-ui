@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {loginAPI} from '../../networking/api/endpoints/loginWS';
-import {loginGoogleAPI} from '../../networking/api/endpoints/loginGoogleWS';
+import {loginGoogleAPI, loginUpdateGoogleUserAPI} from '../../networking/api/endpoints/loginGoogleWS';
 
 const initialState = {
   token: '',
@@ -12,6 +12,7 @@ const initialState = {
   error: null,
   hasError: false,
   isNewUser: false,
+  isUserUpdateFinished: false,
   userClaims: {}
 };
 
@@ -22,6 +23,12 @@ export const userLogin = createAsyncThunk('userLogin', async loginInfo => {
 
 export const userLoginGoogle = createAsyncThunk('userLoginGoogle', async googleIdToken => {
     const response = await loginGoogleAPI(googleIdToken);
+    return response;
+});
+
+export const userUpdateGoogle = createAsyncThunk('userUpdateGoogle', async userInfo => {
+    console.log(userInfo);
+    const response = await loginUpdateGoogleUserAPI(userInfo.userId, userInfo.email, userInfo.username, userInfo.avatar);
     return response;
 });
 
@@ -73,6 +80,26 @@ const UserLoginSlice = createSlice({
         state.isNewUser = action.payload.isNewUser;
       })
       .addCase(userLoginGoogle.rejected, (state, action) => {
+        console.log('rejected');
+        state.isLoading = false;
+      })
+      .addCase(userUpdateGoogle.pending, (state, action) => {
+        console.log('pending');
+        state.isLoading = true;
+        state.error = null;
+        state.hasError = false;
+      })
+      .addCase(userUpdateGoogle.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.hasError = false;
+        state.userClaims = action.payload;
+        state.userId = action.payload.id;
+        state.username = action.payload.username;
+        state.email = action.payload.email;
+        state.isUserUpdateFinished = action.payload.enabled;
+      })
+      .addCase(userUpdateGoogle.rejected, (state, action) => {
         console.log('rejected');
         state.isLoading = false;
       });
