@@ -35,13 +35,25 @@ export default {
       buttonTitle: 'Filtro',
     },
     showingSectionName: 'Actualmente en cartelera',
-    noDataMessage: 'No hay ninguna función en cartelera actualmente\nPor favor, pruebe de nuevo más tarde'
+    noDataMessage:
+      'No hay ninguna función en cartelera actualmente\nPor favor, pruebe de nuevo más tarde',
   },
   userSettings: {
     sectionName: 'Configuraciones',
   },
   userBookings: {
-    sectionName: 'Tus entradas'
+    sectionName: 'Tus entradas',
+  },
+  movieDetails: {
+    sectionName: 'Detalles de la Película',
+    infoColumn: {
+      genreLabel: 'Género',
+      durationLabel: 'Duración',
+      ratingLabel: 'Valoración',
+      reviewsLabel: 'Comentarios',
+    },
+    synopsisLabel: 'Sinópsis',
+    bookingButtonLabel: 'Sacar entrada',
   },
   cinemaHome: {
     title: 'Tus Cines',
@@ -131,10 +143,10 @@ export default {
       hallLabel: 'Sala',
       dateTimeLabel: 'Horario',
     },
-    dateFilterPlaceholder: "Filtrar por Fecha"
+    dateFilterPlaceholder: 'Filtrar por Fecha',
   },
   cinemaCard: {
-    showsButton: 'Ver funciones'
+    showsButton: 'Ver funciones',
   },
   newCinemaShow: {
     sectionName: 'Nueva Función',
