@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   movieImage: {
-    flex: 3,
+    flex: 4,
+    marginHorizontal:16,
     aspectRatio: 2 / 3,
     borderRadius: 16,
   },
