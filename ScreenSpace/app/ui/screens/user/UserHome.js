@@ -25,10 +25,10 @@ const UserHome = ({navigation, route}) => {
   function removeDuplicates(arr) {
     const uniqueIds = [];
     let unique = arr.filter(element => {
-      const isDuplicate = uniqueIds.includes(element.id);
+      const isDuplicate = uniqueIds.includes(element.movie.id);
 
       if (!isDuplicate) {
-        uniqueIds.push(element.id);
+        uniqueIds.push(element.movie.id);
 
         return true;
       }
@@ -118,7 +118,7 @@ const UserHome = ({navigation, route}) => {
                 renderItem={(style, item) => (
                   <MovieCard
                     style={style}
-                    item={item}
+                    item={item.movie}
                     navigation={navigation}
                   />
                 )}
