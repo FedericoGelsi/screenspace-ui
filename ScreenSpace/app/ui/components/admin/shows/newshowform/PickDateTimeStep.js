@@ -7,6 +7,7 @@ import {
   NativeDateService,
   Autocomplete,
   Text,
+  Divider,
 } from '@ui-kitten/components';
 import I18n from '../../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../../assets/strings/TextKey';
@@ -56,10 +57,12 @@ const PickDateTimeStep = () => {
     i18n,
     startDayOfWeek: 1,
   });
+  const now = new Date();
+  const min = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
 
   return (
-    <ScrollView style={{flex: 1}}>
-      <Layout style={{marginVertical: 16, alignItems: 'center'}}>
+    <ScrollView style={{flex: 1, paddingVertical: 16}}>
+      <Layout style={{marginBottom: 16, alignItems: 'center'}}>
         <Text category="h4">
           {I18n.t(TEXT_KEY.newCinemaShow.steps.fourthStep.title)}
         </Text>
@@ -67,37 +70,40 @@ const PickDateTimeStep = () => {
           {I18n.t(TEXT_KEY.newCinemaShow.steps.fourthStep.subtitle)}
         </Text>
       </Layout>
-      <Layout style={{marginVertical: 16, alignItems: 'center'}}>
-        <Calendar
-          dateService={localeDateService}
-          date={date}
-          onSelect={nextDate => handleDate(nextDate)}
-        />
-      </Layout>
-      <Layout
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-          marginHorizontal: 16,
-        }}>
-        <Text style={{flex: 2, fontWeight: 'bold'}} category="p1">
-          {I18n.t(TEXT_KEY.newCinemaShow.steps.fourthStep.timePickerLabel)}:
-        </Text>
-        <Autocomplete
-          // FIXME: See if we can use anothe element to avoid opening the keyboard
-          style={{flex: 3}}
-          placeholder={I18n.t(
-            TEXT_KEY.newCinemaShow.steps.fourthStep.timePickerPlaceholder,
-          )}
-          value={date?.toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
-          disabled={date === null}
-          onPressIn={showTimepicker}
-        />
-      </Layout>
+      <Calendar
+        style={{flex: 1}}
+        dateService={localeDateService}
+        date={date}
+        onSelect={nextDate => handleDate(nextDate)}
+        min={min}
+        renderFooter={() => (
+          <Layout
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              alignItems: 'center',
+            }}>
+            <Divider />
+            <Text style={{fontWeight: 'bold'}} category="p1">
+              {I18n.t(TEXT_KEY.newCinemaShow.steps.fourthStep.timePickerLabel)}:
+            </Text>
+            <Autocomplete
+              // FIXME: See if we can use anothe element to avoid opening the keyboard
+              placeholder={I18n.t(
+                TEXT_KEY.newCinemaShow.steps.fourthStep.timePickerPlaceholder,
+              )}
+              value={date?.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+              disabled={date === null}
+              onPressIn={showTimepicker}
+            />
+          </Layout>
+        )}
+      />
+
       {show && (
         <DateTimePicker
           value={date}
