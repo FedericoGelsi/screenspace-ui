@@ -32,7 +32,7 @@ const ScreenSpaceStepIndicator = ({labels, currentPosition, setCurrentPosition})
   };
 
   return (
-    <Layout style={{paddingVertical:32}}>
+    <Layout style={{paddingVertical:16}}>
       <StepIndicator
         customStyles={customStyles}
         currentPosition={currentPosition}
