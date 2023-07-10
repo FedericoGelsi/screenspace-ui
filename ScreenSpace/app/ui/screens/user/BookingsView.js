@@ -80,11 +80,11 @@ const BookingsView = ({navigation}) => {
   ];
   const dispatch = useDispatch();
 
-  // const {bookings, error, isLoading} = useSelector(state => state.booking);
+  const {bookings, error, isLoading} = useSelector(state => state.booking);
   const {userId} = useSelector(state => state.login);
 
   React.useEffect(() => {
-    //dispatch(getBooking(userId));
+    dispatch(getBooking(userId));
   }, [dispatch, userId]);
 
   const navigateBookingDetail = bookingItem => {
@@ -98,13 +98,13 @@ const BookingsView = ({navigation}) => {
       accessoryLeft={<></>}
       headerTitle={I18n.t(TEXT_KEY.userBookings.sectionName)}>
       <View style={styles.screenContainer}>
-        {isLoadingMock ? (
+        {isLoading ? (
           <Layout style={styles.noDataContainer}>
             <Spinner size="giant" />
           </Layout>
         ) : (
           <>
-            {bookingsMock.length === 0 ? (
+            {bookings.length === 0 ? (
               <View style={styles.noDataContainer}>
                 <Text category="h6" style={styles.title}>
                   {I18n.t(TEXT_KEY.userBookings.noData)}
@@ -114,7 +114,7 @@ const BookingsView = ({navigation}) => {
               <View style={styles.bookingContainer}>
                 <List
                   contentContainerStyle={styles.contentContainer}
-                  data={bookingsMock}
+                  data={bookings}
                   renderItem={item => (
                     <BookingCard
                       navigateAction={navigateBookingDetail}

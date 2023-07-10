@@ -157,7 +157,6 @@ const SelectSeatsStep = ({navigation, route}) => {
             : Status.Reserved,
           seatId: seatId,
         });
-        console.log(seatId);
       }
     }
     return seatMap;

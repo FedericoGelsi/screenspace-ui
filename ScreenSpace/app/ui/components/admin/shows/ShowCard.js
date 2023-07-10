@@ -74,8 +74,13 @@ const ShowCard = ({show, navigation}) => {
 
   const handleDeleteShow = show => {
     setDeleteModalVisible(false);
-    console.log(show);
-    dispatch(removeShow({cinemaId: show.cinemaId, hallId: show.hallId, showId: show.showId}));
+    dispatch(
+      removeShow({
+        cinemaId: show.cinemaId,
+        hallId: show.hallId,
+        showId: show.showId,
+      }),
+    );
   };
 
   const editShow = show => {
@@ -96,9 +101,7 @@ const ShowCard = ({show, navigation}) => {
     </Layout>
   );
   return (
-    <Card
-      style={styles.card}
-      header={<Header movieName={show.showName} />}>
+    <Card style={styles.card} header={<Header movieName={show.showName} />}>
       <Layout style={{flex: 1, flexDirection: 'row'}}>
         <Layout
           style={{

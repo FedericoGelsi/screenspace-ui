@@ -9,8 +9,7 @@ import TEXT_KEY from '../../../assets/strings/TextKey';
 const BookingsViewDetail = ({navigation, route}) => {
   const {bookingSeri} = route.params;
   const booking = JSON.parse(bookingSeri);
-  const image = {uri: booking?.item.movie?.image};
-  console.log(image);
+  const image = {uri: booking?.item.movie?.imageUrl};
   var totalPrice = parseFloat(booking.item.totalPrice);
   const fechaHora = new Date(booking.item.timetable);
 
@@ -101,7 +100,7 @@ const BookingsViewDetail = ({navigation, route}) => {
               {I18n.t(TEXT_KEY.bookingDetail.price)}
             </Text>
             <Text category="s1" style={styles.textBooking}>
-              {booking.item.pricePerSeat}
+              ${booking.item.pricePerSeat}
             </Text>
           </Layout>
           <Divider style={styles.divider} />
@@ -116,10 +115,7 @@ const BookingsViewDetail = ({navigation, route}) => {
               {I18n.t(TEXT_KEY.bookingDetail.serviceFee)}
             </Text>
             <Text category="s1" style={styles.textBooking}>
-              {(
-                totalPrice -
-                booking?.item?.pricePerSeat * booking?.item.seats.length
-              ).toFixed(2)}
+              $3.00
             </Text>
           </Layout>
           <Divider style={styles.divider} />
@@ -134,7 +130,7 @@ const BookingsViewDetail = ({navigation, route}) => {
               {I18n.t(TEXT_KEY.bookingDetail.total)}
             </Text>
             <Text category="s1" style={styles.textBooking}>
-              {booking?.item.totalPrice}
+              ${booking.item.pricePerSeat * booking.item.seats.length + 3}
             </Text>
           </Layout>
         </View>
