@@ -40,6 +40,9 @@ export default {
   },
   userSettings: {
     sectionName: 'Configuraciones',
+    profile: 'Actualización de perfil',
+    logout: 'Desconectar',
+    deleteProfile: 'Borrar perfil'
   },
   userBookings: {
     sectionName: 'Tus entradas',
