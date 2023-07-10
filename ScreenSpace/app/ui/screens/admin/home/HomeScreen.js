@@ -28,6 +28,8 @@ export const HomeScreenAdmin = ({navigation, route}) => {
   );
   const {userId} = useSelector(state => state.login);
 
+  console.log(userId);
+
   React.useEffect(() => {
     dispatch(getOwnerCinemas(userId));
     if (refresh) dispatch(getOwnerCinemas(userId));
