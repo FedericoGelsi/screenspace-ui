@@ -8,7 +8,19 @@ import TEXT_KEY from '../../../../assets/strings/TextKey';
 const InfoColumn = ({movie}) => {
   const genres = movie.genres.flatMap(o => o.genre);
 
-  console.log(movie);
+  const reviewAverage = () => {
+    const ratings = movie.reviews.map(review => review.rating);
+    const totalRatings = ratings.length;
+    if (totalRatings === 0) return 'Not Rated';
+    const sumRatings = ratings.reduce((total, rating) => total + rating, 0);
+    const averageRating = sumRatings / totalRatings;
+
+    let raitingFinal = averageRating.toFixed(1);
+    if (Number.isInteger(parseFloat(raitingFinal))) {
+      raitingFinal = parseInt(raitingFinal);
+    }
+    return `${raitingFinal}/5`;
+  };
 
   const data = [
     {
@@ -23,7 +35,7 @@ const InfoColumn = ({movie}) => {
     },
     {
       label: I18n.t(TEXT_KEY.movieDetails.infoColumn.ratingLabel),
-      value: movie.rating,
+      value: reviewAverage(),
       icon: 'star-outline',
     },
   ];
