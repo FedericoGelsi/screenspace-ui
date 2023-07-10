@@ -59,6 +59,19 @@ export default {
     total: 'bookingDetail.total',
     code: 'bookingDetail.code',
   },
+  bookingFeedback: {
+    sectionName: 'bookingFeedback.sectionName',
+    title: 'bookingFeedback.title',
+    subTitle: 'bookingFeedback.subTitle',
+    cardTitle: 'bookingFeedback.cardTitle',
+    buttonLabel: 'bookingFeedback.buttonLabel',
+  },
+  bookingSummary: {
+    sectionName: 'bookingSummary.sectionName',
+    title: 'bookingSummary.title',
+    subtitle: 'bookingSummary.subtitle',
+    buttonLabel: 'bookingSummary.buttonLabel'
+  },
   movieDetails: {
     sectionName: 'movieDetails.sectionName',
     infoColumn: {

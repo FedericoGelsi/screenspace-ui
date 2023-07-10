@@ -60,6 +60,19 @@ export default {
     total: 'Total Bill',
     code: 'Reservation Code',
   },
+  bookingFeedback: {
+    sectionName: 'Feedback',
+    title: 'Booking Complete!',
+    subTitle: 'You will receive an email with the tickets details.\n\nEnjoy your movie!',
+    cardTitle: 'Reservation Code',
+    buttonLabel: 'Back to home page',
+  },
+  bookingSummary: {
+    sectionName: 'Summary',
+    title: 'Booking summary',
+    subtitle: 'Please review your selection before submitting',
+    buttonLabel: 'Submit booking'
+  },
   movieDetails: {
     sectionName: 'Movie Details',
     infoColumn: {

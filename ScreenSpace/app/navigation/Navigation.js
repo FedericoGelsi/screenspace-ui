@@ -24,6 +24,8 @@ import UserViewsNavigator from '../ui/screens/user/UserViewsNavigator';
 import BookingForm from '../ui/screens/user/booking/BookingForm';
 import BookingsViewDetail from '../ui/screens/user/BookingViewDetail';
 import SelectSeatsStep from '../ui/components/user/bookingForm/SelectSeatsStep';
+import BookingFeedback from '../ui/screens/user/booking/BookingFeedback';
+import BookingSummary from '../ui/screens/user/booking/BookingSummary';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -52,6 +54,8 @@ const HomeNavigator = ({initialScreen}) => (
     <Screen name="BookingForm" component={BookingForm} />
     <Screen name="BookingsViewDetail" component={BookingsViewDetail} />
     <Screen name="SelectSeats" component={SelectSeatsStep} />
+    <Screen name="BookingSummary" component={BookingSummary} />
+    <Screen name="BookingFeedback" component={BookingFeedback} />
   </Navigator>
 );
 

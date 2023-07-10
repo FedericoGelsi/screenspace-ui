@@ -42,19 +42,22 @@ export const getMovies = createAsyncThunk(
   },
 );
 
-export const getMovieById = createAsyncThunk('movies/id', async movieId => {
-  try {
-    const response = await getMovieByIdAPI(movieId);
-    return response;
-  } catch (error) {
-    if (error.response) {
-      const statusCode = error.response.status;
-      return rejectWithValue(statusCode);
-    } else {
-      throw error;
+export const getMovieById = createAsyncThunk(
+  'movies/id',
+  async (movieId, thunkAPI) => {
+    try {
+      const response = await getMovieByIdAPI(movieId);
+      return response;
+    } catch (error) {
+      if (error.response) {
+        const statusCode = error.response.status;
+        return rejectWithValue(statusCode);
+      } else {
+        throw error;
+      }
     }
-  }
-});
+  },
+);
 
 const moviesSlice = createSlice({
   name: 'movies',
