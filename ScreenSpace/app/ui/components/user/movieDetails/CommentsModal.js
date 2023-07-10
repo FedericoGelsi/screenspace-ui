@@ -4,9 +4,28 @@ import Modal from 'react-native-modal';
 import {Divider, Button, Avatar} from '@ui-kitten/components';
 import RatingComponent from '../../RatingComponent';
 import {NoData} from '../../NoData';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  completeForm,
+  newReview,
+  reset,
+} from '../../../../redux/slices/reviewSlice';
 
-export const CommentsModal = ({isModalVisible, toggleModal, reviews}) => {
+export const CommentsModal = ({
+  isModalVisible,
+  toggleModal,
+  reviews,
+  movieId,
+}) => {
   const comments = reviews;
+  const reviewForm = useSelector(state => state.review);
+  const dispatch = useDispatch();
+
+  const addCommentHandler = () => {
+    dispatch(newReview(movieId));
+    toggleModal(false);
+    dispatch(reset());
+  };
 
   const renderItem = ({item}) => {
     return (
@@ -65,13 +84,16 @@ export const CommentsModal = ({isModalVisible, toggleModal, reviews}) => {
                 </View>
                 <TextInput
                   style={styles.commentInput}
+                  onChangeText={text =>
+                    dispatch(completeForm({key: 'comment', value: text}))
+                  }
                   placeholder="Write your comment here"
                 />
               </View>
 
               <Button
                 style={styles.addButton}
-                onPress={() => toggleModal(false)}>
+                onPress={() => addCommentHandler()}>
                 Add Comment
               </Button>
             </View>
@@ -81,6 +103,8 @@ export const CommentsModal = ({isModalVisible, toggleModal, reviews}) => {
     </View>
   );
 };
+
+export default CommentsModal;
 
 const styles = StyleSheet.create({
   flexView: {

@@ -3,7 +3,7 @@ import {postMovieReviewAPI} from '../../networking/api/endpoints/moviesWS';
 import {getMoviesInTheaters} from './showingSlice';
 
 const initialState = {
-  raiting: null,
+  rating: null,
   comment: null,
   error: null,
   isLoading: false,

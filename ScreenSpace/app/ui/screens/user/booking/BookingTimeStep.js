@@ -45,8 +45,16 @@ const BookingTimeStep = () => {
     return `${hours}:${formattedMinutes}`;
   };
 
-  const handleCardPress = (index, showId) => {
+  const handleCardPress = (index, showId, show) => {
     dispatch(completeForm({key: 'showId', value: showId}));
+    const cinema = cinemas.cinemas.find(
+      cinema => cinema.id === formValues.cinemaId,
+    );
+    const selectedHall = cinema.halls.find(hall =>
+      hall.cinemaShows.find(show => show.id === showId),
+    );
+    dispatch(completeForm({key: 'hall', value: selectedHall}));
+    dispatch(completeForm({key: 'show', value: show}));
     setSelectedCard(index);
   };
 
@@ -54,7 +62,9 @@ const BookingTimeStep = () => {
     const isSelected = selectedCard === index;
     const cardStyle = [styles.item, isSelected && styles.selectedCard];
     return (
-      <Card style={cardStyle} onPress={() => handleCardPress(index, item.id)}>
+      <Card
+        style={cardStyle}
+        onPress={() => handleCardPress(index, item.id, item)}>
         <Text style={styles.text}>{extractTime(item.datetime)}</Text>
       </Card>
     );

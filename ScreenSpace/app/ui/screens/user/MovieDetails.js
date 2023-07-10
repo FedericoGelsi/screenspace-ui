@@ -7,17 +7,25 @@ import I18n from '../../../assets/strings/I18n';
 import TEXT_KEY from '../../../assets/strings/TextKey';
 import ShareContent from '../../components/ShareContent';
 import MovieReviews from '../../components/user/movieDetails/MovieReviews';
+import {useSelector} from 'react-redux';
 
 const MovieDetails = ({navigation, route}) => {
-  const {movie} = route.params;
+  const [movie, setMovie] = React.useState(route.params.movie);
+  const showing = useSelector(state => state.showing);
 
   const navigateBooking = () => {
-    navigation.push('BookingForm', {movieId: movie.id});
+    navigation.push('BookingForm', {movie: movie});
   };
 
   const accessoryRight = () => {
     return <ShareContent movieTitle={movie.title} />;
   };
+
+  React.useEffect(() => {
+    const result = showing.movies.find(mov => mov.movie.id === movie.id);
+    setMovie(result.movie);
+  }, [showing]);
+
   return (
     <ViewTopNavigationContainer
       navigation={navigation}
@@ -50,7 +58,7 @@ const MovieDetails = ({navigation, route}) => {
             </ScrollView>
           </View>
         </View>
-        <MovieReviews reviews={movie.reviews} />
+        <MovieReviews reviews={movie.reviews} movieId={movie.id} />
         <Button onPress={navigateBooking} style={styles.button}>
           Get Reservation
         </Button>

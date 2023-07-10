@@ -3,6 +3,7 @@ import {Layout} from '@ui-kitten/components';
 import BookingCinemaStep from './BookingCinemaStep';
 import BookingDateStep from './BookingDateStep';
 import BookingTimeStep from './BookingTimeStep';
+import SelectSeatsStep from '../../../components/user/bookingForm/SelectSeatsStep';
 
 const BookingSteps = ({currentPosition}) => {
   return (

@@ -9,9 +9,9 @@ export const newBooking = async (userId, bookingInfo) => {
   body = {
     userId: userId,
     showId: bookingInfo.showId,
-    timetable: new Date(),
-    seats: ['A1'],
+    timetable: new Date().toISOString(),
+    seats: bookingInfo.seats,
   };
-  const results = await axios.get(`/api/bookings`, body);
+  const results = await axios.post(`/api/bookings`, body);
   return results.data;
 };

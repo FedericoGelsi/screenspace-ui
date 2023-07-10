@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import {AirbnbRating} from 'react-native-ratings';
+import {useDispatch, useSelector} from 'react-redux';
+import {completeForm} from '../../redux/slices/reviewSlice';
 
 const RatingComponent = () => {
+  const dispatch = useDispatch();
   const [rating, setRating] = useState(0);
 
   const handleRatingChange = value => {
+    dispatch(completeForm({key: 'rating', value: value}));
     setRating(value);
   };
 
@@ -14,6 +18,7 @@ const RatingComponent = () => {
       <Text style={styles.raitingText}>Raiting</Text>
       <AirbnbRating
         type="star"
+        defaultRating={0}
         ratingCount={5}
         startingValue={rating}
         size={25}
