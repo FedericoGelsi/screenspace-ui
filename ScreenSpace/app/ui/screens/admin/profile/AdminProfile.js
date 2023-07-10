@@ -3,6 +3,7 @@ import {AdminProfileView} from './AdminProfileView';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {reset} from '../../../../redux/slices/loginSlice';
+import {CommonActions} from '@react-navigation/native';
 
 export const AdminProfile = ({navigation}) => {
   const [showModal, setShowModal] = React.useState(false);
@@ -11,7 +12,12 @@ export const AdminProfile = ({navigation}) => {
   const handleLogout = () => {
     storeLoggedSession('false');
     dispatch(reset());
-    navigation.popToTop();
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{name: 'InitialLogin'}],
+      }),
+    );
   };
 
   const handleDeleteProfile = () => {

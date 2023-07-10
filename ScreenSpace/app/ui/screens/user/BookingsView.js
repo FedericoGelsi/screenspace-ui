@@ -7,6 +7,7 @@ import {List, Text, Spinner, Layout} from '@ui-kitten/components';
 import {BookingCard} from '../../components/BookingCard';
 import {useDispatch, useSelector} from 'react-redux';
 import {getBooking} from '../../../redux/slices/bookingSlice';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const BookingsView = ({navigation}) => {
   const dispatch = useDispatch();
@@ -43,16 +44,18 @@ const BookingsView = ({navigation}) => {
               </View>
             ) : (
               <View style={styles.bookingContainer}>
-                <List
-                  contentContainerStyle={styles.contentContainer}
-                  data={bookings}
-                  renderItem={item => (
-                    <BookingCard
-                      navigateAction={navigateBookingDetail}
-                      item={item}
-                    />
-                  )}
-                />
+                <ScrollView>
+                  <List
+                    contentContainerStyle={styles.contentContainer}
+                    data={bookings}
+                    renderItem={item => (
+                      <BookingCard
+                        navigateAction={navigateBookingDetail}
+                        item={item}
+                      />
+                    )}
+                  />
+                </ScrollView>
               </View>
             )}
           </>

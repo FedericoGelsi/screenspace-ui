@@ -20,12 +20,17 @@ export const CommentsModal = ({
   const comments = reviews;
   const reviewForm = useSelector(state => state.review);
   const dispatch = useDispatch();
+  const [isReviewComplete, setIsReviewComplete] = React.useState(true);
 
   const addCommentHandler = () => {
     dispatch(newReview(movieId));
     toggleModal(false);
     dispatch(reset());
   };
+
+  React.useEffect(() => {
+    setIsReviewComplete(reviewForm?.rating == null);
+  }, [reviewForm]);
 
   const renderItem = ({item}) => {
     return (
@@ -93,6 +98,7 @@ export const CommentsModal = ({
 
               <Button
                 style={styles.addButton}
+                disabled={isReviewComplete}
                 onPress={() => addCommentHandler()}>
                 Add Comment
               </Button>

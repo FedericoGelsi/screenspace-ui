@@ -1,6 +1,10 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {loginAPI} from '../../networking/api/endpoints/loginWS';
-import {loginGoogleAPI, loginUpdateGoogleUserAPI, deleteGoogleUserAPI} from '../../networking/api/endpoints/loginGoogleWS';
+import {
+  loginGoogleAPI,
+  loginUpdateGoogleUserAPI,
+  deleteGoogleUserAPI,
+} from '../../networking/api/endpoints/loginGoogleWS';
 
 const initialState = {
   token: '',
@@ -13,7 +17,8 @@ const initialState = {
   hasError: false,
   isNewUser: false,
   isUserUpdateFinished: false,
-  userClaims: {}
+  isOwner: false,
+  userClaims: {},
 };
 
 export const userLogin = createAsyncThunk('userLogin', async loginInfo => {
@@ -21,21 +26,35 @@ export const userLogin = createAsyncThunk('userLogin', async loginInfo => {
   return response;
 });
 
-export const userLoginGoogle = createAsyncThunk('userLoginGoogle', async googleIdToken => {
+export const userLoginGoogle = createAsyncThunk(
+  'userLoginGoogle',
+  async googleIdToken => {
     const response = await loginGoogleAPI(googleIdToken);
     return response;
-});
+  },
+);
 
-export const userUpdateGoogle = createAsyncThunk('userUpdateGoogle', async userInfo => {
+export const userUpdateGoogle = createAsyncThunk(
+  'userUpdateGoogle',
+  async userInfo => {
     console.log(userInfo);
-    const response = await loginUpdateGoogleUserAPI(userInfo.userId, userInfo.email, userInfo.username, userInfo.avatar);
+    const response = await loginUpdateGoogleUserAPI(
+      userInfo.userId,
+      userInfo.email,
+      userInfo.username,
+      userInfo.avatar,
+    );
     return response;
-});
+  },
+);
 
-export const deleteGoogleUser = createAsyncThunk('deleteGoogleUser', async userId => {
-  const response = await deleteGoogleUserAPI(userId);
-  return response;
-});
+export const deleteGoogleUser = createAsyncThunk(
+  'deleteGoogleUser',
+  async userId => {
+    const response = await deleteGoogleUserAPI(userId);
+    return response;
+  },
+);
 
 const UserLoginSlice = createSlice({
   name: 'login',
@@ -62,6 +81,7 @@ const UserLoginSlice = createSlice({
         state.userId = action.payload.userId;
         state.username = action.payload.username;
         state.email = action.payload.email;
+        state.isOwner = true;
       })
       .addCase(userLogin.rejected, (state, action) => {
         console.log('rejected');

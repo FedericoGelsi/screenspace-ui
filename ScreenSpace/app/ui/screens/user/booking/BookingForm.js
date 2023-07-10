@@ -66,11 +66,9 @@ const BookingForm = ({navigation, route}) => {
       case 0:
         return formValues.cinemaId === null;
       case 1:
-        return formValues.hallId === null;
-      case 2:
-        return formValues.movieId === null;
-      case 3:
         return formValues.datetime === null;
+      case 2:
+        return formValues.showId === null;
       default:
         return true;
     }
@@ -80,7 +78,7 @@ const BookingForm = ({navigation, route}) => {
     <ViewTopNavigationContainer
       navigation={navigation}
       headerTitle="Ticket Reservation"
-      headerSubtitle="Everything Everywhere All at Once"
+      headerSubtitle={movie.title}
       accessoryLeft={
         currentPosition === labels.length ? (
           <TopNavigationAction />
