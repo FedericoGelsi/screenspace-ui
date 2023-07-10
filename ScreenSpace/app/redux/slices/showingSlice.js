@@ -32,6 +32,8 @@ export const getMoviesFilter = createAsyncThunk(
   'moviesFilter',
   async filterInfo => {
     const response = await getCinemasFilter(
+      filterInfo.latitude,
+      filterInfo.longitude,
       filterInfo.distance,
       filterInfo.genre,
       filterInfo.rating,

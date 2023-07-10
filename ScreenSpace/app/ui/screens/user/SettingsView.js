@@ -5,7 +5,7 @@ import ViewTopNavigationContainer from '../../components/ViewTopNavigationContai
 import I18n from '../../../assets/strings/I18n';
 import TEXT_KEY from '../../../assets/strings/TextKey';
 import {useDispatch, useSelector} from 'react-redux';
-import {reset, deleteGoogleUser} from '../../../redux/slices/loginSlice';
+import {reset, resetUserProfile, deleteGoogleUser} from '../../../redux/slices/loginSlice';
 import {
   GoogleSignin,
   statusCodes,
@@ -15,7 +15,12 @@ const SettingsView = ({navigation}) => {
 
   const [showModal, setShowModal] = React.useState(false);
   const userClaims = useSelector(state => state.login.userClaims);
+  const userInfo = useSelector(state => state.login);
   const dispatch = useDispatch();
+
+  const handleUpdateProfile = () => {
+    navigation.push('UserLogin');
+  }
 
   const handleLogout = () => {
     // storeLoggedSession('false');
@@ -48,12 +53,27 @@ const SettingsView = ({navigation}) => {
       accessoryLeft={<></>}
       headerTitle={I18n.t(TEXT_KEY.userSettings.sectionName)}>
       <View style={styles.container}>
+      <Card style={styles.card} onPress={handleUpdateProfile}>
+          <View style={styles.cardContent}>
+            <View style={styles.leftContent}>
+              <Icon name="person-outline" fill="#000" style={styles.icon} />
+              <Text category="h6" style={styles.cardText}>
+                {I18n.t(TEXT_KEY.userSettings.profile)}
+              </Text>
+            </View>
+            <Icon
+              name="arrow-ios-forward-outline"
+              fill="#000"
+              style={styles.arrowIcon}
+            />
+          </View>
+        </Card>
         <Card style={styles.card} onPress={handleLogout}>
           <View style={styles.cardContent}>
             <View style={styles.leftContent}>
-              <Icon name="person" fill="#000" style={styles.icon} />
+              <Icon name="log-out" fill="#000" style={styles.icon} />
               <Text category="h6" style={styles.cardText}>
-                Logout
+              {I18n.t(TEXT_KEY.userSettings.logout)}
               </Text>
             </View>
             <Icon
@@ -68,7 +88,7 @@ const SettingsView = ({navigation}) => {
             <View style={styles.leftContent}>
               <Icon name="slash-outline" fill="#FF0000" style={styles.icon} />
               <Text category="h6" style={[styles.cardText, styles.redText]}>
-                Delete Profile
+              {I18n.t(TEXT_KEY.userSettings.deleteProfile)}
               </Text>
             </View>
             <Icon

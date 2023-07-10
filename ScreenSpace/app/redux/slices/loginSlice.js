@@ -16,7 +16,6 @@ const initialState = {
   error: null,
   hasError: false,
   isNewUser: false,
-  isUserUpdateFinished: false,
   isOwner: false,
   userClaims: {},
 };
@@ -63,7 +62,7 @@ const UserLoginSlice = createSlice({
     reset: () => initialState,
     completeUserId: (state, action) => {
       state.userId = action.payload;
-    },
+    }
   },
   extraReducers: builder => {
     builder

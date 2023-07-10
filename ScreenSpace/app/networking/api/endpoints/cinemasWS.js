@@ -8,8 +8,16 @@ export const getCinemas = async ownerId => {
   return results.data;
 };
 
-export const getCinemasFilter = async (distance, genre, rating) => {
+export const getCinemasFilter = async (
+  latitude,
+  longitude,
+  distance,
+  genre,
+  rating,
+) => {
   const params = {
+    latitude: latitude,
+    longitude: longitude,
     distance: distance,
     genre: genre,
     rating: rating,

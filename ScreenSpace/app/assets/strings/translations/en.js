@@ -40,6 +40,9 @@ export default {
   },
   userSettings: {
     sectionName: 'Settings',
+    profile: 'Update profile',
+    logout: 'Logout',
+    deleteProfile: 'Delete Profile'
   },
   userBookings: {
     sectionName: 'Your Bookings',
