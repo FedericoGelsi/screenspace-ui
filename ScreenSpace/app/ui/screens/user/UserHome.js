@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import ViewTopNavigationContainer from '../../components/ViewTopNavigationContainer';
 import {Image, Modal, TextInput, View} from 'react-native';
 import IMAGES from '../../../assets/images/Images';
@@ -22,7 +22,9 @@ import {
 } from '../../../redux/slices/showingSlice';
 import SearchBar from '../../components/SearchBar';
 import {NoData} from '../../components/NoData';
-import useUserGeolocation from '../../components/utils/useUserGeolocation';
+import {Platform} from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
+import {request, PERMISSIONS} from 'react-native-permissions';
 
 const UserHome = ({navigation, route}) => {
   const showing = useSelector(state => state.showing);
@@ -30,7 +32,23 @@ const UserHome = ({navigation, route}) => {
   const dispatch = useDispatch();
   const [isModalVisible, setisModalVisible] = useState(false);
   const [isFilterActive, setisFilterActive] = useState(false);
-  const {location} = useUserGeolocation();
+  const [location, setLocation] = useState(null);
+
+  useEffect(() => {
+    const requestLocationPermission = async () => {
+      let permission;
+      if (Platform.OS === 'android') {
+        permission = PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
+      } else if (Platform.OS === 'ios') {
+        permission = PERMISSIONS.IOS.LOCATION_ALWAYS;
+      }
+
+      await request(permission);
+    };
+
+    requestLocationPermission();
+  }, []);
+
   function removeDuplicates(arr) {
     const uniqueIds = [];
     let unique = arr.filter(element => {
@@ -105,24 +123,37 @@ const UserHome = ({navigation, route}) => {
 
   const handleSave = async () => {
     const {distance, genre, rating} = formValuesRef.current;
-    const latitudeParam = location?.latitude;
-    const longitudeParam = location?.longitude;
-    dispatch(
-      getMoviesFilter({
-        latitude: latitudeParam,
-        longitude: longitudeParam,
-        distance: distance,
-        genre: genre,
-        rating: rating,
-      }),
-    );
-    formValuesRef.current = {
-      distance: '',
-      genre: '',
-      rating: '',
-    };
-    setisFilterActive(true);
-    setisModalVisible(false);
+    try {
+      const position = await new Promise((resolve, reject) => {
+        Geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 10000,
+        });
+      });
+
+      const {latitude, longitude} = position.coords;
+
+      dispatch(
+        getMoviesFilter({
+          latitude: latitude,
+          longitude: longitude,
+          distance: distance,
+          genre: genre,
+          rating: rating,
+        }),
+      );
+
+      formValuesRef.current = {
+        distance: '',
+        genre: '',
+        rating: '',
+      };
+      setisFilterActive(true);
+      setisModalVisible(false);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const ModalSearch = () => {
