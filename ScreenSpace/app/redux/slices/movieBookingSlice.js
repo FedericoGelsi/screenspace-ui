@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {newBooking} from '../../networking/api/endpoints/bookingWS';
+import {getMoviesInTheaters} from './showingSlice';
 
 const initialState = {
   movieId: null,
@@ -10,6 +11,7 @@ const initialState = {
   show: null,
   seats: null,
   selectedCard: null,
+  selectedTime: null,
   seats: null,
   error: null,
   hasError: false,
@@ -18,7 +20,7 @@ const initialState = {
 
 export const newUserBooking = createAsyncThunk(
   'user/newBooking',
-  async thunkAPI => {
+  async (args, thunkAPI) => {
     const state = thunkAPI.getState();
     const result = await newBooking(state.login.userId, state.movieBooking);
     return result;
