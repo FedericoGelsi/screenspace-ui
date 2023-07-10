@@ -22,6 +22,7 @@ import {
 } from '../../../redux/slices/showingSlice';
 import SearchBar from '../../components/SearchBar';
 import {NoData} from '../../components/NoData';
+import useUserGeolocation from '../../components/utils/useUserGeolocation';
 
 const UserHome = ({navigation, route}) => {
   const showing = useSelector(state => state.showing);
@@ -29,6 +30,7 @@ const UserHome = ({navigation, route}) => {
   const dispatch = useDispatch();
   const [isModalVisible, setisModalVisible] = useState(false);
   const [isFilterActive, setisFilterActive] = useState(false);
+  const {location} = useUserGeolocation();
   function removeDuplicates(arr) {
     const uniqueIds = [];
     let unique = arr.filter(element => {
@@ -103,8 +105,16 @@ const UserHome = ({navigation, route}) => {
 
   const handleSave = async () => {
     const {distance, genre, rating} = formValuesRef.current;
+    const latitudeParam = location?.latitude;
+    const longitudeParam = location?.longitude;
     dispatch(
-      getMoviesFilter({distance: distance, genre: genre, rating: rating}),
+      getMoviesFilter({
+        latitude: latitudeParam,
+        longitude: longitudeParam,
+        distance: distance,
+        genre: genre,
+        rating: rating,
+      }),
     );
     formValuesRef.current = {
       distance: '',
