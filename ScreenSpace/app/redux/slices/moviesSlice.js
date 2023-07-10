@@ -104,15 +104,12 @@ const moviesSlice = createSlice({
         state.error = null;
         state.hasError = false;
 
-        state.movies =
-          state.movies.length === 0
-            ? action.payload
-            : state.movies.map(obj => {
-                if (obj.id === action.payload.id) {
-                  return action.payload;
-                }
-                return obj;
-              });
+        state.movies = state.movies.map(obj => {
+          if (obj.id === action.payload.id) {
+            return action.payload;
+          }
+          return obj;
+        });
       })
       .addCase(getMovieById.rejected, (state, action) => {
         state.isLoading = false;

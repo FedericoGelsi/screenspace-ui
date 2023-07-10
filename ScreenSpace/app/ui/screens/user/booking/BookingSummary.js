@@ -11,33 +11,39 @@ import {
   Text,
 } from '@ui-kitten/components';
 import {useDispatch, useSelector} from 'react-redux';
-import {newUserBooking} from '../../../../redux/slices/movieBookingSlice';
+import {
+  newUserBooking,
+  reset,
+} from '../../../../redux/slices/movieBookingSlice';
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
-import {getMovieById} from '../../../../redux/slices/moviesSlice';
+import {getMovieById, getMovies} from '../../../../redux/slices/moviesSlice';
+import {getCinemasByMovie} from '../../../../redux/slices/userCinemaSlice';
 
-const BookingSummary = ({navigation}) => {
+const BookingSummary = ({navigation, route}) => {
   const movieBooking = useSelector(state => state.movieBooking);
   const cinemasValue = useSelector(state => state.userCinemas);
-  const moviesValue = useSelector(state => state.movies);
+  // const moviesValue = useSelector(state => state.movies);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getMovieById(movieBooking.movieId));
-  }, []);
+    // dispatch(getMovieById(movieBooking.movieId));
+    dispatch(getCinemasByMovie(movieBooking.movieId));
+  }, [dispatch, movieBooking]);
 
   const submitHandler = () => {
     dispatch(newUserBooking());
     navigation.push('BookingFeedback');
   };
 
+  // console.log(moviesValue);
   const cinema = cinemasValue.cinemas.find(e => e.id === movieBooking.cinemaId);
-
+  const movie = route.params.movie
   const data = [
     {
       icon: 'film-outline',
       label: 'Movie',
-      value: moviesValue.movies.title,
+      value: movie.title,
     },
     {
       icon: 'pin-outline',

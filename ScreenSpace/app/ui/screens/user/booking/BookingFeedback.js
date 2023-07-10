@@ -3,20 +3,14 @@ import ViewTopNavigationContainer from '../../../components/ViewTopNavigationCon
 import I18n from '../../../../assets/strings/I18n';
 import TEXT_KEY from '../../../../assets/strings/TextKey';
 import {View} from 'react-native';
-import {Button, Card, Icon, Text} from '@ui-kitten/components';
+import {Button, Card, Icon, Layout, Text} from '@ui-kitten/components';
 import {useDispatch, useSelector} from 'react-redux';
 import {reset} from '../../../../redux/slices/movieBookingSlice';
 import {getBooking} from '../../../../redux/slices/bookingSlice';
 
 const BookingFeedback = ({navigation}) => {
-  const bookings = useSelector(state => state.bookings);
-  const user = useSelector(state => state.login);
+  const movieBooking = useSelector(state => state.movieBooking);
   const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(getBooking(user.userId));
-  }, []);
-  console.log(bookings);
 
   const navigateHome = () => {
     navigation.navigate('UserHome');
@@ -24,7 +18,7 @@ const BookingFeedback = ({navigation}) => {
   };
   return (
     <ViewTopNavigationContainer variant="logo">
-      <View style={{flex: 1, padding: 16, justifyContent: 'center'}}>
+      <Layout style={{flex: 1, padding: 16, justifyContent: 'center'}}>
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <Icon
             style={{width: 48, height: 48}}
@@ -37,7 +31,8 @@ const BookingFeedback = ({navigation}) => {
           </Text>
         </View>
         <Card
-          style={{marginVertical: 16}}
+          status='success'
+          style={{marginVertical: 16, borderColor:'#000'}}
           header={props => (
             <View
               style={{
@@ -57,7 +52,7 @@ const BookingFeedback = ({navigation}) => {
             </View>
           )}>
           <Text status="primary" style={{alignSelf: 'center'}} category="h6">
-            BFG325TV
+            {movieBooking.bookingCode}
           </Text>
         </Card>
         <Button
@@ -67,7 +62,7 @@ const BookingFeedback = ({navigation}) => {
           onPress={navigateHome}>
           {I18n.t(TEXT_KEY.bookingFeedback.buttonLabel)}
         </Button>
-      </View>
+      </Layout>
     </ViewTopNavigationContainer>
   );
 };

@@ -20,7 +20,7 @@ const SelectSeatsStep = ({navigation, route}) => {
   const dispatch = useDispatch();
 
   const navigateSummary = () => {
-    navigation.push('BookingSummary');
+    navigation.push('BookingSummary', {movie: route.params.movie});
   };
 
   const initialMapping = () => {

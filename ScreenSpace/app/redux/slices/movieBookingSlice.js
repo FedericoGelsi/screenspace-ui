@@ -16,6 +16,7 @@ const initialState = {
   error: null,
   hasError: false,
   isProcessing: false,
+  bookingCode: null,
 };
 
 export const newUserBooking = createAsyncThunk(
@@ -47,6 +48,7 @@ export const movieBookingSlice = createSlice({
         state.error = null;
         state.hasError = false;
         state.isProcessing = false;
+        state.bookingCode = action.payload.bookingCode;
       })
       .addCase(newUserBooking.rejected, (state, action) => {
         state.hasError = true;
