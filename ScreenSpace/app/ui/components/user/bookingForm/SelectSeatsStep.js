@@ -1,147 +1,26 @@
 import React, {useState} from 'react';
 import ViewTopNavigationContainer from '../../ViewTopNavigationContainer';
 import SeatItem, {Status} from './SeatItem';
-import {Button, Layout} from '@ui-kitten/components';
+import {Button, Icon, Layout} from '@ui-kitten/components';
 import GridLayout from '../GridLayout';
 import SeatGridLeyend from './SeatGridLeyend';
 import IncrementalButton from './IncrementalButton';
 import {Image, View} from 'react-native';
 import IMAGES from '../../../../assets/images/Images';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  completeForm,
-  newUserBooking,
-  reset,
-} from '../../../../redux/slices/movieBookingSlice';
+import {completeForm} from '../../../../redux/slices/movieBookingSlice';
 import {ScrollView} from 'react-native-gesture-handler';
+import I18n from '../../../../assets/strings/I18n';
+import TEXT_KEY from '../../../../assets/strings/TextKey';
 
 const SelectSeatsStep = ({navigation, route}) => {
-  const show2 = {
-    id: 12,
-    hallHeight: 10,
-    hallWidth: 8,
-    movie: {
-      id: 7,
-      title: 'El señor de los anillos: El retorno del rey',
-      duration: 201,
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/en/thumb/2/23/The_Lord_of_the_Rings%2C_TROTK_%282003%29.jpg/220px-The_Lord_of_the_Rings%2C_TROTK_%282003%29.jpg',
-      genres: [
-        {
-          id: 8,
-          genre: 'Fantasia',
-        },
-        {
-          id: 10,
-          genre: 'Accion',
-        },
-        {
-          id: 2,
-          genre: 'Drama',
-        },
-      ],
-      synopsis:
-        'Gandalf y Aragorn lideran el mundo de los hombres contra la armada de Sauron para distraer su atención de Frodo y Sam, quienes se aproximan al Monte del Destino con el Anillo Único.',
-      rating: 4.3,
-      releaseDate: 61032441600000,
-      reviews: [],
-      showing: true,
-    },
-    datetime: 1689724800000,
-    name: 'El señor de los anillos: El retorno del rey',
-    availableSeats: [
-      'A1',
-      //   'A2',
-      'A3',
-      'A4',
-      'A5',
-      'A6',
-      'A7',
-      'A8',
-      'B1',
-      'B2',
-      'B3',
-      'B4',
-      'B5',
-      'B6',
-      'B7',
-      'B8',
-      'C1',
-      'C2',
-      'C3',
-      'C4',
-      'C5',
-      'C6',
-      'C7',
-      'C8',
-      'D1',
-      'D2',
-      'D3',
-      'D4',
-      'D5',
-      'D6',
-      'D7',
-      'D8',
-      'E1',
-      'E2',
-      'E3',
-      'E4',
-      'E5',
-      'E6',
-      'E7',
-      'E8',
-      'F1',
-      'F2',
-      'F3',
-      'F4',
-      'F5',
-      'F6',
-      'F7',
-      'F8',
-      'G1',
-      'G2',
-      'G3',
-      'G4',
-      'G5',
-      'G6',
-      'G7',
-      'G8',
-      'H1',
-      'H2',
-      'H3',
-      'H4',
-      'H5',
-      'H6',
-      'H7',
-      'H8',
-      'I1',
-      'I2',
-      'I3',
-      'I4',
-      'I5',
-      'I6',
-      'I7',
-      'I8',
-      //   'J1',
-      //   'J2',
-      //   'J3',
-      //   'J4',
-      //   'J5',
-      //   'J6',
-      'J7',
-      'J8',
-    ],
-  };
-
   const show = useSelector(state => state.movieBooking.show);
   const movieBooking = useSelector(state => state.movieBooking);
   const [hall, setHall] = useState(movieBooking.hall);
   const dispatch = useDispatch();
 
-  const submitHandler = () => {
-    dispatch(newUserBooking());
-    navigation.push('UserHome');
-    dispatch(reset());
+  const navigateSummary = () => {
+    navigation.push('BookingSummary');
   };
 
   const initialMapping = () => {
@@ -234,7 +113,13 @@ const SelectSeatsStep = ({navigation, route}) => {
           </Layout>
         </View>
         <Layout style={{justifyContent: 'center'}}>
-          <Button onPress={submitHandler}>Book Ticket</Button>
+          <Button
+            style={{flex: 1}}
+            appearance="outline"
+            accessoryRight={<Icon name="arrow-forward" />}
+            onPress={navigateSummary}>
+            {I18n.t(TEXT_KEY.newCinemaShow.nextStepButtonLabel)}
+          </Button>
         </Layout>
       </Layout>
     </ViewTopNavigationContainer>
