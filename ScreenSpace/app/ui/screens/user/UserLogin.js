@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Avatar, Button, Card, Input, Layout, Text} from '@ui-kitten/components';
 import { Image, ImageBackground, SafeAreaView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import { userUpdateGoogle } from '../../../redux/slices/loginSlice';
 import IMAGES from '../../../assets/images/Images';
 import I18n from '../../../assets/strings/I18n';
 import TEXT_KEY from '../../../assets/strings/TextKey';
@@ -10,12 +11,30 @@ import ImagePicker from '../../components/user/ImagePicker';
 const UserLogin = ({navigation, route}) => {
   const [value, setValue] = useState('');
   // TODO: Get user data from redux
+  const dispatch = useDispatch();
+  const isUserUpdateFinished = useSelector(state => state.login.isUserUpdateFinished);
+  const token = useSelector(state => state.login.token);
   const userClaims = useSelector(state => state.login.userClaims);
   const uri = Image.resolveAssetSource(IMAGES.PNG.AVATAR_PNG).uri;
   const avatarUrl = userClaims?.avatar ?? uri;
 
+  React.useEffect(() => {
+    if (token != '') {
+      if (isUserUpdateFinished) {
+        navigation.push('UserHome');
+      }
+    }
+  }, [token, isUserUpdateFinished]);
+
   const handleSave = props => {
-    navigation.push('UserHome');
+    userInfo = {
+        userId: userClaims.id,
+        email: userClaims.email,
+        username: value,
+        avatar: userClaims.avatar
+      };
+    dispatch(userUpdateGoogle(userInfo))
+    // navigation.push('UserHome');
   };
 
   const Header = props => (
