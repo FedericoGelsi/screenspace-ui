@@ -8,11 +8,15 @@ import {AppNavigator} from './navigation/Navigation';
 import SplashScreen from 'react-native-splash-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from '../app/networking/api/Api';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 
 GoogleSignin.configure({
-    webClientId: "954758489890-k2vos57qjf8nk1hrqpaeee7us9p65l4u.apps.googleusercontent.com",
-    offlineAccess: true
+  webClientId:
+    '954758489890-k2vos57qjf8nk1hrqpaeee7us9p65l4u.apps.googleusercontent.com',
+  offlineAccess: true,
 });
 
 export const verifyToken = async token => {
@@ -21,7 +25,6 @@ export const verifyToken = async token => {
   });
   return results.data;
 };
-
 
 export default App = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);

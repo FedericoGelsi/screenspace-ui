@@ -17,9 +17,10 @@ const InitialLoginScreen = ({navigation}) => {
 
   const isNewUser = useSelector(state => state.login.isNewUser);
   const token = useSelector(state => state.login.token);
+  const isOwner = useSelector(state => state.login.isOwner);
 
   React.useEffect(() => {
-    if (token != '') {
+    if (token != '' && !isOwner) {
       if (isNewUser) {
         navigation.push('UserLogin');
       } else {
