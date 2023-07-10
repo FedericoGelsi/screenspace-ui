@@ -1,6 +1,7 @@
-import React from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useRef, useState} from 'react';
 import ViewTopNavigationContainer from '../../components/ViewTopNavigationContainer';
-import {Image} from 'react-native';
+import {Image, Modal, TextInput, View} from 'react-native';
 import IMAGES from '../../../assets/images/Images';
 import {
   Avatar,
@@ -15,7 +16,10 @@ import TEXT_KEY from '../../../assets/strings/TextKey';
 import MovieCard from '../../components/user/MovieCard';
 import GridLayout from '../../components/user/GridLayout';
 import {useDispatch, useSelector} from 'react-redux';
-import {getMoviesInTheaters} from '../../../redux/slices/showingSlice';
+import {
+  getMoviesFilter,
+  getMoviesInTheaters,
+} from '../../../redux/slices/showingSlice';
 import SearchBar from '../../components/SearchBar';
 import {NoData} from '../../components/NoData';
 
@@ -23,6 +27,8 @@ const UserHome = ({navigation, route}) => {
   const showing = useSelector(state => state.showing);
   const userClaims = useSelector(state => state.login.userClaims);
   const dispatch = useDispatch();
+  const [isModalVisible, setisModalVisible] = useState(false);
+  const [isFilterActive, setisFilterActive] = useState(false);
   function removeDuplicates(arr) {
     const uniqueIds = [];
     let unique = arr.filter(element => {
@@ -46,7 +52,7 @@ const UserHome = ({navigation, route}) => {
 
   React.useEffect(() => {
     setMoviesData(showing.movies);
-  }, [showing]);
+  }, [showing, dispatch]);
   const handleSearch = movieName => {
     setMoviesData(
       showing.movies.filter(item => {
@@ -84,12 +90,118 @@ const UserHome = ({navigation, route}) => {
 
   const avatarUrl = userClaims?.avatar ?? uri;
 
+  const formValuesRef = useRef({
+    cinema: '',
+    distance: '',
+    genre: '',
+    rating: '',
+  });
+
+  const handleInputChange = (name, value) => {
+    formValuesRef.current[name] = value;
+  };
+
+  const handleSave = async () => {
+    const {distance, genre, rating} = formValuesRef.current;
+    dispatch(
+      getMoviesFilter({distance: distance, genre: genre, rating: rating}),
+    );
+    formValuesRef.current = {
+      distance: '',
+      genre: '',
+      rating: '',
+    };
+    setisFilterActive(true);
+    setisModalVisible(false);
+  };
+
+  const ModalSearch = () => {
+    return (
+      <Modal
+        visible={isModalVisible}
+        onRequestClose={() => setisModalVisible(false)}
+        animationType="fade"
+        transparent>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          }}>
+          <View
+            style={{
+              backgroundColor: 'white',
+              padding: 20,
+              width: '80%',
+              borderRadius: 8,
+            }}>
+            <Text style={{fontSize: 18, marginBottom: 10}}>
+              Contenido del modal
+            </Text>
+
+            <TextInput
+              style={{
+                marginBottom: 10,
+                padding: 10,
+                borderColor: 'gray',
+                borderWidth: 1,
+              }}
+              placeholder="Distance in km"
+              onChangeText={text => handleInputChange('distance', text)}
+            />
+
+            <TextInput
+              style={{
+                marginBottom: 10,
+                padding: 10,
+                borderColor: 'gray',
+                borderWidth: 1,
+              }}
+              placeholder="Genre"
+              onChangeText={text => handleInputChange('genre', text)}
+            />
+
+            <TextInput
+              style={{
+                marginBottom: 10,
+                padding: 10,
+                borderColor: 'gray',
+                borderWidth: 1,
+              }}
+              placeholder="Rating"
+              onChangeText={text => handleInputChange('rating', text)}
+            />
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}>
+              <Button
+                appearance="outline"
+                size="small"
+                onPress={() => setisModalVisible(false)}>
+                Close
+              </Button>
+              <Button
+                appearance="outline"
+                size="small"
+                onPress={() => handleSave()}>
+                Search
+              </Button>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
   return (
     <ViewTopNavigationContainer
       accessoryLeft={LogoIcon}
       accessoryRight={accesoryRight}
       headerTitle={headerTitle}
       headerSubtitle={headerSubTitle}>
+      <ModalSearch />
       <Layout style={{flex: 1, paddingHorizontal: 16}}>
         <Layout style={{flexDirection: 'row', paddingVertical: 16}}>
           <SearchBar
@@ -97,12 +209,29 @@ const UserHome = ({navigation, route}) => {
             placeholder={I18n.t(TEXT_KEY.userHome.searchBar.placeholder)}
             setValue={handleSearch}
           />
-          <Button
-            appearance="outline"
-            size="small"
-            accessoryLeft={props => <Icon {...props} name="funnel-outline" />}>
-            {I18n.t(TEXT_KEY.userHome.filter.buttonTitle)}
-          </Button>
+          {isFilterActive ? (
+            <Button
+              onPress={() => {
+                dispatch(getMoviesInTheaters());
+                setisFilterActive(false);
+              }}
+              appearance="outline"
+              size="small"
+              status="danger"
+              accessoryLeft={props => <Icon {...props} name="trash-outline" />}>
+              X
+            </Button>
+          ) : (
+            <Button
+              onPress={() => setisModalVisible(true)}
+              appearance="outline"
+              size="small"
+              accessoryLeft={props => (
+                <Icon {...props} name="funnel-outline" />
+              )}>
+              {I18n.t(TEXT_KEY.userHome.filter.buttonTitle)}
+            </Button>
+          )}
         </Layout>
         <Text category="h5">
           {I18n.t(TEXT_KEY.userHome.showingSectionName)}
