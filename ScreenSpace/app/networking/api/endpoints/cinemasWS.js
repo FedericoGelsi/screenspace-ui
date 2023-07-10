@@ -4,7 +4,30 @@ export const getCinemas = async ownerId => {
   const params = {
     ownerId: ownerId,
   };
-  const results = await axios.get("/api/cinemas", params);
+  const results = await axios.get('/api/cinemas', params);
+  return results.data;
+};
+
+export const getCinemasFilter = async (distance, genre, rating) => {
+  const params = {
+    distance: distance,
+    genre: genre,
+    rating: rating,
+  };
+  let url = '/api/cinemas/filter';
+  const queryParams = [];
+
+  for (const key in params) {
+    if (params[key] !== '') {
+      queryParams.push(
+        `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`,
+      );
+    }
+  }
+  if (queryParams.length > 0) {
+    url += `?${queryParams.join('&')}`;
+  }
+  const results = await axios.get(url);
   return results.data;
 };
 
