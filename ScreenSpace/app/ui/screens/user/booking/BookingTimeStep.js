@@ -12,7 +12,9 @@ const BookingTimeStep = () => {
   const cinemas = useSelector(state => state.userCinemas);
   const dispatch = useDispatch();
   const [showsTimes, setShowsTimes] = React.useState([]);
-  const [selectedCard, setSelectedCard] = React.useState(null);
+  const [selectedCard, setSelectedCard] = React.useState(
+    formValues.selectedTime,
+  );
 
   React.useEffect(() => {
     const cinema = cinemas.cinemas.find(
@@ -55,6 +57,7 @@ const BookingTimeStep = () => {
     );
     dispatch(completeForm({key: 'hall', value: selectedHall}));
     dispatch(completeForm({key: 'show', value: show}));
+    dispatch(completeForm({key: 'selectedTime', value: index}));
     setSelectedCard(index);
   };
 

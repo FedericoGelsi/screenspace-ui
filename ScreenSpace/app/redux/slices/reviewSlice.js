@@ -4,7 +4,7 @@ import {getMoviesInTheaters} from './showingSlice';
 
 const initialState = {
   rating: null,
-  comment: null,
+  comment: '',
   error: null,
   isLoading: false,
   hasError: false,
