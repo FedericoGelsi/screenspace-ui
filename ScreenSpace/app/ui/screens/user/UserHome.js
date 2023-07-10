@@ -25,6 +25,7 @@ import {NoData} from '../../components/NoData';
 import {Platform} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import {request, PERMISSIONS} from 'react-native-permissions';
+import {GenrePicker} from '../../components/GenrePicker';
 
 const UserHome = ({navigation, route}) => {
   const showing = useSelector(state => state.showing);
@@ -157,6 +158,7 @@ const UserHome = ({navigation, route}) => {
   };
 
   const ModalSearch = () => {
+    const {genre} = formValuesRef.current;
     return (
       <Modal
         visible={isModalVisible}
@@ -199,20 +201,12 @@ const UserHome = ({navigation, route}) => {
                 borderColor: 'gray',
                 borderWidth: 1,
               }}
-              placeholder="Genre"
-              onChangeText={text => handleInputChange('genre', text)}
-            />
-
-            <TextInput
-              style={{
-                marginBottom: 10,
-                padding: 10,
-                borderColor: 'gray',
-                borderWidth: 1,
-              }}
               placeholder="Rating"
               onChangeText={text => handleInputChange('rating', text)}
             />
+
+            <GenrePicker actualGenre={genre} handlePick={handleInputChange} />
+
             <View
               style={{
                 flexDirection: 'row',
