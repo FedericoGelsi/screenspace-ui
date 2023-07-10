@@ -9,22 +9,12 @@ import TEXT_KEY from '../../../assets/strings/TextKey';
 import ImagePicker from '../../components/user/ImagePicker';
 
 const UserLogin = ({navigation, route}) => {
-  const [value, setValue] = useState('');
   // TODO: Get user data from redux
   const dispatch = useDispatch();
-  const isUserUpdateFinished = useSelector(state => state.login.isUserUpdateFinished);
-  const token = useSelector(state => state.login.token);
   const userClaims = useSelector(state => state.login.userClaims);
+  const [value, setValue] = useState(userClaims.username);
   const uri = Image.resolveAssetSource(IMAGES.PNG.AVATAR_PNG).uri;
   const avatarUrl = userClaims?.avatar ?? uri;
-
-  React.useEffect(() => {
-    if (token != '') {
-      if (isUserUpdateFinished) {
-        navigation.push('UserHome');
-      }
-    }
-  }, [token, isUserUpdateFinished]);
 
   const handleSave = props => {
     userInfo = {
@@ -33,8 +23,9 @@ const UserLogin = ({navigation, route}) => {
         username: value,
         avatar: userClaims.avatar
       };
+    
     dispatch(userUpdateGoogle(userInfo))
-    // navigation.push('UserHome');
+    navigation.push('UserHome');
   };
 
   const Header = props => (
