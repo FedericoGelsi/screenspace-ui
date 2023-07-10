@@ -62,7 +62,7 @@ const moviesSlice = createSlice({
   reducers: {
     filterMoviesByTitle: (state, action) => {
       let filteredMovies = state.movies;
-      if ( action.payload !== ""){
+      if (action.payload !== '') {
         filteredMovies = state.movies.filter(movie =>
           movie.title.toLowerCase().includes(action.payload.toLowerCase()),
         );
