@@ -16,7 +16,7 @@ import {
 } from '../../../../redux/slices/movieBookingSlice';
 
 const BookingForm = ({navigation, route}) => {
-  const movieId = route?.params?.movieId;
+  const movie = route?.params?.movie;
   const stepLabels = [
     {label: I18n.t(TEXT_KEY.newCinemaShow.steps.firstStep.label)},
     {label: 'Date'},
@@ -27,17 +27,15 @@ const BookingForm = ({navigation, route}) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getCinemasByMovie(movieId));
-    dispatch(completeForm({key: 'movieId', value: movieId}));
+    dispatch(getCinemasByMovie(movie.id));
+    dispatch(completeForm({key: 'movieId', value: movie.id}));
   }, [dispatch]);
 
   const labels = stepLabels.map(step => step.label);
   const [currentPosition, setCurrentPosition] = useState(0);
-  const [visible, setVisible] = React.useState(false);
 
-  const submitHandler = () => {
-    dispatch(newUserBooking());
-    setVisible(true);
+  const navigateSeatsSelection = () => {
+    navigation.push('SelectSeats', {movie: movie});
   };
 
   const nextStep = () => {
@@ -84,7 +82,7 @@ const BookingForm = ({navigation, route}) => {
       headerTitle="Ticket Reservation"
       headerSubtitle="Everything Everywhere All at Once"
       accessoryLeft={
-        currentPosition === labels.length - 1 ? (
+        currentPosition === labels.length ? (
           <TopNavigationAction />
         ) : (
           CancelAction
@@ -121,19 +119,12 @@ const BookingForm = ({navigation, route}) => {
           {currentPosition === labels.length - 1 && (
             <Button
               style={{flex: 1}}
-              status="success"
-              accessoryRight={<Icon name="checkmark" />}
-              onPress={submitHandler}>
-              {I18n.t(TEXT_KEY.newCinemaShow.submitButtonLabel)}
+              appearance="outline"
+              accessoryRight={<Icon name="arrow-forward" />}
+              onPress={navigateSeatsSelection}
+              disabled={isDisabled()}>
+              {I18n.t(TEXT_KEY.newCinemaShow.nextStepButtonLabel)}
             </Button>
-          )}
-          {visible && (
-            <SuccessModal
-              text={I18n.t(TEXT_KEY.cinemaForm.successModalMessage)}
-              buttonText={I18n.t(TEXT_KEY.cinemaForm.successModalButtonMessage)}
-              action={navigateHome}
-              isProcessing={formValues.isProcessing}
-            />
           )}
         </Layout>
       </Layout>

@@ -14,7 +14,7 @@ const MovieDetails = ({navigation, route}) => {
   const showing = useSelector(state => state.showing);
 
   const navigateBooking = () => {
-    navigation.push('BookingForm', {movieId: movie.id});
+    navigation.push('BookingForm', {movie: movie});
   };
 
   const accessoryRight = () => {

@@ -6,6 +6,9 @@ const initialState = {
   cinemaId: null,
   datetime: null,
   showId: null,
+  hall: null,
+  show: null,
+  seats: null,
   selectedCard: null,
   seats: null,
   error: null,
@@ -15,9 +18,9 @@ const initialState = {
 
 export const newUserBooking = createAsyncThunk(
   'user/newBooking',
-  async (userId, thunkAPI) => {
+  async thunkAPI => {
     const state = thunkAPI.getState();
-    const result = await newBooking(userId, state.movieBooking);
+    const result = await newBooking(state.login.userId, state.movieBooking);
     return result;
   },
 );

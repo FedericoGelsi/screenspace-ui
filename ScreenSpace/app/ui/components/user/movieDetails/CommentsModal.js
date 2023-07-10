@@ -104,6 +104,8 @@ export const CommentsModal = ({
   );
 };
 
+export default CommentsModal;
+
 const styles = StyleSheet.create({
   flexView: {
     backgroundColor: 'white',
